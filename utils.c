@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 12:05:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/03/10 11:06:53 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/03/10 15:38:57 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,12 @@ void	print_map(t_all *s)
 int		is_start_pos(char c)
 {
 	return(c == 'N' ||c == 'E' || c == 'S' || c == 'W');
+}
+
+void		 pixel_put(t_all *s, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = s->mlx.addr + (y * s->mlx.line_length + x * (s->mlx.bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
 }

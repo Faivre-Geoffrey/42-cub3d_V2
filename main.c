@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 08:07:02 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/03/10 12:41:02 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/03/10 16:23:38 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ int		main()
 	parsing(&s);
 	check_parsing(&s);
 
+	s.mlx.mlx = mlx_init();
+	s.mlx.mlx_win = mlx_new_window(s.mlx.mlx, s.parse.width_window_size , s.parse.height_window_size, "Hello world!");
+    s.mlx.img = mlx_new_image(s.mlx.mlx, 1920, 1080);
+    s.mlx.addr = mlx_get_data_addr(s.mlx.img, &s.mlx.bits_per_pixel, &s.mlx.line_length,
+                                 &s.mlx.endian);
+    pixel_put(&s, 5, 5, 0x00FF0000);
+    mlx_put_image_to_window(s.mlx.mlx, s.mlx.mlx_win, s.mlx.img, 0, 0);
+    mlx_loop(s.mlx.mlx);
 
 	printf("%s\n",s.parse.EA_path);
 	printf("%s\n",s.parse.NO_path);

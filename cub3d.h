@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:59:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/03/10 11:14:31 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/03/10 16:21:23 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,19 @@ typedef	struct		s_start
 
 }					t_start;
 
+typedef struct		s_data {
+	void			*img;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+	void			*mlx;
+	void			*mlx_win;
+}					t_data;
+
 typedef	struct		s_all
 {
+	t_data 			mlx;
 	t_parse			parse;
 	t_map 			map;
 	t_axe			axe;
@@ -98,5 +109,6 @@ int		check_parsing(t_all *s);
 void	print_map(t_all *s);
 void	print_list(t_all *s);
 int		is_start_pos(char c);
+void		 pixel_put(t_all *s, int x, int y, int color);
 
 #endif
