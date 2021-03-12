@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:59:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/03/10 16:21:23 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/03/12 13:00:48 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,17 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <mlx.h>
+#include <math.h>
+
+# define ESC 53
+# define W 13
+# define A 0
+# define S 1
+# define D 2
+# define UP 126
+# define DOWN 125
+# define LEFT 123
+# define RIGHT 124
 
 typedef struct		s_rgb {
 	unsigned char	b;
@@ -31,7 +42,16 @@ typedef struct		s_rgb {
 typedef struct		s_axe {
 	int				x;
 	int				y;
+	int				x_count;
+	int				y_count;
 }					t_axe;
+
+typedef struct		s_axe_f {
+	float			x;
+	float			y;
+	float			x_count;
+	float			y_count;
+}					t_axe_f;
 
 typedef	struct		s_parse
 {
@@ -46,6 +66,7 @@ typedef	struct		s_parse
 	char			*WE_path;
 	char			*EA_path;
 	char			*S_path;
+	int				diviseur;
 }					t_parse;
 
 typedef	struct		s_map
@@ -73,6 +94,17 @@ typedef struct		s_data {
 	void			*mlx_win;
 }					t_data;
 
+typedef struct		s_boy{
+	t_axe_f			pos;
+	t_axe_f			dir;
+	t_axe_f			plane;
+}					t_boy;
+
+typedef	struct		s_ray_casting
+{
+
+}					t_ray_casting;
+
 typedef	struct		s_all
 {
 	t_data 			mlx;
@@ -81,7 +113,8 @@ typedef	struct		s_all
 	t_axe			axe;
 	t_list			*list;
 	t_start			start;
-
+	t_boy			boy;
+	t_ray_casting	RC;
 }					t_all;
 
 int		parsing(t_all *s);
@@ -101,6 +134,9 @@ int		make_map(t_all *s);
 
 int		check_parsing(t_all *s);
 
+void	forward(t_all *s);
+
+void	printboy(t_all *s);
 
 
 
@@ -109,6 +145,9 @@ int		check_parsing(t_all *s);
 void	print_map(t_all *s);
 void	print_list(t_all *s);
 int		is_start_pos(char c);
-void		 pixel_put(t_all *s, int x, int y, int color);
+void	pixel_put(t_all *s, int x, int y, int color);
+void	square_put(t_all *s, int size, int color);
+
+void	printmap(t_all *s);
 
 #endif

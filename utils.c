@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 12:05:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/03/10 15:38:57 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/03/11 13:33:59 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,28 @@ void		 pixel_put(t_all *s, int x, int y, int color)
 
 	dst = s->mlx.addr + (y * s->mlx.line_length + x * (s->mlx.bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
+}
+
+void	square_put(t_all *s, int size, int color)
+{
+	int x = s->axe.x;
+	int y = s->axe.y;
+	int x_count = 0;
+	int y_count = 0;
+	int y_save = y;
+
+	while (x_count < size)
+	{
+		y_count = 0;
+		y = y_save;
+		while (y_count < size)
+		{
+			pixel_put(s, x, y, color);
+			y++;
+			y_count++;
+		}
+		x++;
+		x_count++;
+
+	}
 }

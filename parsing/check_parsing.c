@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 10:23:34 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/03/10 11:19:18 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/03/11 14:45:53 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int		check_start_pos(t_all *s)
 			{
 				s->start.count++;
 				s->start.NSEW = s->map.map[i][j];
+				s->start.pos.y = i;
+				s->start.pos.x = j;
 			}
 			j++;
 		}

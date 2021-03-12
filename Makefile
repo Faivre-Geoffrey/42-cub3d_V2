@@ -43,6 +43,8 @@ SRCS =	GNL/get_next_line.c \
 		parsing/make_linked_list.c \
 		parsing/make_map.c \
 		parsing/check_parsing.c \
+		map/print_map.c \
+		move/move.c \
 			utils.c \
 			main.c
 

@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 08:49:30 by geoffrey          #+#    #+#             */
-/*   Updated: 2021/03/09 12:30:53 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/03/11 09:40:09 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,6 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 int					ft_lstsize(t_list *lst);
 int					ft_lstsize_longer(t_list *lst);
 
+int					ft_intmax(int a, int b);
+int					ft_intmin(int a, int b);
 #endif
