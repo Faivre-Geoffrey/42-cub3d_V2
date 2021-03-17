@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 08:07:02 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/03/12 13:49:20 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/03/17 10:45:47 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,80 +28,41 @@ void	mlx_init_full(t_all *s)
 
 int		ft_key(int key, t_all *s)
 {
-
 	if (key == ESC)
 		exit(0);
 	if (key == W)
-		{
-
-			s->mlx.img = mlx_new_image(s->mlx.mlx, s->parse.width_window_size, s->parse.height_window_size);
-			s->mlx.addr = mlx_get_data_addr(s->mlx.img, &s->mlx.bits_per_pixel, &s->mlx.line_length, &s->mlx.endian);
-			s->boy.pos.x = s->boy.pos.x + s->boy.dir.x * 0.1;
-			s->boy.pos.y = s->boy.pos.y + s->boy.dir.y * 0.1;
-			printf("s->boy.pos.x %f\n", s->boy.pos.x);
-			printf("s->boy.pos.y %f\n", s->boy.pos.y);
-			printmap(s);
-			printboy(s);
-		}
+		forward(s);
 	if (key == S)
-		{
-			s->mlx.img = mlx_new_image(s->mlx.mlx, s->parse.width_window_size, s->parse.height_window_size);
-			s->mlx.addr = mlx_get_data_addr(s->mlx.img, &s->mlx.bits_per_pixel, &s->mlx.line_length, &s->mlx.endian);
-			s->boy.pos.x = s->boy.pos.x + -(s->boy.dir.x * 0.1);
-			s->boy.pos.y = s->boy.pos.y + -(s->boy.dir.y * 0.1);
-			printf("s->boy.pos.x %f\n", s->boy.pos.x);
-			printf("s->boy.pos.y %f\n", s->boy.pos.y);
-			printmap(s);
-			printboy(s);
-		}
-		if (key == LEFT)
-		{
-			float oldDirX = s->boy.dir.x;
-			s->boy.dir.x = s->boy.dir.x * cos(0.1) - s->boy.dir.y * sin(-0.1);
-			s->boy.dir.y = oldDirX * sin(-0.1) + s->boy.dir.y * cos(-0.1);
-			/* float oldPlaneX = planeX;
-			planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
-			planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed); */
-			printf("s->boy.dir.x %f\n", s->boy.dir.x);
-			printf("s->boy.dir.y %f\n", s->boy.dir.y);
-			printmap(s);
-			printboy(s);
-		}
-		if (key == RIGHT)
-		{
-			float oldDirX = s->boy.dir.x;
-			s->boy.dir.x = s->boy.dir.x * cos(-0.1) - s->boy.dir.y * sin(0.1);
-			s->boy.dir.y = oldDirX * sin(0.1) + s->boy.dir.y * cos(0.1);
-			/* float oldPlaneX = planeX;
-			planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
-			planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed); */
-			printf("s->boy.dir.x %f\n", s->boy.dir.x);
-			printf("s->boy.dir.y %f\n", s->boy.dir.y);
-			printmap(s);
-			printboy(s);
-		}
-
-		mlx_put_image_to_window(s->mlx.mlx, s->mlx.mlx_win, s->mlx.img, 0, 0);
+		backward(s);
+	if (key == A)
+		leftward(s);
+	if (key == D)
+		rightward(s);
+	if (key == LEFT)
+		dirleft(s);
+	if (key == RIGHT)
+		dirright(s);
+	mlx_put_image_to_window(s->mlx.mlx, s->mlx.mlx_win, s->mlx.img, 0, 0);
 	return (1);
 }
 
 void	init_boy(t_all *s)
 {
 	s->parse.diviseur = s->parse.width_window_size / s->map.size.x;
-	s->boy.pos.x = s->start.pos.x;
-	s->boy.pos.y = s->start.pos.y;
+	s->boy.pos.x = s->start.pos.x + 0.5;
+	s->boy.pos.y = s->start.pos.y + 0.5;
 	s->boy.dir.y = -1;
 	s->boy.dir.x = 0;
-	s->boy.plane.y = 1;
-	s->boy.plane.x = 1;
+	s->boy.plane.y = 0;
+	s->boy.plane.x = 0.66;
 
 
 }
 
 void	printboy(t_all *s)
 {
-	s->axe.x = s->boy.pos.x * s->parse.diviseur - (2 * s->parse.diviseur) + (s->parse.diviseur / 2) - 5;
-	s->axe.y = s->boy.pos.y * s->parse.diviseur - (2 * s->parse.diviseur) + (s->parse.diviseur / 2) - 5;
+	s->axe.x = s->boy.pos.x * s->parse.diviseur - (2 * s->parse.diviseur) ;
+	s->axe.y = s->boy.pos.y * s->parse.diviseur - (2 * s->parse.diviseur) ;
 
 	square_put(s, 10, 0x0042F5A1);
 }
@@ -118,10 +79,12 @@ int		main()
 
 
 
-	mlx_hook(s.mlx.mlx_win, 2, 0, ft_key, &s);
+	/* mlx_hook(s.mlx.mlx_win, 2, 0, ft_key, &s); */
 
 
-
+	s.mlx.img = mlx_xpm_file_to_image(s.mlx.mlx, "textures/east.xpm", &s.parse.width_window_size, &s.parse.height_window_size);
+	s.mlx.addr = mlx_get_data_addr(s.mlx.img, &s.mlx.bits_per_pixel, &s.mlx.line_length, &s.mlx.endian);
+	mlx_put_image_to_window(s.mlx.mlx, s.mlx.mlx_win, s.mlx.img, 0, 0);
 	mlx_loop(s.mlx.mlx);
 
 /*	printf("%s\n",s.parse.EA_path);

@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:59:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/03/12 13:00:48 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/03/15 10:00:36 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,11 @@ int		make_map(t_all *s);
 int		check_parsing(t_all *s);
 
 void	forward(t_all *s);
+void	backward(t_all *s);
+void	leftward(t_all *s);
+void	rightward(t_all *s);
+void	dirleft(t_all *s);
+void	dirright(t_all *s);
 
 void	printboy(t_all *s);
 
@@ -147,7 +152,9 @@ void	print_list(t_all *s);
 int		is_start_pos(char c);
 void	pixel_put(t_all *s, int x, int y, int color);
 void	square_put(t_all *s, int size, int color);
+void	printline(int x, int drawStart , int drawEnd,int color, t_all *s);
 
 void	printmap(t_all *s);
+void	printback(t_all *s);
 
 #endif

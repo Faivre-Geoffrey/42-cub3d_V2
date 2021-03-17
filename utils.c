@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 12:05:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/03/11 13:33:59 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/03/17 10:16:10 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,67 @@ void	square_put(t_all *s, int size, int color)
 		x_count++;
 
 	}
+}
+
+void	printline(int x, int drawStart , int drawEnd,int color, t_all *s)
+{
+	while (drawStart <= drawEnd)
+	{
+		pixel_put(s, x, drawStart, color);
+		drawStart++;
+	}
+}
+void	printceiling(t_all *s)
+{
+	int		x = 0;
+	int		y = 0;
+	while (x < (s->parse.height_window_size / 2))
+	{
+		y = 0;
+		while (y < s->parse.width_window_size)
+		{
+			pixel_put(s, y, x, s->parse.rgb_C);
+			y++;
+		}
+		x++;
+
+	}
+
+}
+void	printfloor(t_all *s)
+{
+	int		x = s->parse.height_window_size / 2;
+	int		y = 0;
+	while (x < s->parse.height_window_size)
+	{
+		y = 0;
+		while (y < s->parse.width_window_size)
+		{
+			pixel_put(s, y, x, s->parse.rgb_F);
+			y++;
+		}
+		x++;
+
+	}
+
+}
+
+void	printback(t_all *s)
+{
+	int		x = 0;
+	int		y = 0;
+	while (x < s->parse.height_window_size)
+	{
+		y = 0;
+		while (y < s->parse.width_window_size)
+		{
+			pixel_put(s, y, x, 0x00ffffff);
+			y++;
+		}
+		x++;
+
+	}
+	/* printceiling(s);
+	printfloor(s); */
+
 }

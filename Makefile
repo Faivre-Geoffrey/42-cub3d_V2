@@ -33,7 +33,7 @@ CC = gcc
 
 RM = rm -rf
 
-CFLAGS = -Werror -Wall -Wextra
+CFLAGS = #-Werror -Wall -Wextra
 
 SRCS =	GNL/get_next_line.c \
 		GNL/get_next_line_utils.c \
