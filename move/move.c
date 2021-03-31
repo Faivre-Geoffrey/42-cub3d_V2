@@ -6,12 +6,12 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 09:26:53 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/03/17 10:30:18 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/03/31 13:11:42 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
+#define texHeight 64
 
 int		ismovable(char c)
 {
@@ -20,8 +20,23 @@ int		ismovable(char c)
 
 void	oui(t_all *s)
 {
-	int i;
 
+	t_data texture[5];
+	t_all cp = *s;
+
+	texture[0].img = mlx_xpm_file_to_image(cp.mlx.mlx, "textures/south.xpm", &cp.parse.width_window_size, &cp.parse.height_window_size);
+	texture[0].addr = (int *)mlx_get_data_addr(texture[0].img, &cp.mlx.bits_per_pixel, &cp.mlx.line_length, &cp.mlx.endian);
+
+	texture[1].img = mlx_xpm_file_to_image(cp.mlx.mlx, "textures/north.xpm", &cp.parse.width_window_size, &cp.parse.height_window_size);
+	texture[1].addr = (int *)mlx_get_data_addr(texture[1].img, &cp.mlx.bits_per_pixel, &cp.mlx.line_length, &cp.mlx.endian);
+
+	texture[2].img = mlx_xpm_file_to_image(cp.mlx.mlx, "textures/west.xpm", &cp.parse.width_window_size, &cp.parse.height_window_size);
+	texture[2].addr = (int *)mlx_get_data_addr(texture[2].img, &cp.mlx.bits_per_pixel, &cp.mlx.line_length, &cp.mlx.endian);
+
+	texture[3].img = mlx_xpm_file_to_image(cp.mlx.mlx, "textures/east.xpm", &cp.parse.width_window_size, &cp.parse.height_window_size);
+	texture[3].addr = (int *)mlx_get_data_addr(texture[3].img, &cp.mlx.bits_per_pixel, &cp.mlx.line_length, &cp.mlx.endian);
+
+	int i;
 	i = 0;
 	while (i < s->parse.width_window_size)
 	{
@@ -104,52 +119,67 @@ void	oui(t_all *s)
 		int drawEnd = lineHeight / 2 + s->parse.height_window_size / 2;
 		if(drawEnd >= s->parse.height_window_size)drawEnd = s->parse.height_window_size - 1;
 
-     //choose wall color
-      /* int color;
-      switch(s->map.map[mapY][mapX])
+
+
+	//texturing calculations
+      int texNum = s->map.map[mapY][mapX] - 1; //1 subtracted from it so that texture 0 can be used!
+
+      //calculate value of wallX
+    float wallX; //where exactly the wall was it
+      if(side == 0) wallX = s->boy.pos.y + perpWallDist * rayDirY;
+      else          wallX = s->boy.pos.x + perpWallDist * rayDirX;
+      wallX -= floor((wallX));
+
+      //x coordinate on the texture
+      int texX = (int)(wallX * 64);
+      if(side == 0 && rayDirX > 0) texX = 64 - texX - 1;
+      if(side == 1 && rayDirY < 0) texX = 64 - texX - 1;
+
+      // TODO: an integer-only bresenham or DDA like algorithm could make the texture coordinate stepping faster
+      // How much to increase the texture coordinate per screen pixel
+      float step = 1.0 * texHeight / lineHeight;
+      // Starting texture coordinate
+      float texPos = (drawStart -  s->parse.height_window_size/ 2 + lineHeight / 2) * step;
+/* 		printf("texX = %i\n", texX); */
+
+      for(int y = drawStart; y < drawEnd; y++)
       {
-        case 1:  color = 0x00ff0000;    break; //red
-        case 2:  color = 0x0000ff00;  break; //green
-        case 3:  color = 0x000000ff;   break; //blue
-        case 4:  color = 0x00ffffff;  break; //white
-        default: color = 0x00ffff00; break; //yellow
-      }
- */
+        // Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
+        int texY = (int)texPos & texHeight - 1;
+        texPos += step;
 
-/* color = 0x0032a852;
-color = 0x00a83240; */
-	int color;
-	if(side == 1 && rayDirY < 0 )
-		color = 0x00ff0000;
-	else if(side == 1 && rayDirY >= 0 )
-		color = 0x0000ff00;
+	if (texY < 0 || texY > 64 )
+		s->mlx.addr[y * s->mlx.line_length / 4 + i ] = 0x00ff00ff;
+	else if(side == 1 && rayDirY < 0 )
+		s->mlx.addr[y * s->mlx.line_length / 4 + i ] = texture[0].addr[texY * cp.mlx.line_length / 4 + texX];
+	else if(side == 1 && rayDirY > 0 )
+		s->mlx.addr[y * s->mlx.line_length / 4 + i ] = texture[1].addr[texY * cp.mlx.line_length / 4 + texX];
 	else if(side == 0 && rayDirX < 0 )
-		color = 0x000000ff;
-	else if(side == 0 && rayDirX >= 0 )
-		color = 0x00ffff00;
+		s->mlx.addr[y * s->mlx.line_length / 4 + i ] = texture[2].addr[texY * cp.mlx.line_length / 4 + texX];
+	else if(side == 0 && rayDirX > 0 )
+		s->mlx.addr[y * s->mlx.line_length / 4 + i ] = texture[3].addr[texY * cp.mlx.line_length / 4 + texX];
 	else
-		color = 0x00000000;
-	//give x and y sides different brightness
-    /* if(side == 1) {color = color / 2;} */
+		s->mlx.addr[y * s->mlx.line_length / 4 + i ] = 0x00ff00ff;
 
-    //draw the pixels of the stripe as a vertical line
-    printline(i, drawStart, drawEnd, color, s);
+
+
+
+	  }
+
+
 		i++;
 	}
+
 }
 
 void	forward(t_all *s)
 {
-	s->mlx.img = mlx_new_image(s->mlx.mlx, s->parse.width_window_size, s->parse.height_window_size);
-	s->mlx.addr = mlx_get_data_addr(s->mlx.img, &s->mlx.bits_per_pixel, &s->mlx.line_length, &s->mlx.endian);
+	/* s->mlx.img = mlx_new_image(s->mlx.mlx, s->parse.width_window_size, s->parse.height_window_size);
+	s->mlx.addr = (int *)mlx_get_data_addr(s->mlx.img, &s->mlx.bits_per_pixel, &s->mlx.line_length, &s->mlx.endian); */
 	if(ismovable(s->map.map[(int)(s->boy.pos.y)][(int)(s->boy.pos.x + s->boy.dir.x * 0.1)]))
 		s->boy.pos.x = s->boy.pos.x + s->boy.dir.x * 0.1;
 	if(ismovable(s->map.map[(int)(s->boy.pos.y + s->boy.dir.y * 0.1)][(int)(s->boy.pos.x)]))
 		s->boy.pos.y = s->boy.pos.y + s->boy.dir.y * 0.1;
-	printf("\ntest x = %f\n",(s->boy.pos.x  + s->boy.dir.x * 0.1 ));
-	printf("\ntest y = %f\n",(s->boy.pos.y ));
-	printf("s->boy.pos.x %f\n", s->boy.pos.x);
-	printf("s->boy.pos.y %f\n", s->boy.pos.y);
 	/* printmap(s);
 	printboy(s); */
 	printback(s);
@@ -159,13 +189,11 @@ void	forward(t_all *s)
 void	backward(t_all *s)
 {
 	s->mlx.img = mlx_new_image(s->mlx.mlx, s->parse.width_window_size, s->parse.height_window_size);
-	s->mlx.addr = mlx_get_data_addr(s->mlx.img, &s->mlx.bits_per_pixel, &s->mlx.line_length, &s->mlx.endian);
+	s->mlx.addr = (int *)mlx_get_data_addr(s->mlx.img, &s->mlx.bits_per_pixel, &s->mlx.line_length, &s->mlx.endian);
 	if(ismovable(s->map.map[(int)(s->boy.pos.y)][(int)(s->boy.pos.x + -(s->boy.dir.x * 0.1))]))
 		s->boy.pos.x = s->boy.pos.x + -(s->boy.dir.x * 0.1);
 	if(ismovable(s->map.map[(int)(s->boy.pos.y + -(s->boy.dir.y * 0.1))][(int)(s->boy.pos.x)]))
 		s->boy.pos.y = s->boy.pos.y + -(s->boy.dir.y * 0.1);
-	printf("s->boy.pos.x %f\n", s->boy.pos.x);
-	printf("s->boy.pos.y %f\n", s->boy.pos.y);
 	/* printmap(s);
 	printboy(s); */
 	printback(s);
@@ -175,13 +203,11 @@ void	backward(t_all *s)
 void	leftward(t_all *s)
 {
 	s->mlx.img = mlx_new_image(s->mlx.mlx, s->parse.width_window_size, s->parse.height_window_size);
-	s->mlx.addr = mlx_get_data_addr(s->mlx.img, &s->mlx.bits_per_pixel, &s->mlx.line_length, &s->mlx.endian);
+	s->mlx.addr = (int *)mlx_get_data_addr(s->mlx.img, &s->mlx.bits_per_pixel, &s->mlx.line_length, &s->mlx.endian);
 	if(ismovable(s->map.map[(int)(s->boy.pos.y)][(int)(s->boy.pos.x + (s->boy.dir.y * 0.1))]))
 		s->boy.pos.x = s->boy.pos.x + (s->boy.dir.y * 0.1);
 	if(ismovable(s->map.map[(int)(s->boy.pos.y - (s->boy.dir.x * 0.1))][(int)(s->boy.pos.x)]))
 		s->boy.pos.y = s->boy.pos.y - (s->boy.dir.x * 0.1);
-	printf("s->boy.pos.x %f\n", s->boy.pos.x);
-	printf("s->boy.pos.y %f\n", s->boy.pos.y);
 	/* printmap(s);
 	printboy(s); */
 	printback(s);
@@ -190,13 +216,11 @@ void	leftward(t_all *s)
 void	rightward(t_all *s)
 {
 	s->mlx.img = mlx_new_image(s->mlx.mlx, s->parse.width_window_size, s->parse.height_window_size);
-	s->mlx.addr = mlx_get_data_addr(s->mlx.img, &s->mlx.bits_per_pixel, &s->mlx.line_length, &s->mlx.endian);
+	s->mlx.addr = (int *)mlx_get_data_addr(s->mlx.img, &s->mlx.bits_per_pixel, &s->mlx.line_length, &s->mlx.endian);
 	if(ismovable(s->map.map[(int)(s->boy.pos.y)][(int)(s->boy.pos.x - (s->boy.dir.y * 0.1))]))
 		s->boy.pos.x = s->boy.pos.x - (s->boy.dir.y * 0.1);
 	if(ismovable(s->map.map[(int)(s->boy.pos.y + (s->boy.dir.x * 0.1))][(int)(s->boy.pos.x)]))
 		s->boy.pos.y = s->boy.pos.y + (s->boy.dir.x * 0.1);
-	printf("s->boy.pos.x %f\n", s->boy.pos.x);
-	printf("s->boy.pos.y %f\n", s->boy.pos.y);
 	/* printmap(s);
 	printboy(s); */
 	printback(s);
@@ -211,8 +235,6 @@ void	dirright(t_all *s)
 	float oldPlaneX = s->boy.plane.x;
 	s->boy.plane.x = s->boy.plane.x * cos(0.08) - s->boy.plane.y * sin(0.08);
 	s->boy.plane.y = oldPlaneX * sin(0.08) + s->boy.plane.y * cos(0.08);
-	printf("s->boy.dir.x %f\n", s->boy.dir.x);
-	printf("s->boy.dir.y %f\n", s->boy.dir.y);
 	/* printmap(s);
 	printboy(s); */
 	printback(s);
@@ -227,14 +249,20 @@ void	dirleft(t_all *s)
 	float oldPlaneX = s->boy.plane.x;
 	s->boy.plane.x = s->boy.plane.x * cos(-0.08) - s->boy.plane.y * sin(-0.08);
 	s->boy.plane.y = oldPlaneX * sin(-0.08) + s->boy.plane.y * cos(-0.08);
-	printf("s->boy.dir.x %f\n", s->boy.dir.x);
-	printf("s->boy.dir.y %f\n", s->boy.dir.y);
-	/* printmap(s);
-	printboy(s); */
 	printback(s);
 	oui(s);
 }
+/* int color;
+	if(side == 1 && rayDirY < 0 )
+		color = 0x00ff0000;
+	else if(side == 1 && rayDirY >= 0 )
+		color = 0x0000ff00;
+	else if(side == 0 && rayDirX < 0 )
+		color = 0x000000ff;
+	else if(side == 0 && rayDirX >= 0 )
+		color = 0x00ffff00;
+	else
+		color = 0x00000000; */
 
-
-
-
+    //draw the pixels of the stripe as a vertical line
+    /* printline(i, drawStart, drawEnd, color, s); */

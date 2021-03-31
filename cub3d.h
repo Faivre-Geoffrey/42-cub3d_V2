@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:59:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/03/15 10:00:36 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/03/19 09:49:58 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ typedef	struct		s_start
 
 typedef struct		s_data {
 	void			*img;
-	char			*addr;
+	int			*addr;
 	int				bits_per_pixel;
 	int				line_length;
 	int				endian;

@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 08:07:02 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/03/17 10:45:47 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/03/30 10:20:04 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	mlx_init_full(t_all *s)
 	s->mlx.mlx = mlx_init();
 	s->mlx.mlx_win = mlx_new_window(s->mlx.mlx, s->parse.width_window_size , s->parse.height_window_size, "Hello world!");
 	s->mlx.img = mlx_new_image(s->mlx.mlx, s->parse.width_window_size, s->parse.height_window_size);
-	s->mlx.addr = mlx_get_data_addr(s->mlx.img, &s->mlx.bits_per_pixel, &s->mlx.line_length, &s->mlx.endian);
+	s->mlx.addr = (int *)mlx_get_data_addr(s->mlx.img, &s->mlx.bits_per_pixel, &s->mlx.line_length, &s->mlx.endian);
 }
 
 int		ft_key(int key, t_all *s)
@@ -77,15 +77,41 @@ int		main()
 	init_boy(&s);
 	mlx_init_full(&s);
 
+	mlx_hook(s.mlx.mlx_win, 2, 0, ft_key, &s);
 
 
-	/* mlx_hook(s.mlx.mlx_win, 2, 0, ft_key, &s); */
+
+	/* t_data texture;
+
+	t_all cp = s;
 
 
-	s.mlx.img = mlx_xpm_file_to_image(s.mlx.mlx, "textures/east.xpm", &s.parse.width_window_size, &s.parse.height_window_size);
-	s.mlx.addr = mlx_get_data_addr(s.mlx.img, &s.mlx.bits_per_pixel, &s.mlx.line_length, &s.mlx.endian);
+
+
+	texture.img = mlx_xpm_file_to_image(s.mlx.mlx, "textures/east.xpm", &cp.parse.width_window_size, &cp.parse.height_window_size);
+	texture.addr = (int *)mlx_get_data_addr(texture.img, &cp.mlx.bits_per_pixel, &cp.mlx.line_length, &cp.mlx.endian);
+
+
+
+	for(int x = 0; x < 1000; x++)
+		for(int y = 0; y < 1000; y++)
+		{
+
+			s.mlx.addr[x * s.mlx.line_length / 4 + y ] = texture.addr[x % 64  * cp.mlx.line_length / 4 + y % 64];
+		}
+
+	s.axe.x = 100;
+	s.axe.y = 100;
+
+	square_put(&s, 10, 0x00ff00ff);
+
+
+
 	mlx_put_image_to_window(s.mlx.mlx, s.mlx.mlx_win, s.mlx.img, 0, 0);
+	printf("s.mlx.line_length = %d\n", s.mlx.line_length);
+	printf("cp.mlx.line_length = %d\n", cp.mlx.line_length); */
 	mlx_loop(s.mlx.mlx);
+
 
 /*	printf("%s\n",s.parse.EA_path);
 	printf("%s\n",s.parse.NO_path);

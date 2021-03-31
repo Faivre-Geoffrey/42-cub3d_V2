@@ -201,6 +201,8 @@ int main(int /*argc*/, char */*argv*/[])
       int drawEnd = lineHeight / 2 + h / 2;
       if(drawEnd >= h) drawEnd = h - 1;
 
+
+
       //texturing calculations
       int texNum = worldMap[mapX][mapY] - 1; //1 subtracted from it so that texture 0 can be used!
 
@@ -220,7 +222,7 @@ int main(int /*argc*/, char */*argv*/[])
       double step = 1.0 * texHeight / lineHeight;
       // Starting texture coordinate
       double texPos = (drawStart - h / 2 + lineHeight / 2) * step;
-      for(int y = drawStart; y < drawEnd; y++)
+      for(int y = drawStart; y < drawEnd; y++
       {
         // Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
         int texY = (int)texPos & (texHeight - 1);
@@ -231,6 +233,16 @@ int main(int /*argc*/, char */*argv*/[])
         buffer[y][x] = color;
       }
     }
+
+
+
+
+
+
+
+
+
+
 
     drawBuffer(buffer[0]);
     for(int y = 0; y < h; y++) for(int x = 0; x < w; x++) buffer[y][x] = 0; //clear the buffer instead of cls()
