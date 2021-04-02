@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 12:05:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/03/31 13:15:15 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/04/01 13:21:42 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,6 @@ void	square_put(t_all *s, int size, int color)
 	}
 }
 
-void	printline(int x, int drawStart , int drawEnd,int color, t_all *s)
-{
-	while (drawStart <= drawEnd)
-	{
-		pixel_put(s, x, drawStart, color);
-		drawStart++;
-	}
-}
 void	printceiling(t_all *s)
 {
 	int		x = 0;

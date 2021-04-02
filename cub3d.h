@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:59:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/03/19 09:49:58 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/04/02 10:15:52 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,31 @@ typedef struct		s_boy{
 	t_axe_f			plane;
 }					t_boy;
 
-typedef	struct		s_ray_casting
-{
-
-}					t_ray_casting;
+typedef struct		s_rc{
+	float cameraX;
+	float rayDirX;
+	float rayDirY;
+	int mapX;
+	int mapY;
+	float sideDistX;
+	float sideDistY;
+	float deltaDistX;
+	float deltaDistY;
+	float perpWallDist;
+	int stepX;
+	int stepY;
+	int hit;
+	int side;
+	int lineHeight;
+	int drawStart;
+	int drawEnd;
+	int texNum;
+	float wallX;
+	int texX;
+	int texY;
+	float step;
+	float texPos;
+}					t_rc;
 
 typedef	struct		s_all
 {
@@ -114,8 +135,8 @@ typedef	struct		s_all
 	t_list			*list;
 	t_start			start;
 	t_boy			boy;
-	t_ray_casting	RC;
-}					t_all;
+	t_rc			rc;
+	}					t_all;
 
 int		parsing(t_all *s);
 
@@ -144,7 +165,12 @@ void	dirright(t_all *s);
 void	printboy(t_all *s);
 
 
-
+void	oui(t_all *s);
+void	drawline(t_data *texture, t_all *s,t_all *cp);
+void	set_texture(t_data *texture, t_all *cp);
+void	rc_hit(t_all *s);
+void	rc_step_and_dist(t_all *s);
+void	set_rc_var(t_all *s);
 
 
 void	print_map(t_all *s);
@@ -152,7 +178,6 @@ void	print_list(t_all *s);
 int		is_start_pos(char c);
 void	pixel_put(t_all *s, int x, int y, int color);
 void	square_put(t_all *s, int size, int color);
-void	printline(int x, int drawStart , int drawEnd,int color, t_all *s);
 
 void	printmap(t_all *s);
 void	printback(t_all *s);

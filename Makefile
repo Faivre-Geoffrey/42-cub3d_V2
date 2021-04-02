@@ -45,6 +45,9 @@ SRCS =	GNL/get_next_line.c \
 		parsing/check_parsing.c \
 		map/print_map.c \
 		move/move.c \
+		move/move_dir.c \
+		move/raycasting.c \
+		move/raycasting_2.c \
 			utils.c \
 			main.c
 
