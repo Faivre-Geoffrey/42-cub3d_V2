@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 12:05:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/01 13:21:42 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/04/12 12:33:17 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,22 +111,31 @@ void	printfloor(t_all *s)
 
 }
 
+void	drawline(t_all *s)
+{
+	if (s->axe.y == 0)
+	{
+		while (s->axe.y < s->rc.drawStart)
+		{
+			pixel_put(s, s->axe.x, s->axe.y, s->parse.rgb_C);
+			s->axe.y++;
+		}
+	}
+	else if (s->axe.y == s->rc.drawEnd + 1)
+	{
+		while(s->axe.y < s->parse.height_window_size)
+		{
+			pixel_put(s, s->axe.x, s->axe.y, s->parse.rgb_F);
+			s->axe.y++;
+		}
+	}
+}
+
 void	printback(t_all *s)
 {
-	/* int		x = 0;
-	int		y = 0;
-	while (x < s->parse.height_window_size)
-	{
-		y = 0;
-		while (y < s->parse.width_window_size)
-		{
-			pixel_put(s, y, x, 0x00ffffff);
-			y++;
-		}
-		x++;
-
-	} */
 	printceiling(s);
 	printfloor(s);
 
 }
+
+

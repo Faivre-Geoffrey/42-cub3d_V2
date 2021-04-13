@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:59:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/02 10:15:52 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/04/13 09:16:23 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct		s_axe_f {
 	float			y;
 	float			x_count;
 	float			y_count;
+	double			a;
 }					t_axe_f;
 
 typedef	struct		s_parse
@@ -67,6 +68,19 @@ typedef	struct		s_parse
 	char			*EA_path;
 	char			*S_path;
 	int				diviseur;
+	char			*map_path;
+	int				lastisline;
+	int				firstline;
+	int				spaceinmap;
+	int				treat_window_size;
+	int				treat_NO_path;
+	int				treat_SO_path;
+	int				treat_WE_path;
+	int				treat_EA_path;
+	int				treat_S_path;
+	int				treat_RGB_F;
+	int				treat_RGB_C;
+	int				numsprite;
 }					t_parse;
 
 typedef	struct		s_map
@@ -86,7 +100,7 @@ typedef	struct		s_start
 
 typedef struct		s_data {
 	void			*img;
-	int			*addr;
+	int				*addr;
 	int				bits_per_pixel;
 	int				line_length;
 	int				endian;
@@ -101,34 +115,65 @@ typedef struct		s_boy{
 }					t_boy;
 
 typedef struct		s_rc{
-	float cameraX;
-	float rayDirX;
-	float rayDirY;
-	int mapX;
-	int mapY;
-	float sideDistX;
-	float sideDistY;
-	float deltaDistX;
-	float deltaDistY;
-	float perpWallDist;
-	int stepX;
-	int stepY;
-	int hit;
-	int side;
-	int lineHeight;
-	int drawStart;
-	int drawEnd;
-	int texNum;
-	float wallX;
-	int texX;
-	int texY;
-	float step;
-	float texPos;
+	float			cameraX;
+	float			rayDirX;
+	float			rayDirY;
+	int				mapX;
+	int				mapY;
+	float			sideDistX;
+	float			sideDistY;
+	float			deltaDistX;
+	float			deltaDistY;
+	float			perpWallDist;
+	int 			stepX;
+	int 			stepY;
+	int 			hit;
+	int 			side;
+	int 			lineHeight;
+	int 			drawStart;
+	int 			drawEnd;
+	int 			texNum;
+	float			wallX;
+	int 			texX;
+	int 			texY;
+	float			step;
+	float			texPos;
+	double			*ZBuffer;
+	int				*spriteOrder;
+	double			*spriteDistance;
 }					t_rc;
+
+typedef struct		s_sprxy
+{
+	double			x;
+	double			y;
+}					t_sprxy;
+
+typedef struct	s_spr
+{
+	int				nbspr;
+	int				*order;
+	double			*dist;
+	double			spritex;
+	double			spritey;
+	double			invdet;
+	double			transformx;
+	double			transformy;
+	int				spritescreenx;
+	int				spriteheight;
+	int				drawstartx;
+	int				drawstarty;
+	int				drawendy;
+	int				drawendx;
+	int				spritewidth;
+	double			*zbuffer;
+}				t_spr;
 
 typedef	struct		s_all
 {
 	t_data 			mlx;
+	t_data 			texture[5];
+	t_all			cp;
 	t_parse			parse;
 	t_map 			map;
 	t_axe			axe;
@@ -136,6 +181,8 @@ typedef	struct		s_all
 	t_start			start;
 	t_boy			boy;
 	t_rc			rc;
+	t_spr			spr;
+	t_sprxy			*sxy;
 	}					t_all;
 
 int		parsing(t_all *s);
@@ -155,18 +202,18 @@ int		make_map(t_all *s);
 
 int		check_parsing(t_all *s);
 
-void	forward(t_all *s);
-void	backward(t_all *s);
-void	leftward(t_all *s);
-void	rightward(t_all *s);
-void	dirleft(t_all *s);
-void	dirright(t_all *s);
+void	forward(t_all *s, t_all *cp, t_data texture[5]);
+void	backward(t_all *s, t_all *cp, t_data texture[5]);
+void	leftward(t_all *s, t_all *cp, t_data texture[5]);
+void	rightward(t_all *s, t_all *cp, t_data texture[5]);
+void	dirleft(t_all *s, t_all *cp, t_data texture[5]);
+void	dirright(t_all *s, t_all *cp, t_data texture[5]);
 
 void	printboy(t_all *s);
 
 
-void	oui(t_all *s);
-void	drawline(t_data *texture, t_all *s,t_all *cp);
+void	oui(t_all *s, t_all *cp, t_data texture[5]);
+void	drawline_tex(t_data *texture, t_all *s,t_all *cp);
 void	set_texture(t_data *texture, t_all *cp);
 void	rc_hit(t_all *s);
 void	rc_step_and_dist(t_all *s);
@@ -181,5 +228,6 @@ void	square_put(t_all *s, int size, int color);
 
 void	printmap(t_all *s);
 void	printback(t_all *s);
+void	drawline(t_all *s);
 
 #endif

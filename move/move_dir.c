@@ -6,13 +6,13 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 09:47:17 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/02 09:47:33 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/04/13 08:57:28 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	dirright(t_all *s)
+void	dirright(t_all *s, t_all *cp, t_data texture[5])
 {
 	float oldDirX = s->boy.dir.x;
 	s->boy.dir.x = s->boy.dir.x * cos(0.08) - s->boy.dir.y * sin(0.08);
@@ -20,11 +20,10 @@ void	dirright(t_all *s)
 	float oldPlaneX = s->boy.plane.x;
 	s->boy.plane.x = s->boy.plane.x * cos(0.08) - s->boy.plane.y * sin(0.08);
 	s->boy.plane.y = oldPlaneX * sin(0.08) + s->boy.plane.y * cos(0.08);
-	printback(s);
-	oui(s);
+	oui(s, cp, texture);
 }
 
-void	dirleft(t_all *s)
+void	dirleft(t_all *s, t_all *cp, t_data texture[5])
 {
 	float oldDirX = s->boy.dir.x;
 	s->boy.dir.x = s->boy.dir.x * cos(-0.08) - s->boy.dir.y * sin(-0.08);
@@ -32,6 +31,5 @@ void	dirleft(t_all *s)
 	float oldPlaneX = s->boy.plane.x;
 	s->boy.plane.x = s->boy.plane.x * cos(-0.08) - s->boy.plane.y * sin(-0.08);
 	s->boy.plane.y = oldPlaneX * sin(-0.08) + s->boy.plane.y * cos(-0.08);
-	printback(s);
-	oui(s);
+	oui(s, cp, texture);
 }

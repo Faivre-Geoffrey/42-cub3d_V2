@@ -6,16 +6,16 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 09:45:31 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/02 09:46:26 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/04/13 09:17:05 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 #define texHeight 64
 
-void	set_texture(t_data *texture, t_all *cp)
+void	set_texture(t_all *s)
 {
-	texture[0].img = mlx_xpm_file_to_image(cp->mlx.mlx, "textures/south.xpm",
+	s->texture[0].img = mlx_xpm_file_to_image(cp->mlx.mlx, "textures/south.xpm",
 	&cp->parse.width_window_size, &cp->parse.height_window_size);
 	texture[0].addr = (int *)mlx_get_data_addr(texture[0].img,
 	&cp->mlx.bits_per_pixel, &cp->mlx.line_length, &cp->mlx.endian);
@@ -31,12 +31,18 @@ void	set_texture(t_data *texture, t_all *cp)
 	&cp->parse.width_window_size, &cp->parse.height_window_size);
 	texture[3].addr = (int *)mlx_get_data_addr(texture[3].img,
 	&cp->mlx.bits_per_pixel, &cp->mlx.line_length, &cp->mlx.endian);
+	texture[4].img = mlx_xpm_file_to_image(cp->mlx.mlx, "textures/pillar.xpm",
+	&cp->parse.width_window_size, &cp->parse.height_window_size);
+	texture[4].addr = (int *)mlx_get_data_addr(texture[4].img,
+	&cp->mlx.bits_per_pixel, &cp->mlx.line_length, &cp->mlx.endian);
+}
 }
 
-void	drawline(t_data *texture, t_all *s,t_all *cp)
+void	drawline_tex(t_data *texture, t_all *s,t_all *cp)
 {
-	s->axe.y = s->rc.drawStart;
-	while( s->axe.y < s->rc.drawEnd )
+	s->axe.y = 0;
+	drawline(s);
+	while( s->axe.y <= s->rc.drawEnd )
 	{
 		s->rc.texY = (int)s->rc.texPos & texHeight - 1;
 		s->rc.texPos += s->rc.step;
@@ -57,6 +63,7 @@ void	drawline(t_data *texture, t_all *s,t_all *cp)
 			0x00ffBBff;
 		s->axe.y++;
 	}
+	drawline(s);
 }
 
 void	set_rc_var(t_all *s)
