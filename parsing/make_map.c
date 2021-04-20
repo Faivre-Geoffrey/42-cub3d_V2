@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 12:10:33 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/09 07:21:06 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/04/20 09:47:39 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,20 @@ char	**malloc_map(t_all *s)
 	char **tab_map = NULL;
 	tab_map = malloc(sizeof(char*) * (s->map.size.y + 4 + 1));
 	if (tab_map == NULL)
+	{
+		printf("malloc foiree");
 		return (NULL);
-	while (i < s->map.size.x + 4 + 1)
+
+	}
+
+	while (i < s->map.size.y + 4 + 1)
 	{
 		tab_map[i] = malloc(sizeof(char) * (s->map.size.x + 4 + 1));
+		if (tab_map[i] == NULL)
+		{
+			printf("malloc_2 foiree");
+			return (NULL);
+		}
 		tab_map[i][s->map.size.y + 4 + 1] = '\0';
 		i++;
 	}
@@ -38,6 +48,7 @@ void	space_map(t_all *s)
 	int x;
 
 	y = 0;
+
 	while (y < s->map.size.y + 4)
 	{
 		x = 0;

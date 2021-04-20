@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 07:16:17 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/13 08:00:13 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/04/14 14:42:38 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,48 +208,7 @@ int		treat_line(t_all *s)
 	return (-1);
 }
 
-void	ft_init_sprite2(t_all *s, int i, int j, int v)
-{
-	i = 0;
-	while (++i < s->map.size.y + 3)
-	{
-		j = 0;
-		while (++j < s->map.size.x + 3)
-		{
-			if (s->map.map[i][j] == '2')
-			{
-				s->sxy[v].x = (double)i + 0.5;
-				s->sxy[v].y = (double)j + 0.5;
-				v++;
-			}
-		}
-	}
-}
 
-void	ft_init_sprite(t_all *s)
-{
-	int i;
-	int j;
-
-	i = 0;
-	s->spr.nbspr = 0;
-	while (++i < s->map.size.y + 3)
-	{
-		j = 0;
-		while (++j < s->map.size.x + 3)
-		{
-			if (s->map.map[i][j] == '2')
-				s->spr.nbspr += 1;
-		}
-	}
-	if (!(s->sxy = (t_sprxy *)malloc(sizeof(t_sprxy) * s->spr.nbspr)))
-		return;
-	if (!(s->spr.order = (int *)malloc(sizeof(int) * s->spr.nbspr)))
-		return;
-	if (!(s->spr.dist = (double *)malloc(sizeof(double) * s->spr.nbspr)))
-		return;
-	ft_init_sprite2(s, 0, 0, 0);
-}
 
 
 
@@ -272,7 +231,6 @@ int		parsing(t_all *s)
 			return (-1);
 		}
 	make_map(s);
-	ft_init_sprite(s);
 	close(s->parse.fd);
 	return 0;
 }

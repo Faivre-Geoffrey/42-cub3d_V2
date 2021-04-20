@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:59:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/13 09:16:23 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/04/19 13:32:08 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,42 +138,24 @@ typedef struct		s_rc{
 	int 			texY;
 	float			step;
 	float			texPos;
-	double			*ZBuffer;
-	int				*spriteOrder;
-	double			*spriteDistance;
 }					t_rc;
 
-typedef struct		s_sprxy
+typedef struct	s_sprite
 {
-	double			x;
-	double			y;
-}					t_sprxy;
+	float	x;
+	float	y;
+}				t_sprite;
 
 typedef struct	s_spr
 {
-	int				nbspr;
-	int				*order;
-	double			*dist;
-	double			spritex;
-	double			spritey;
-	double			invdet;
-	double			transformx;
-	double			transformy;
-	int				spritescreenx;
-	int				spriteheight;
-	int				drawstartx;
-	int				drawstarty;
-	int				drawendy;
-	int				drawendx;
-	int				spritewidth;
 	double			*zbuffer;
+	int 			*spriteOrder;
+	double 			*spriteDistance;
 }				t_spr;
 
 typedef	struct		s_all
 {
 	t_data 			mlx;
-	t_data 			texture[5];
-	t_all			cp;
 	t_parse			parse;
 	t_map 			map;
 	t_axe			axe;
@@ -182,8 +164,8 @@ typedef	struct		s_all
 	t_boy			boy;
 	t_rc			rc;
 	t_spr			spr;
-	t_sprxy			*sxy;
-	}					t_all;
+	t_sprite		*sprite;
+}					t_all;
 
 int		parsing(t_all *s);
 
@@ -202,19 +184,19 @@ int		make_map(t_all *s);
 
 int		check_parsing(t_all *s);
 
-void	forward(t_all *s, t_all *cp, t_data texture[5]);
-void	backward(t_all *s, t_all *cp, t_data texture[5]);
-void	leftward(t_all *s, t_all *cp, t_data texture[5]);
-void	rightward(t_all *s, t_all *cp, t_data texture[5]);
-void	dirleft(t_all *s, t_all *cp, t_data texture[5]);
-void	dirright(t_all *s, t_all *cp, t_data texture[5]);
+void	forward(t_all *s);
+void	backward(t_all *s);
+void	leftward(t_all *s);
+void	rightward(t_all *s);
+void	dirleft(t_all *s);
+void	dirright(t_all *s);
 
 void	printboy(t_all *s);
 
 
-void	oui(t_all *s, t_all *cp, t_data texture[5]);
+void	oui(t_all *s);
 void	drawline_tex(t_data *texture, t_all *s,t_all *cp);
-void	set_texture(t_data *texture, t_all *cp);
+void	set_texture(t_data *texture, t_all *cp ,t_all *s);
 void	rc_hit(t_all *s);
 void	rc_step_and_dist(t_all *s);
 void	set_rc_var(t_all *s);
@@ -229,5 +211,8 @@ void	square_put(t_all *s, int size, int color);
 void	printmap(t_all *s);
 void	printback(t_all *s);
 void	drawline(t_all *s);
+
+
+int		ft_namecheck(char *arg, char *ext);
 
 #endif

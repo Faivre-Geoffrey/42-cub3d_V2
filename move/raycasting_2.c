@@ -6,36 +6,35 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 09:45:31 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/13 09:17:05 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/04/19 12:29:55 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 #define texHeight 64
 
-void	set_texture(t_all *s)
+void	set_texture(t_data texture[5], t_all *cp, t_all *s)
 {
-	s->texture[0].img = mlx_xpm_file_to_image(cp->mlx.mlx, "textures/south.xpm",
+	texture[0].img = mlx_xpm_file_to_image(cp->mlx.mlx, s->parse.NO_path,
 	&cp->parse.width_window_size, &cp->parse.height_window_size);
 	texture[0].addr = (int *)mlx_get_data_addr(texture[0].img,
 	&cp->mlx.bits_per_pixel, &cp->mlx.line_length, &cp->mlx.endian);
-	texture[1].img = mlx_xpm_file_to_image(cp->mlx.mlx, "textures/north.xpm",
+	texture[1].img = mlx_xpm_file_to_image(cp->mlx.mlx, s->parse.SO_path,
 	&cp->parse.width_window_size, &cp->parse.height_window_size);
 	texture[1].addr = (int *)mlx_get_data_addr(texture[1].img,
 	&cp->mlx.bits_per_pixel, &cp->mlx.line_length, &cp->mlx.endian);
-	texture[2].img = mlx_xpm_file_to_image(cp->mlx.mlx, "textures/west.xpm",
+	texture[2].img = mlx_xpm_file_to_image(cp->mlx.mlx, s->parse.WE_path,
 	&cp->parse.width_window_size, &cp->parse.height_window_size);
 	texture[2].addr = (int *)mlx_get_data_addr(texture[2].img,
 	&cp->mlx.bits_per_pixel, &cp->mlx.line_length, &cp->mlx.endian);
-	texture[3].img = mlx_xpm_file_to_image(cp->mlx.mlx, "textures/east.xpm",
+	texture[3].img = mlx_xpm_file_to_image(cp->mlx.mlx, s->parse.EA_path,
 	&cp->parse.width_window_size, &cp->parse.height_window_size);
 	texture[3].addr = (int *)mlx_get_data_addr(texture[3].img,
 	&cp->mlx.bits_per_pixel, &cp->mlx.line_length, &cp->mlx.endian);
-	texture[4].img = mlx_xpm_file_to_image(cp->mlx.mlx, "textures/pillar.xpm",
+	texture[4].img = mlx_xpm_file_to_image(cp->mlx.mlx, s->parse.S_path,
 	&cp->parse.width_window_size, &cp->parse.height_window_size);
 	texture[4].addr = (int *)mlx_get_data_addr(texture[4].img,
 	&cp->mlx.bits_per_pixel, &cp->mlx.line_length, &cp->mlx.endian);
-}
 }
 
 void	drawline_tex(t_data *texture, t_all *s,t_all *cp)
@@ -118,8 +117,7 @@ void	rc_hit(t_all *s)
 				s->rc.mapY += s->rc.stepY;
 				s->rc.side = 1;
 			}
-			if(s->map.map[s->rc.mapY][s->rc.mapX] == '1' ||
-				s->map.map[s->rc.mapY][s->rc.mapX] == '2')
+			if(s->map.map[s->rc.mapY][s->rc.mapX] == '1')
 				s->rc.hit = 1;
 	}
 }

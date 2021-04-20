@@ -6,168 +6,25 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 09:44:09 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/13 09:16:47 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/04/20 09:50:35 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 #define texHeight 64
-# define NONE 0xFF000000
 
 
-
-void	ft_dist_order2(t_all *s)
-{
-	int i;
-
-	i = -1;
-	while (++i < s->spr.nbspr)
-	{
-		s->spr.order[i] = i;
-		s->spr.dist[i] = ((s->boy.pos.x - s->sxy[i].x) *
-				(s->boy.pos.x - s->sxy[i].x) + (s->boy.pos.y -
-					s->sxy[i].y) * (s->boy.pos.y - s->sxy[i].y));
-	}
-}
-
-void	ft_dist_order(t_all *s)
-{
-	int		i;
-	int		j;
-	double	tmp;
-
-	ft_dist_order2(s);
-	i = -1;
-	while (++i < s->parse.numsprite)
-	{
-		j = -1;
-		while (++j < s->parse.numsprite - 1)
-		{
-			if (s->spr.dist[j] < s->spr.dist[j + 1])
-			{
-				tmp = s->spr.dist[j];
-				s->spr.dist[j] = s->spr.dist[j + 1];
-				s->spr.dist[j + 1] = tmp;
-				tmp = s->spr.order[j];
-				s->spr.order[j] = s->spr.order[j + 1];
-				s->spr.order[j + 1] = (int)tmp;
-			}
-		}
-	}
-}
-
-void	ft_calculs(t_all *s, int i)
-{
-	s->spr.spritex = s->sxy[s->spr.order[i]].x - s->boy.pos.x;
-	s->spr.spritey = s->sxy[s->spr.order[i]].y - s->boy.pos.y;
-	s->spr.invdet = 1.0 / (s->boy.plane.x * s->boy.dir.y -
-			s->boy.dir.x * s->boy.plane.y);
-	s->spr.transformx = s->spr.invdet * (s->boy.dir.y *
-			s->spr.spritex - s->boy.dir.x * s->spr.spritey);
-	s->spr.transformy = s->spr.invdet * (-s->boy.plane.y *
-			s->spr.spritex + s->boy.plane.x * s->spr.spritey);
-	s->spr.spritescreenx = (int)((s->parse.width_window_size / 2) * (1 + s->spr.transformx
-				/ s->spr.transformy));
-	s->spr.spriteheight = abs((int)(s->parse.height_window_size / (s->spr.transformy)));
-	s->spr.drawstarty = -s->spr.spriteheight / 2 + s->parse.height_window_size / 2;
-	if (s->spr.drawstarty < 0)
-		s->spr.drawstarty = 0;
-	s->spr.drawendy = s->spr.spriteheight / 2 + s->parse.height_window_size / 2;
-	if (s->spr.drawendy >= s->parse.height_window_size)
-		s->spr.drawendy = s->parse.height_window_size;
-	s->spr.spritewidth = abs((int)(s->parse.height_window_size / (s->spr.transformy)));
-	s->spr.drawstartx = -s->spr.spritewidth / 2 + s->spr.spritescreenx;
-	if (s->spr.drawstartx < 0)
-		s->spr.drawstartx = 0;
-	s->spr.drawendx = s->spr.spritewidth / 2 + s->spr.spritescreenx;
-	if (s->spr.drawendx >= s->parse.width_window_size)
-		s->spr.drawendx = s->parse.width_window_size;
-}
-
-void	ft_draw_spr(t_all *s, int y, int texx, int stripe)
-{
-	int		d;
-	int		texy;
-
-	while (y < s->spr.drawendy)
-	{
-		d = (y) * 256 - s->parse.height_window_size * 128 + s->spr.spriteheight * 128;
-		texy = ((d * s->texture[4].height) / s->spr.spriteheight) / 256;
-		if (s->texture[4].addr[texy * s->texture[4].line_length / 4 +
-				texx] != -16777216)
-		{
-			s->data.addr[y * s->data.line_length / 4 + stripe] =
-				s->texture[4].addr[texy * s->texture[4].line_length /
-				4 + texx];
-		}
-		y++;
-	}
-}
-
-void	ft_sprite(t_all *s)
-{
-	int i;
-	int y;
-	int stripe;
-	int texx;
-
-	i = -1;
-	ft_dist_order(s);
-	while (++i < s->parse.numsprite)
-	{
-		ft_calculs(s, i);
-		stripe = s->spr.drawstartx;
-		while (stripe < s->spr.drawendx)
-		{
-			texx = (int)(256 * (stripe - (-s->spr.spritewidth / 2 +
-							s->spr.spritescreenx)) * s->texture[4].width
-					/ s->spr.spritewidth) / 256;
-			if (s->spr.transformy > 0 && stripe >= 0 && stripe < s->parse.width_window_size
-					&& s->spr.transformy < s->spr.zbuffer[stripe])
-			{
-				y = s->spr.drawstarty;
-				ft_draw_spr(s, y, texx, stripe);
-			}
-			stripe++;
-		}
-	}
-}
-
-
-
-
-
-
-
-
-
-
-void	oui_2(t_data *texture, t_all *s,t_all *cp)
-{
-	if(s->rc.drawEnd >= s->parse.height_window_size)
-			s->rc.drawEnd = s->parse.height_window_size - 1;
-		s->rc.texNum = s->map.map[s->rc.mapY][s->rc.mapX] - 1;
-		if(s->rc.side == 0)
-			s->rc.wallX = s->boy.pos.y + s->rc.perpWallDist * s->rc.rayDirY;
-		else
-			s->rc.wallX = s->boy.pos.x + s->rc.perpWallDist * s->rc.rayDirX;
-		s->rc.wallX -= floor((s->rc.wallX));
-		s->rc.texX = (int)(s->rc.wallX * 64);
-		if((s->rc.side == 0 && s->rc.rayDirX > 0) || (s->rc.side == 1 && s->rc.rayDirY < 0))
-			s->rc.texX = 64 - s->rc.texX - 1;
-		s->rc.step = 1.0 * texHeight / s->rc.lineHeight;
-		s->rc.texPos = (s->rc.drawStart -  s->parse.height_window_size/
-		2 + s->rc.lineHeight / 2) * s->rc.step;
-		drawline_tex(*(&texture), s, cp);
-		ft_sprite(s);
-		s->axe.x++;
-}
 
 void	oui(t_all *s)
 {
+	t_data texture[5];
+	t_all cp = *s;
 
+	s->spr.zbuffer = malloc(sizeof(double) * s->parse.width_window_size);
+	s->spr.spriteOrder = malloc(sizeof(int) * s->parse.numsprite);
+	s->spr.spriteDistance = malloc(sizeof(double) * s->parse.numsprite);
 
-	set_texture(*(&texture), &cp);
+	set_texture(*(&texture), &cp, s);
 	s->axe.x = 0;
 	while (s->axe.x < s->parse.width_window_size)
 	{
@@ -187,6 +44,98 @@ void	oui(t_all *s)
 		if(s->rc.drawStart < 0)
 			s->rc.drawStart = 0;
 		s->rc.drawEnd = s->rc.lineHeight / 2 + s->parse.height_window_size / 2;
-		oui_2(*(&texture), s,&cp);
+		if(s->rc.drawEnd >= s->parse.height_window_size)
+			s->rc.drawEnd = s->parse.height_window_size - 1;
+		s->rc.texNum = s->map.map[s->rc.mapY][s->rc.mapX] - 1;
+		if(s->rc.side == 0)
+			s->rc.wallX = s->boy.pos.y + s->rc.perpWallDist * s->rc.rayDirY;
+		else
+			s->rc.wallX = s->boy.pos.x + s->rc.perpWallDist * s->rc.rayDirX;
+		s->rc.wallX -= floor((s->rc.wallX));
+		s->rc.texX = (int)(s->rc.wallX * 64);
+		if((s->rc.side == 0 && s->rc.rayDirX > 0) || (s->rc.side == 1 && s->rc.rayDirY < 0))
+			s->rc.texX = 64 - s->rc.texX - 1;
+		s->rc.step = 1.0 * texHeight / s->rc.lineHeight;
+		s->rc.texPos = (s->rc.drawStart -  s->parse.height_window_size/
+		2 + s->rc.lineHeight / 2) * s->rc.step;
+		drawline_tex(*(&texture), s, &cp);
+		s->spr.zbuffer[s->axe.x] = s->rc.perpWallDist;
+		s->axe.x++;
 	}
+	for(int i = 0; i < s->parse.numsprite; i++)
+    {
+      s->spr.spriteOrder[i] = i;
+      s->spr.spriteDistance[i] = ((s->boy.pos.x - s->sprite[i].x) * (s->boy.pos.x - s->sprite[i].x) + (s->boy.pos.y - s->sprite[i].y) * (s->boy.pos.y - s->sprite[i].y)); //sqrt not taken, unneeded
+    }
+
+	int x = 0;
+	for (int i = 0; i < s->parse.numsprite - 1; i++)
+	{
+		if (s->spr.spriteDistance[s->spr.spriteOrder[i]] < s->spr.spriteDistance[s->spr.spriteOrder[i + 1]])
+		{
+			x = s->spr.spriteOrder[i];
+			s->spr.spriteOrder[i] = s->spr.spriteOrder[i + 1];
+			s->spr.spriteOrder[i + 1] = x;
+			i = -1;
+		}
+	}
+
+	for(int i = 0; i < s->parse.numsprite; i++)
+    {
+      double spriteX = s->sprite[s->spr.spriteOrder[i]].x - s->boy.pos.x + 0.5;
+      double spriteY = s->sprite[s->spr.spriteOrder[i]].y - s->boy.pos.y + 0.5;
+
+
+      double invDet = 1.0 / (s->boy.plane.x * s->boy.dir.y - s->boy.dir.x * s->boy.plane.y);
+      double transformX = invDet * (s->boy.dir.y * spriteX - s->boy.dir.x * spriteY);
+      double transformY = invDet * (-s->boy.plane.y * spriteX + s->boy.plane.x * spriteY);
+
+      int spriteScreenX = (int)(s->parse.width_window_size / 2) * (1 + transformX / transformY);
+
+      #define uDiv 0.75
+      #define vDiv 0.75
+      #define vMove 64
+      int vMoveScreen = (int)(vMove / transformY);
+
+      int spriteHeight = abs((int)(s->parse.height_window_size / (transformY))) / vDiv;
+      int drawStartY = -spriteHeight / 2 + s->parse.height_window_size / 2 + vMoveScreen;
+      if(drawStartY < 0) drawStartY = 0;
+      int drawEndY = spriteHeight / 2 + s->parse.height_window_size / 2 + vMoveScreen;
+      if(drawEndY >= s->parse.height_window_size) drawEndY = s->parse.height_window_size - 1;
+
+
+      int spriteWidth = abs( (int) (s->parse.height_window_size / (transformY))) / uDiv;
+      int drawStartX = -(spriteWidth) / 2 + spriteScreenX;
+      if(drawStartX < 0) drawStartX = 0;
+      int drawEndX = spriteWidth / 2 + spriteScreenX;
+      if(drawEndX >= s->parse.width_window_size)
+      drawEndX = s->parse.width_window_size - 1;
+
+
+      for(int stripe = drawStartX; stripe < drawEndX; stripe++)
+      {
+        int texX = (int)(256 * (stripe - (-spriteWidth / 2 + spriteScreenX)) * 64 / spriteWidth) / 256;
+
+        if(transformY > 0 && stripe > 0 && stripe < s->parse.width_window_size && transformY < s->spr.zbuffer[stripe])
+        for(int y = drawStartY; y < drawEndY; y++)
+        {
+          int d = (y-vMoveScreen) * 256 - s->parse.height_window_size * 128 + spriteHeight * 128;
+          int texY = ((d * texHeight) / spriteHeight) / 256;
+          if (texture[4].addr[texY * cp.mlx.line_length / 4 + texX] != 0x0000000)
+          s->mlx.addr[y * s->mlx.line_length / 4 + stripe] =
+			texture[4].addr[texY * cp.mlx.line_length / 4 + texX] ;
+        }
+      }
+    }
+
+
+
+
+
+
+
+
+	/* free(s->spr.zbuffer);
+	free(s->spr.spriteDistance);
+	free(s->spr.spriteOrder); */
 }

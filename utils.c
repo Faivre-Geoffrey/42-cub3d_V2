@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 12:05:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/12 12:33:17 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/04/19 13:40:23 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,4 +138,27 @@ void	printback(t_all *s)
 
 }
 
+int		namecheck(char *arg, char *ext)
+{
+	int size;
+	int	i;
+
+	i = 0;
+	size = 0;
+	while (arg[i] != '\0')
+		i++;
+	size = ft_strlen(ext);
+	while(arg[i] != '.' && i < 0 && size < 0)
+	{
+		if (arg[i] != ext[size])
+			return (-1);
+
+		if (arg[i] == '.' && size != 0)
+			return (-1);
+
+		size--;
+		i--;
+	}
+	return (1);
+}
 

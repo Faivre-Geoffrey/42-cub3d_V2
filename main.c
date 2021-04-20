@@ -6,19 +6,13 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 08:07:02 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/13 09:16:01 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/04/20 09:44:46 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 
-void	init_2(t_all *s)
-{
-	s->rc.ZBuffer = malloc(sizeof(double) * s->parse.width_window_size);
-	s->rc.spriteOrder = malloc(sizeof(int) * s->parse.numsprite);
-	s->rc.spriteDistance = malloc(sizeof(double) * s->parse.numsprite);
-	}
 
 void	init(t_all *s)
 {
@@ -27,6 +21,12 @@ void	init(t_all *s)
 	s->parse.width_window_size = 0;
 	s->parse.firstline = 1;
 	s->parse.lastisline = 0;
+
+	s->parse.NO_path = NULL;
+	s->parse.EA_path = NULL;
+	s->parse.SO_path = NULL;
+	s->parse.WE_path = NULL;
+	s->parse.S_path = NULL;
 
 	s->parse.treat_window_size = 0;
 	s->parse.treat_NO_path = 0;
@@ -38,7 +38,7 @@ void	init(t_all *s)
 	s->parse.treat_RGB_C = 0;
 	s->parse.spaceinmap = 0;
 	s->parse.numsprite = 0;
-	int_2(s);
+	s->sprite = NULL;
 }
 
 void	mlx_init_full(t_all *s)
@@ -51,20 +51,21 @@ void	mlx_init_full(t_all *s)
 
 int		ft_key(int key, t_all *s, t_all *cp, t_data texture[5])
 {
+
 	if (key == ESC)
 		exit(0);
 	if (key == W)
-		forward(s, cp, texture);
+		forward(s);
 	if (key == S)
-		backward(s, cp, texture);
+		backward(s);
 	if (key == A)
-		leftward(s, cp, texture);
+		leftward(s);
 	if (key == D)
-		rightward(s, cp, texture);
+		rightward(s);
 	if (key == LEFT)
-		dirleft(s, cp, texture);
+		dirleft(s);
 	if (key == RIGHT)
-		dirright(s, cp, texture);
+		dirright(s);
 	mlx_put_image_to_window(s->mlx.mlx, s->mlx.mlx_win, s->mlx.img, 0, 0);
 	return (1);
 }
@@ -153,7 +154,6 @@ int	ft_pp(int key, t_all *s)
 int		main(int ac, char *av[])
 {
 	t_all s;
-
 
 	init(&s);
 	if (ac < 2 || ac > 3)
