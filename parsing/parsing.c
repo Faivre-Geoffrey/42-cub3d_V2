@@ -18,8 +18,6 @@ int	atoi(const char *str)
 	int	neg;
 	int	res;
 
-	if (!str)
-		return (0);
 	i = 0;
 	neg = 1;
 	if (str[i] == '-')
@@ -33,11 +31,9 @@ int	atoi(const char *str)
 int		treat_window_size(t_all *s)
 {
 	int		i;
-	int		j;
 	i = 0;
 	while (!(ft_isdigit(s->parse.line[i])))
 		i++;
-	j = 0;
 	if (ft_isdigit(s->parse.line[i]))
 	{
 		if (ft_atoi(&s->parse.line[i]) > 2560)

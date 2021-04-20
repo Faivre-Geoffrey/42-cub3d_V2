@@ -49,7 +49,7 @@ void	mlx_init_full(t_all *s)
 	s->mlx.addr = (int *)mlx_get_data_addr(s->mlx.img, &s->mlx.bits_per_pixel, &s->mlx.line_length, &s->mlx.endian);
 }
 
-int		ft_key(int key, t_all *s, t_all *cp, t_data texture[5])
+int		ft_key(int key, t_all *s)
 {
 
 	if (key == ESC)
@@ -138,7 +138,7 @@ int		map_path(t_all *s,char *str)
 
 }
 
-int		second_arg(t_all *s,char *str)
+int		second_arg(char *str)
 {
 	if (ft_strncmp(str, "--save", 7) != 0)
 		return -1;

@@ -54,8 +54,10 @@ NAME			= libft.a
 
 
 
-all:	$(OBJS)
-	@ar rcs $(NAME) $(OBJS)
+all	: $(NAME)
+
+$(NAME):	$(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
 
 clean:

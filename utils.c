@@ -16,7 +16,7 @@ void	print_list(t_all *s)
 {
 	while (s->list)
 	{
-		printf("%s\n", s->list->content);
+		printf("%p\n", s->list->content);
 		s->list = s->list->next;
 	}
 }
@@ -47,8 +47,6 @@ int		is_start_pos(char c)
 
 void		 pixel_put(t_all *s, int x, int y, int color)
 {
-	char	*dst;
-
 	s->mlx.addr[y * s->mlx.line_length / 4 + x]= color;
 }
 

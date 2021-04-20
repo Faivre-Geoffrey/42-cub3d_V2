@@ -19,7 +19,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <mlx.h>
+#include "minilibx_linux/mlx.h"
 #include <math.h>
 
 # define ESC 53

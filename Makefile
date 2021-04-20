@@ -26,14 +26,14 @@ _IWHITE=\x1b[47m
 
 NAME = cub3D
 
-MLX = -lmlx -lm -framework OpenGL -framework AppKit
+#MLX = -lmlx -lm -framework OpenGL -framework AppKit
 #MLX = -I /usr/include -g -L /usr/lib -lX11 -lmlx -lXext -lm -fsanitize=address
 
 CC = gcc
 
 RM = rm -rf
 
-CFLAGS = #-Werror -Wall -Wextra
+CFLAGS = -Werror -Wall -Wextra
 
 SRCS =	GNL/get_next_line.c \
 		GNL/get_next_line_utils.c \
@@ -66,11 +66,12 @@ all: $(OBJS)
 	@echo "$(_GREEN)[OK 1/3]$(_END)"
 	@echo "$(_BLUE)[Libft compilation...]$(_END)"
 	@echo "$(_PURPLE)"
+	@$(MAKE) -C ./minilibx_linux
 	@$(MAKE) -C ./libft
 	@echo "$(_END)"
 	@echo "$(_GREEN)[OK 2/3]$(_END)"
 	@echo "$(_BLUE)[Cub3D compilation...]$(_END)"
-	@$(CC) $(SRCS) -I./includes -I./usr/include $(CFLAGS) $(MLX) ./libft/libft.a -o $(NAME)
+	@$(CC) $(CFLAGS) -o $(NAME)  $(SRCS)   ./minilibx_linux/libmlx_Linux.a ./libft/libft.a 
 	@echo "$(_GREEN)[OK 3/3]$(_END)"
 	@echo "$(_GREY)$(_IGREEN)\t\t[Done !]$(_END)"
 

@@ -43,7 +43,7 @@ void	drawline_tex(t_data *texture, t_all *s,t_all *cp)
 	drawline(s);
 	while( s->axe.y <= s->rc.drawEnd )
 	{
-		s->rc.texY = (int)s->rc.texPos & texHeight - 1;
+		s->rc.texY = (int)s->rc.texPos & (texHeight - 1);
 		s->rc.texPos += s->rc.step;
 		if(s->rc.side == 1 && s->rc.rayDirY < 0 )
 			s->mlx.addr[s->axe.y * s->mlx.line_length / 4 + s->axe.x ] =
