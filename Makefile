@@ -26,90 +26,80 @@ _IWHITE=\033[47m
 
 
 
-SRCS =	GNL/get_next_line.c \
-		GNL/get_next_line_utils.c \
-		parsing/parsing.c \
-		parsing/treat_path.c \
-		parsing/treat_rgb.c \
-		parsing/make_linked_list.c \
-		parsing/make_map.c \
-		parsing/check_parsing.c \
-		map/print_map.c \
-		move/move.c \
-		move/move_dir.c \
-		move/raycasting.c \
-		move/raycasting_2.c \
-			utils.c \
-			main.c
+SRC =	move_dir.c \
+		raycasting.c \
+		raycasting_2.c \
+		utils.c \
+		main.c \
+		get_next_line.c \
+		get_next_line_utils.c \
+		parsing.c \
+		treat_path.c \
+		treat_rgb.c \
+		make_linked_list.c \
+		make_map.c \
+		check_parsing.c \
+		print_map.c \
+		move.c 
+		
 
+NAME = Cub3D
 
-OBJS = $(SRCS:.c=.o)
+MLX_DIR = minilibx_linux
+MLX = libmlx.a 
+CC = clang
 
-MLX_DIR	= minilibx_linux
+# diff entre .a et .dylib
+# .a = lib static, les fonctions utilisees sont directement ecrite dans le binaire
+# .dylib = lib dynamique, les fonctions doivent etre chargees au momnent ou on lance le binaire
 
-NAME = cub3D
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 
+OBJ_DIR = obj
+SRC_DIR = src
+INC_DIR = inc
 
-MLX = -lm -lbsd -lmlx -LX11 -LXest
-
-CC = gcc
-
-RM = rm -rf
-
-CFLAGS = -Werror -Wall -Wextra
-
-HEADER = -I .
-
-
-all: $(NAME)
-
-$(NAME) : $(OBJS) ft mlx
-	@echo "\n"
-	@echo "\t\t $(_IWHITE)$(_BLUE)Make cub3D with remake library$(_END)"
-	@echo "\n"
-	@echo "$(_BLUE)[Remove last version...]$(_END)"
-	@rm -rf Cub3D
-	@echo "$(_GREEN)[OK 1/3]$(_END)"
-	@echo "$(_BLUE)[Libft compilation...]$(_END)"
-	@echo "$(_GREEN)[OK 2/3]$(_END)"
-	@echo "$(_BLUE)[Cub3D compilation...]$(_END)"
-	@$(CC) $(CFLAGS) $(HEADER) -L $(MLX_DIR) -o $(NAME)  $(SRCS) $(MLX)  ./minilibx_linux/libmlx_Linux.a
-	@echo "$(_GREEN)[OK 3/3]$(_END)"
-	@echo "$(_GREY)$(_IGREEN)\t\t[Done !]$(_END)"
+OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
+DPD = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.d))
 
 .c.o:
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I ${INC}
+	${CC} ${CFLAGS} -c$< -o ${<:.c=.o}
 
-mlx:
-	@echo "\033[34m-= Making mlx... =-"
-	@make -C $(MLX_DIR)
-	@echo "\033[34m-= mlx Done ! =-"
+# -C faire make comme si on etait dana le dossier
+# -j multisreder / ameliore la vitesse de compliation
+# Pas de regle opti car makefile mlx pas compatible
+all:
+	@$(MAKE) -j $(NAME)
 
-ft:
-	@echo "\033[33m-= Making Libft... =-"
-	@make -C libft
-	@echo "\033[33m-= Libft Done ! =-"
+# permet de pouvoir comparer la derniere modification de la dep par rapport a la regle
+# -L donner le nom du dossier / -l donner le nom le la lib
+# loader path = ecrit le chemin de la mlx dans le binaire pour pouvoir la retrouver au moment ou on lance le binaire
+$(NAME): $(OBJ) ft
+		${CC} $(CFLAGS) -o $(NAME) $(OBJ) libft/libft.a -L $(MLX_DIR) -lmlx -lm -lbsd -lX11 -lXext
+		@echo $(NAME) : Created !
 
-nolib: $(OBJS)
-	@echo "\n"
-	@echo "\t\t $(_IWHITE)$(_BLUE)Make cub3D without remake library$(_END)"
-	@echo "\n"
-	@echo "$(_GREEN)[Remove last version...]$(_END)"
-	@rm -rf Cub3D
-	@echo "$(_GREEN)[Cub3D compilation...]$(_END)"
-	@$(CC) $(SRCS) -I./includes -I./usr/include $(CFLAGS) $(MLX)  -o $(NAME)
-	@echo "$(_GREEN)[Done !]$(_END)"
+# si le .c est plus recent que le .o on rentre dans la regle
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | .gitignore
+		@mkdir -p $(OBJ_DIR)
+		${CC} $(CFLAGS) -I $(INC_DIR) -I $(MLX_DIR) -c $< -o $@
 
-clean :
-	@echo "\n"
-	@echo "\t\t $(_IWHITE)$(_BLUE)Clean all .o$(_END)"
-	@echo "\n"
-	@$(RM) $(OBJS)
-	@$(MAKE) clean -C ./libft
+ft :
+		make -C libft
 
-fclean : clean
-	@$(RM) $(NAME)
-	@$(RM) cub3d.bmp
+.gitignore:
+		@echo $(NAME) > .gitignore
 
-re : fclean all
+clean:
+	@rm -rf $(OBJ_DIR)
+	@echo "obj deleted"
 
+fclean:	clean
+	@rm -rf $(NAME)
+	@echo "[$(NAME)]: deleted"
+
+re: fclean all
+
+.PHONY: all, clean, fclean, re
+
+# Utilise les .d (et ignore s'ils n'existe pas)
+-include $(DPD)
