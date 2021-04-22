@@ -19,10 +19,10 @@ void	ft_strcpy(char *dst, const char *src)
 	i = 0;
 	if (!dst || !src)
 		return ;
-		while (src[i])
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = '\0';
+	while (src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
 }

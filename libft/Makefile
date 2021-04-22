@@ -39,6 +39,7 @@ SRCS			=	ft_memset.c ft_bzero.c ft_memcpy.c \
 					ft_putnbr_fd.c ft_strcpy.c \
 					\
 					ft_intmin.c ft_intmax.c \
+					\
 					ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
 					ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c \
 					ft_lstclear.c ft_lstiter.c ft_lstmap.c \
@@ -52,12 +53,13 @@ CFLAGS			= -Wall -Wextra -Werror
 
 NAME			= libft.a
 
-
+$(NAME):	$(OBJS)
+	ar rc $(NAME) $(OBJS)
+	ranlib ${NAME}
 
 all	: $(NAME)
 
-$(NAME):	$(OBJS)
-	ar rcs $(NAME) $(OBJS)
+
 
 
 clean:

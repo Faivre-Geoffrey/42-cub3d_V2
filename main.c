@@ -145,7 +145,7 @@ int		second_arg(char *str)
 	return 0;
 }
 
-int	ft_pp(int key, t_all *s)
+int	ft_pp()
 {
 	exit(0);
 	return (0);
@@ -162,7 +162,7 @@ int		main(int ac, char *av[])
 		return (-1);
 	}
 	if (ac == 3)
-		if (second_arg(&s, av[2]) == -1)
+		if (second_arg(av[2]) == -1)
 		{
 			printf("Second args must be \"--save\"\n");
 			return (-1);
