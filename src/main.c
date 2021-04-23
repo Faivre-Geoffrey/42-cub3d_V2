@@ -187,8 +187,8 @@ int		main(int ac, char *av[])
 	mlx_init_full(&s);
 	oui(&s);
 	mlx_put_image_to_window(s.mlx.mlx, s.mlx.mlx_win, s.mlx.img, 0, 0);
-	mlx_hook(s.mlx.mlx_win, 2, 0, ft_key, &s);
-	mlx_hook(s.mlx.mlx_win, 17, 0, ft_pp, &s);
+	mlx_hook(s.mlx.mlx_win, 2, 1L << 0, ft_key, &s);
+	mlx_hook(s.mlx.mlx_win, 33, 1L << 17, ft_pp, &s);
 	mlx_loop(s.mlx.mlx);
 	return (0);
 }

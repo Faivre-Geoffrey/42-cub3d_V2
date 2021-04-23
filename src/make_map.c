@@ -16,17 +16,15 @@ char	**malloc_map(t_all *s)
 {
 	int i;
 
-	i = 0;
 	char **tab_map = NULL;
 	tab_map = malloc(sizeof(char*) * (s->map.size.y + 4 + 1));
 	if (tab_map == NULL)
 	{
 		printf("malloc foiree");
 		return (NULL);
-
 	}
-
-	while (i < s->map.size.y + 4 + 1)
+	i = 0;
+	while (i < s->map.size.y + 4)
 	{
 		tab_map[i] = malloc(sizeof(char) * (s->map.size.x + 4 + 1));
 		if (tab_map[i] == NULL)
@@ -34,7 +32,7 @@ char	**malloc_map(t_all *s)
 			printf("malloc_2 foiree");
 			return (NULL);
 		}
-		tab_map[i][s->map.size.y + 4 + 1] = '\0';
+		/* tab_map[i][s->map.size.y + 4] = '\0'; */
 		i++;
 	}
 	tab_map[i] = NULL;

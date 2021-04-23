@@ -121,9 +121,14 @@ void	oui(t_all *s)
         {
           int d = (y-vMoveScreen) * 256 - s->parse.height_window_size * 128 + spriteHeight * 128;
           int texY = ((d * texHeight) / spriteHeight) / 256;
-          if (texture[4].addr[texY * cp.mlx.line_length / 4 + texX] != 0x0000000)
+		  /* if (stripe == drawStartX && y == drawStartY) */
+		 /*  printf("texture[4].addr[texY * cp.mlx.line_length / 4 + texX] = %i\n", texture[4].addr[texY * cp.mlx.line_length / 4 + texX]); */
+          if ((texture[4].addr[texY * cp.mlx.line_length / 4 + texX]) != -16777216)
+		  {
+		  
           s->mlx.addr[y * s->mlx.line_length / 4 + stripe] =
 			texture[4].addr[texY * cp.mlx.line_length / 4 + texX] ;
+			}
         }
       }
     }

@@ -43,7 +43,7 @@ SRC =	move_dir.c \
 		move.c 
 		
 
-NAME = Cub3D
+NAME = cub3d
 
 MLX_DIR = minilibx_linux
 MLX = libmlx.a 
@@ -75,7 +75,7 @@ all:
 # -L donner le nom du dossier / -l donner le nom le la lib
 # loader path = ecrit le chemin de la mlx dans le binaire pour pouvoir la retrouver au moment ou on lance le binaire
 $(NAME): $(OBJ) ft
-		${CC} $(CFLAGS) -o $(NAME) $(OBJ) libft/libft.a -L $(MLX_DIR) -lmlx -lm -lbsd -lX11 -lXext
+		${CC} $(CFLAGS) -g -o $(NAME) $(OBJ) libft/libft.a -L $(MLX_DIR) -lmlx -lm -lbsd -lX11 -lXext
 		@echo $(NAME) : Created !
 
 # si le .c est plus recent que le .o on rentre dans la regle
