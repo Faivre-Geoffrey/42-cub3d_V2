@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   move_dir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 09:47:17 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/14 12:41:56 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/05/06 13:56:58 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../includes/cub3d.h"
 
 void	dirright(t_all *s)
 {

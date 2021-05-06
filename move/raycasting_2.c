@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 09:45:31 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/19 12:29:55 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/05/06 13:59:21 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../includes/cub3d.h"
 #define texHeight 64
 
 void	set_texture(t_data texture[5], t_all *cp, t_all *s)
