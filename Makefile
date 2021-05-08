@@ -31,8 +31,6 @@ SRC =	move_dir.c \
 		raycasting_2.c \
 		utils.c \
 		main.c \
-		get_next_line.c \
-		get_next_line_utils.c \
 		parsing.c \
 		treat_path.c \
 		treat_rgb.c \
@@ -53,11 +51,11 @@ CC = clang
 # .a = lib static, les fonctions utilisees sont directement ecrite dans le binaire
 # .dylib = lib dynamique, les fonctions doivent etre chargees au momnent ou on lance le binaire
 
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 OBJ_DIR = obj
 SRC_DIR = src
-INC_DIR = inc
+INC_DIR = includes
 
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 DPD = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.d))
@@ -90,10 +88,12 @@ ft :
 		@echo $(NAME) > .gitignore
 
 clean:
+	@$(MAKE) -C libft clean 
 	@rm -rf $(OBJ_DIR)
 	@echo "obj deleted"
 
 fclean:	clean
+	@$(MAKE) -C libft fclean 
 	@rm -rf $(NAME)
 	@echo "[$(NAME)]: deleted"
 

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 11:43:19 by gefaivre          #+#    #+#             */
-/*   Updated: 2020/12/15 13:26:58 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/05/08 16:48:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-size_t		ft_strlen(const char *s)
+
+size_t		ft_strlen_const(const char *s)
 {
 	int i;
 
@@ -24,7 +25,7 @@ size_t		ft_strlen(const char *s)
 	return (i);
 }
 
-void		*ft_memmove(void *dst, const void *src, size_t len)
+void		*ft_memmove_const(void *dst, const void *src, size_t len)
 {
 	char *dst_c;
 	char *src_c;
@@ -51,12 +52,12 @@ char		*join(char const *s1, char const *s2)
 
 	if (!s1 && !s2)
 		return (0);
-	stot_len = ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1;
+	stot_len = ft_strlen_const((char *)s1) + ft_strlen_const((char *)s2) + 1;
 	rtn_str = malloc(sizeof(char) * stot_len);
 	if (!rtn_str)
 		return (0);
-	ft_memmove(rtn_str, s1, ft_strlen((char *)s1));
-	ft_memmove(rtn_str + ft_strlen((char *)s1), s2, ft_strlen((char *)s2));
+	ft_memmove_const(rtn_str, s1, ft_strlen_const((char *)s1));
+	ft_memmove_const(rtn_str + ft_strlen_const((char *)s1), s2, ft_strlen_const((char *)s2));
 	rtn_str[stot_len - 1] = '\0';
 	free((char *)s1);
 	return (rtn_str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 08:49:30 by geoffrey          #+#    #+#             */
-/*   Updated: 2021/03/11 09:40:09 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/05/08 16:48:24 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,19 @@ int					ft_lstsize_longer(t_list *lst);
 
 int					ft_intmax(int a, int b);
 int					ft_intmin(int a, int b);
+
+/*
+**			get_next_line
+*/
+
+#define BUFFER_SIZE 30
+
+size_t		ft_strlen_const(const char *s);
+void		*ft_memmove_const(void *dst, const void *src, size_t len);
+char		*join(char const *s1, char const *s2);
+int			has_return(char *str);
+char		*get_new_save(char *save);
+char		*get_line(char *str);
+int			get_next_line(int fd, char **line);
+
 #endif
