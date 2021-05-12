@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 07:16:17 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/14 14:42:38 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/05/11 13:51:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ int	is_line_at_map(char *str)
 
 int		treat_line(t_all *s)
 {
-	printf("line = {%s}\n", s->parse.line);
 	if (s->parse.line[0] == 'R' && s->parse.treat_window_size == 0 && s->parse.firstline == 1)
 	{
 		s->parse.lastisline = 0;
@@ -219,13 +218,19 @@ int		parsing(t_all *s)
 	}
 	s->parse.fd = open(s->parse.map_path, O_RDONLY);
 	if (s->parse.fd == -1 )
+	{
+		printf("bad name .cub\n");
 		return (-1);
+	}
 	while (get_next_line(s->parse.fd, &s->parse.line))
+	{
 		if (treat_line(s) == -1)
 		{
 			printf("\"treat_line\" return = [-1]\n");
 			return (-1);
 		}
+		free(s->parse.line);
+	}
 	make_map(s);
 	close(s->parse.fd);
 	return 0;

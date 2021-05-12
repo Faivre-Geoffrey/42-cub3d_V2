@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:59:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/19 13:32:08 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/05/12 14:51:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,13 @@ typedef struct		s_boy{
 	t_axe_f			pos;
 	t_axe_f			dir;
 	t_axe_f			plane;
+	int 			forward;
+	int				backward;
+	int				leftward;
+	int				rightward;
+	int				dirright;
+	int				dirleft;
+
 }					t_boy;
 
 typedef struct		s_rc{
@@ -153,9 +160,16 @@ typedef struct	s_spr
 	double 			*spriteDistance;
 }				t_spr;
 
+typedef struct	s_cp
+{
+	t_data		mlx;
+	t_parse		parse;
+}				t_cp;
+
 typedef	struct		s_all
 {
 	t_data 			mlx;
+	t_data			texture[5];
 	t_parse			parse;
 	t_map 			map;
 	t_axe			axe;
@@ -165,7 +179,10 @@ typedef	struct		s_all
 	t_rc			rc;
 	t_spr			spr;
 	t_sprite		*sprite;
+	t_cp			cp;
 }					t_all;
+
+int		gigi(t_all *s);
 
 int		parsing(t_all *s);
 
@@ -195,8 +212,8 @@ void	printboy(t_all *s);
 
 
 void	oui(t_all *s);
-void	drawline_tex(t_data *texture, t_all *s,t_all *cp);
-void	set_texture(t_data *texture, t_all *cp ,t_all *s);
+void	drawline_tex(t_all *s);
+void	set_texture(t_all *s);
 void	rc_hit(t_all *s);
 void	rc_step_and_dist(t_all *s);
 void	set_rc_var(t_all *s);
@@ -214,5 +231,8 @@ void	drawline(t_all *s);
 
 
 int		ft_namecheck(char *arg, char *ext);
+void fuck_up_fonction(void *i);
+
+int		ismovable(char c);
 
 #endif

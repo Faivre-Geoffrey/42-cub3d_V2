@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 08:28:08 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/03/11 13:59:58 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/05/12 09:43:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ void	printmap(t_all *s)
 		s->axe.x = s->axe.x + s->parse.diviseur;
 		s->axe.x_count++;
 	}
-	printf("NO SEG FAULT");
+	/* printf("NO SEG FAULT"); */
 }

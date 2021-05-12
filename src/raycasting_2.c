@@ -3,41 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 09:45:31 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/19 12:29:55 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/05/12 10:52:11 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #define texHeight 64
 
-void	set_texture(t_data texture[5], t_all *cp, t_all *s)
+void	set_texture(t_all *s)
 {
-	texture[0].img = mlx_xpm_file_to_image(cp->mlx.mlx, s->parse.NO_path,
-	&cp->parse.width_window_size, &cp->parse.height_window_size);
-	texture[0].addr = (int *)mlx_get_data_addr(texture[0].img,
-	&cp->mlx.bits_per_pixel, &cp->mlx.line_length, &cp->mlx.endian);
-	texture[1].img = mlx_xpm_file_to_image(cp->mlx.mlx, s->parse.SO_path,
-	&cp->parse.width_window_size, &cp->parse.height_window_size);
-	texture[1].addr = (int *)mlx_get_data_addr(texture[1].img,
-	&cp->mlx.bits_per_pixel, &cp->mlx.line_length, &cp->mlx.endian);
-	texture[2].img = mlx_xpm_file_to_image(cp->mlx.mlx, s->parse.WE_path,
-	&cp->parse.width_window_size, &cp->parse.height_window_size);
-	texture[2].addr = (int *)mlx_get_data_addr(texture[2].img,
-	&cp->mlx.bits_per_pixel, &cp->mlx.line_length, &cp->mlx.endian);
-	texture[3].img = mlx_xpm_file_to_image(cp->mlx.mlx, s->parse.EA_path,
-	&cp->parse.width_window_size, &cp->parse.height_window_size);
-	texture[3].addr = (int *)mlx_get_data_addr(texture[3].img,
-	&cp->mlx.bits_per_pixel, &cp->mlx.line_length, &cp->mlx.endian);
-	texture[4].img = mlx_xpm_file_to_image(cp->mlx.mlx, s->parse.S_path,
-	&cp->parse.width_window_size, &cp->parse.height_window_size);
-	texture[4].addr = (int *)mlx_get_data_addr(texture[4].img,
-	&cp->mlx.bits_per_pixel, &cp->mlx.line_length, &cp->mlx.endian);
+	s->texture[0].img = mlx_xpm_file_to_image(s->cp.mlx.mlx, s->parse.NO_path,
+	&s->cp.parse.width_window_size, &s->cp.parse.height_window_size);
+	s->texture[0].addr = (int *)mlx_get_data_addr(s->texture[0].img,
+	&s->cp.mlx.bits_per_pixel, &s->cp.mlx.line_length, &s->cp.mlx.endian);
+	s->texture[1].img = mlx_xpm_file_to_image(s->cp.mlx.mlx, s->parse.SO_path,
+	&s->cp.parse.width_window_size, &s->cp.parse.height_window_size);
+	s->texture[1].addr = (int *)mlx_get_data_addr(s->texture[1].img,
+	&s->cp.mlx.bits_per_pixel, &s->cp.mlx.line_length, &s->cp.mlx.endian);
+	s->texture[2].img = mlx_xpm_file_to_image(s->cp.mlx.mlx, s->parse.WE_path,
+	&s->cp.parse.width_window_size, &s->cp.parse.height_window_size);
+	s->texture[2].addr = (int *)mlx_get_data_addr(s->texture[2].img,
+	&s->cp.mlx.bits_per_pixel, &s->cp.mlx.line_length, &s->cp.mlx.endian);
+	s->texture[3].img = mlx_xpm_file_to_image(s->cp.mlx.mlx, s->parse.EA_path,
+	&s->cp.parse.width_window_size, &s->cp.parse.height_window_size);
+	s->texture[3].addr = (int *)mlx_get_data_addr(s->texture[3].img,
+	&s->cp.mlx.bits_per_pixel, &s->cp.mlx.line_length, &s->cp.mlx.endian);
+	s->texture[4].img = mlx_xpm_file_to_image(s->cp.mlx.mlx, s->parse.S_path,
+	&s->cp.parse.width_window_size, &s->cp.parse.height_window_size);
+	s->texture[4].addr = (int *)mlx_get_data_addr(s->texture[4].img,
+	&s->cp.mlx.bits_per_pixel, &s->cp.mlx.line_length, &s->cp.mlx.endian);
 }
 
-void	drawline_tex(t_data *texture, t_all *s,t_all *cp)
+void	drawline_tex(t_all *s)
 {
 	s->axe.y = 0;
 	drawline(s);
@@ -47,16 +47,16 @@ void	drawline_tex(t_data *texture, t_all *s,t_all *cp)
 		s->rc.texPos += s->rc.step;
 		if(s->rc.side == 1 && s->rc.rayDirY < 0 )
 			s->mlx.addr[s->axe.y * s->mlx.line_length / 4 + s->axe.x ] =
-			texture[0].addr[s->rc.texY * cp->mlx.line_length / 4 + s->rc.texX];
+			s->texture[0].addr[s->rc.texY * s->cp.mlx.line_length / 4 + s->rc.texX];
 		else if(s->rc.side == 1 && s->rc.rayDirY > 0 )
 			s->mlx.addr[s->axe.y * s->mlx.line_length / 4 + s->axe.x ] =
-			texture[1].addr[s->rc.texY * cp->mlx.line_length / 4 + s->rc.texX];
+			s->texture[1].addr[s->rc.texY * s->cp.mlx.line_length / 4 + s->rc.texX];
 		else if(s->rc.side == 0 && s->rc.rayDirX < 0 )
 			s->mlx.addr[s->axe.y * s->mlx.line_length / 4 + s->axe.x ] =
-			texture[2].addr[s->rc.texY * cp->mlx.line_length / 4 + s->rc.texX];
+			s->texture[2].addr[s->rc.texY * s->cp.mlx.line_length / 4 + s->rc.texX];
 		else if(s->rc.side == 0 && s->rc.rayDirX > 0 )
 			s->mlx.addr[s->axe.y * s->mlx.line_length / 4 + s->axe.x ] =
-			texture[3].addr[s->rc.texY * cp->mlx.line_length / 4 + s->rc.texX];
+			s->texture[3].addr[s->rc.texY * s->cp.mlx.line_length / 4 + s->rc.texX];
 		else
 			s->mlx.addr[s->axe.y * s->mlx.line_length / 4 + s->axe.x ] =
 			0x00ffBBff;

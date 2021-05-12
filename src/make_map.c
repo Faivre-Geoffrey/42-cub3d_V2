@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 12:10:33 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/20 09:47:39 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/05/11 13:52:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ void	frame_map(t_all *s)
 
 void	fill_map(t_all *s)
 {
+	t_list *t;
+	t = s->list;
 	s->axe.y = 0;
 	while (s->axe.y < s->map.size.y)
 	{
@@ -95,7 +97,7 @@ void	fill_map(t_all *s)
 		s->list = s->list->next;
 		s->axe.y++;
 	}
-
+	s->list = t;
 }
 
 int		make_map(t_all *s)
@@ -106,6 +108,6 @@ int		make_map(t_all *s)
 	space_map(s);
 	frame_map(s);
 	fill_map(s);
-	print_map(s);
+	/* print_map(s); */
 	return (0);
 }

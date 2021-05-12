@@ -3,16 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 08:07:02 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/20 09:44:46 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/05/12 15:31:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+int	ft_pp(t_all *s)
+{
+	int i = 0;
+	ft_lstclear(&s->list, free);
+	while (i < s->map.size.y +4 )
+	{
+		free(s->map.map[i]);
+		i++;
+	}
+	free(s->map.map);
+	free(s->parse.line);
+	free(s->spr.zbuffer);
+	free(s->spr.spriteDistance);
+	free(s->spr.spriteOrder);
+	mlx_destroy_image(s->mlx.mlx, s->mlx.img);
 
+
+	exit(0);
+	return (0);
+}
 
 void	init(t_all *s)
 {
@@ -39,6 +58,12 @@ void	init(t_all *s)
 	s->parse.spaceinmap = 0;
 	s->parse.numsprite = 0;
 	s->sprite = NULL;
+	s->boy.dirleft = 0;
+	s->boy.dirright = 0;
+	s->boy.forward = 0;
+	s->boy.backward = 0;
+	s->boy.leftward = 0;
+	s->boy.rightward = 0;
 }
 
 void	mlx_init_full(t_all *s)
@@ -53,20 +78,20 @@ int		ft_key(int key, t_all *s)
 {
 
 	if (key == ESC)
-		exit(0);
-	if (key == W)
+		ft_pp(s);
+	else if (key == W)
 		forward(s);
-	if (key == S)
+	else if (key == S)
 		backward(s);
-	if (key == A)
+	else if (key == A)
 		leftward(s);
-	if (key == D)
+	else if (key == D)
 		rightward(s);
-	if (key == LEFT)
+	else if (key == LEFT)
 		dirleft(s);
-	if (key == RIGHT)
+	else if (key == RIGHT)
 		dirright(s);
-	mlx_put_image_to_window(s->mlx.mlx, s->mlx.mlx_win, s->mlx.img, 0, 0);
+	
 	return (1);
 }
 
@@ -145,10 +170,43 @@ int		second_arg(char *str)
 	return 0;
 }
 
-int	ft_pp()
+int		ft_key_press(int keycode, t_all *s)
 {
-	exit(0);
-	return (0);
+	if (keycode == W)
+		s->boy.forward = 1;
+	else if (keycode == S)
+		s->boy.backward = 1;
+	else if (keycode == A)
+		s->boy.leftward = 1;
+	else if (keycode == D)
+		s->boy.rightward = 1;
+	else if (keycode == LEFT)
+		s->boy.dirleft = 1;
+	else if (keycode == RIGHT)
+		s->boy.dirright = 1;
+	else if (keycode == ESC)
+		ft_pp(s);
+	
+	return (1);
+}
+
+int		ft_key_release(int keycode, t_all *s)
+{
+	if (keycode == W)
+		s->boy.forward = 0;
+	else if (keycode == S)
+		s->boy.backward = 0;
+	else if (keycode == A)
+		s->boy.leftward = 0;
+	else if (keycode == D)
+		s->boy.rightward = 0;
+	else if (keycode == LEFT)
+		s->boy.dirleft = 0;
+	else if (keycode == RIGHT)
+		s->boy.dirright = 0;
+	else if (keycode == ESC)
+		ft_pp(s);
+	return (1);
 }
 
 int		main(int ac, char *av[])
@@ -185,10 +243,17 @@ int		main(int ac, char *av[])
 	}
 	init_boy(&s);
 	mlx_init_full(&s);
+	s.cp.mlx = s.mlx;
+	s.cp.parse = s.parse;
+	set_texture(&s);
+	s.spr.zbuffer = malloc(sizeof(double) * s.parse.width_window_size);
+	s.spr.spriteOrder = malloc(sizeof(int) * s.parse.numsprite);
+	s.spr.spriteDistance = malloc(sizeof(double) * s.parse.numsprite);
 	oui(&s);
-	mlx_put_image_to_window(s.mlx.mlx, s.mlx.mlx_win, s.mlx.img, 0, 0);
-	mlx_hook(s.mlx.mlx_win, 2, 1L << 0, ft_key, &s);
 	mlx_hook(s.mlx.mlx_win, 33, 1L << 17, ft_pp, &s);
-	mlx_loop(s.mlx.mlx);
+	mlx_hook(s.mlx.mlx_win, 2, 1L << 0, ft_key_press, &s);
+	mlx_loop_hook(s.mlx.mlx, gigi, &s);
+	mlx_hook(s.mlx.mlx_win, 3, 1L << 1, ft_key_release, &s);
+	mlx_loop(s.mlx.mlx); 
 	return (0);
 }

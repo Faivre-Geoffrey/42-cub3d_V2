@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 12:05:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/19 13:40:23 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/05/10 12:46:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/cub3d.h"
+
+void fuck_up_fonction(void *i)
+{
+	return ((void)(i));
+}
 
 void	print_list(t_all *s)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 10:23:34 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/20 09:44:39 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/05/12 14:52:19 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ int		check_map(t_all *s)
 			if(s->map.map[i][j] != '0'  && s->map.map[i][j] != '1' &&
 			s->map.map[i][j] != '2' && s->map.map[i][j] != ' ' && !is_start_pos(s->map.map[i][j]))
 			{
-				printf("oui\n");
-				printf("x = %i, y = %i\n", j, i);
-				printf("map[x,y] = {%c}\n", s->map.map[i][j]);
 				return (-1);
 			}
 			if (s->map.map[i][j] == '2')
@@ -89,9 +86,6 @@ int		set_sprite(t_all *s)
 	x = 0;
 
 
-	printf("s->parse.numsprite = %i\n", s->parse.numsprite);
-
-
 	s->sprite = (t_sprite *)malloc(sizeof(t_sprite) * s->parse.numsprite);
 	if (s->sprite == NULL)
 	{
@@ -99,7 +93,6 @@ int		set_sprite(t_all *s)
 
 
 	}
-	printf("oui1\n");
 
 	i = 0;
 	while (i < s->map.size.y + 4)
@@ -118,7 +111,6 @@ int		set_sprite(t_all *s)
 		i++;
 	}
 
-	printf("oui2\n");
 	return (1);
 }
 

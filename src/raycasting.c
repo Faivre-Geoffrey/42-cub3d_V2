@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 09:44:09 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/04/20 09:50:35 by gefaivre         ###   ########.fr       */
+/*   Updated: 2021/05/12 14:52:26 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,10 @@
 
 void	oui(t_all *s)
 {
-	t_data texture[5];
-	t_all cp = *s;
+	
 
-	s->spr.zbuffer = malloc(sizeof(double) * s->parse.width_window_size);
-	s->spr.spriteOrder = malloc(sizeof(int) * s->parse.numsprite);
-	s->spr.spriteDistance = malloc(sizeof(double) * s->parse.numsprite);
+	
 
-	set_texture(*(&texture), &cp, s);
 	s->axe.x = 0;
 	while (s->axe.x < s->parse.width_window_size)
 	{
@@ -58,10 +54,11 @@ void	oui(t_all *s)
 		s->rc.step = 1.0 * texHeight / s->rc.lineHeight;
 		s->rc.texPos = (s->rc.drawStart -  s->parse.height_window_size/
 		2 + s->rc.lineHeight / 2) * s->rc.step;
-		drawline_tex(*(&texture), s, &cp);
+		drawline_tex(s);
 		s->spr.zbuffer[s->axe.x] = s->rc.perpWallDist;
 		s->axe.x++;
 	}
+	
 	for(int i = 0; i < s->parse.numsprite; i++)
     {
       s->spr.spriteOrder[i] = i;
@@ -121,26 +118,24 @@ void	oui(t_all *s)
         {
           int d = (y-vMoveScreen) * 256 - s->parse.height_window_size * 128 + spriteHeight * 128;
           int texY = ((d * texHeight) / spriteHeight) / 256;
-		  /* if (stripe == drawStartX && y == drawStartY) */
-		 /*  printf("texture[4].addr[texY * cp.mlx.line_length / 4 + texX] = %i\n", texture[4].addr[texY * cp.mlx.line_length / 4 + texX]); */
-          if ((texture[4].addr[texY * cp.mlx.line_length / 4 + texX]) != -16777216)
-		  {
-		  
-          s->mlx.addr[y * s->mlx.line_length / 4 + stripe] =
-			texture[4].addr[texY * cp.mlx.line_length / 4 + texX] ;
+		   if (stripe == drawStartX && y == drawStartY) 
+		   s->texture[4].addr[texY * s->cp.mlx.line_length / 4 + texX] = s->texture[4].addr[texY * s->cp.mlx.line_length / 4 + texX];
+        	if ((s->texture[4].addr[texY * s->cp.mlx.line_length / 4 + texX]) != -16777216)
+			{
+          		s->mlx.addr[y * s->mlx.line_length / 4 + stripe] =
+				s->texture[4].addr[texY * s->cp.mlx.line_length / 4 + texX] ;
 			}
         }
       }
     }
+	
+	mlx_put_image_to_window(s->mlx.mlx, s->mlx.mlx_win, s->mlx.img, 0, 0);
 
-
-
-
-
-
-
-
-	/* free(s->spr.zbuffer);
-	free(s->spr.spriteDistance);
-	free(s->spr.spriteOrder); */
+	/* printf("s->boy.dirleft =	{%i}\n",s->boy.dirleft);
+	printf("s->boy.dirright =	{%i}\n",s->boy.dirright);
+	printf("s->boy.forward =	{%i}\n",s->boy.forward);
+	printf("s->boy.backward =	{%i}\n",s->boy.backward);
+	printf("s->boy.leftward =	{%i}\n",s->boy.leftward);
+	printf("s->boy.rightward =	{%i}\n",s->boy.rightward);
+ */
 }
