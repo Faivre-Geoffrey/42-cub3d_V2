@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:59:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/05/12 14:51:15 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/17 15:56:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@
 # define D 100
 # define LEFT 65361
 # define RIGHT 65363
+
+#define texHeight 64
+#define Vdir 0.1
+#define Vspeed 0.1
+
+# define uDiv 2
+# define vDiv 2
+# define vMove 64
 
 typedef struct		s_rgb {
 	unsigned char	b;
@@ -182,9 +190,13 @@ typedef	struct		s_all
 	t_cp			cp;
 }					t_all;
 
+void	ft_quit(t_all *s, char* str);
+void	save(t_all *s, char *str);
+
+
 int		gigi(t_all *s);
 
-int		parsing(t_all *s);
+void		parsing(t_all *s);
 
 int		treat_NO_path(t_all *s);
 int		treat_SO_path(t_all *s);
@@ -199,7 +211,7 @@ int		make_linked_list(t_all *s);
 
 int		make_map(t_all *s);
 
-int		check_parsing(t_all *s);
+void		check_parsing(t_all *s);
 
 void	forward(t_all *s);
 void	backward(t_all *s);

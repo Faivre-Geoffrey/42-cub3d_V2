@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 07:16:17 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/05/11 13:51:48 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/17 13:40:48 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,107 +90,80 @@ int	is_line_at_map(char *str)
 	return (1);
 }
 
-int		treat_line(t_all *s)
+void		treat_line(t_all *s)
 {
 	if (s->parse.line[0] == 'R' && s->parse.treat_window_size == 0 && s->parse.firstline == 1)
 	{
 		s->parse.lastisline = 0;
 		s->parse.treat_window_size = 1;
 		if (treat_window_size(s) == -1)
-		{
-			printf("\"treat_window_size\" return = [-1]\n");
-			return (-1);
-		}
-		return (0);
+			ft_quit(s,"\"treat_window_size\" return = [-1]\n");
+		return;
 	}
 	else if (s->parse.line[0] == 'N' && s->parse.line[1] == 'O' && s->parse.treat_NO_path == 0 && s->parse.firstline == 1)
 	{
 		s->parse.lastisline = 0;
 		s->parse.treat_NO_path = 1;
 		if (treat_NO_path(s) == -1)
-		{
-			printf("\"treat_NO_path\" return = [-1]\n");
-			return (-1);
-		}
-		return (0);
+			ft_quit(s,"\"treat_NO_path\" return = [-1]\n");
+		return;
 	}
 	else if (s->parse.line[0] == 'S' && s->parse.line[1] == 'O' && s->parse.treat_SO_path == 0 && s->parse.firstline == 1)
 	{
 		s->parse.lastisline = 0;
 		s->parse.treat_SO_path = 1;
 		if (treat_SO_path(s) == -1)
-		{
-			printf("\"treat_SO_path\" return = [-1]\n");
-			return (-1);
-		}
-		return (0);
+			ft_quit(s,"\"treat_SO_path\" return = [-1]\n");
+		return;
 	}
 	else if (s->parse.line[0] == 'W' && s->parse.line[1] == 'E' && s->parse.treat_WE_path == 0 && s->parse.firstline == 1)
 	{
 		s->parse.lastisline = 0;
 		s->parse.treat_WE_path = 1;
 		if (treat_WE_path(s) == -1)
-		{
-			printf("\"treat_WE_path\" return = [-1]\n");
-			return (-1);
-		}
-		return (0);
+			ft_quit(s,"\"treat_WE_path\" return = [-1]\n");
+		return;
 	}
 	else if (s->parse.line[0] == 'E' && s->parse.line[1] == 'A' && s->parse.treat_EA_path == 0 && s->parse.firstline == 1)
 	{
 		s->parse.lastisline = 0;
 		s->parse.treat_WE_path = 1;
 		if (treat_EA_path(s) == -1)
-		{
-			printf("\"treat_EA_path\" return = [-1]\n");
-			return (-1);
-		}
-		return (0);
+			ft_quit(s,"\"treat_EA_path\" return = [-1]\n");
+		return;
 	}
 	else if (s->parse.line[0] == 'S' && s->parse.treat_S_path == 0 && s->parse.firstline == 1)
 	{
 		s->parse.lastisline = 0;
 		s->parse.treat_S_path = 1;
 		if (treat_S_path(s) == -1)
-		{
-			printf("\"treat_S_path\" return = [-1]\n");
-			return (-1);
-		}
-		return (0);
+			ft_quit(s,"\"treat_S_path\" return = [-1]\n");
+		return;
 	}
 	else if (s->parse.line[0] == 'F' && s->parse.treat_RGB_F == 0 && s->parse.firstline == 1)
 	{
 		s->parse.lastisline = 0;
 		s->parse.treat_RGB_F = 1;
 		if ((s->parse.rgb_F = treat_RGB(s)) == -1)
-		{
-			printf("\"Treat_RGB\" return = [-1]\n");
-			return -1;
-		}
-		return (0);
+			ft_quit(s,"\"Treat_RGB\" return = [-1]\n");
+		return;
 	}
 	else if (s->parse.line[0] == 'C' && s->parse.treat_RGB_C == 0 && s->parse.firstline == 1)
 	{
 		s->parse.lastisline = 0;
 		s->parse.treat_RGB_C = 1;
 		if ((s->parse.rgb_C = treat_RGB(s) )== -1)
-		{
-			printf("\"Treat_RGB\" return = [-1]\n");
-			return -1;
-		}
-		return (0);
+			ft_quit(s,"\"Treat_RGB\" return = [-1]\n");
+		return;
 	}
 	else if (is_line_at_map(s->parse.line) && s->parse.spaceinmap == 0 && (s->parse.lastisline == 1 || (s->parse.lastisline == 0 && s->parse.firstline == 1)))
 	{
 		if (s->parse.lastisline == 1 &&  s->parse.spaceinmap == 1)
-		{
-			printf("Don't break the map in .cub\n");
-			return (-1);
-		}
+			ft_quit(s,"Don't break the map in .cub\n");
 		s->parse.firstline = 0;
 		s->parse.lastisline = 1;
 		make_linked_list(s);
-		return (0);
+		return;
 	}
 
 
@@ -198,40 +171,31 @@ int		treat_line(t_all *s)
 	{
 		if (s->parse.firstline == 0)
 			s->parse.spaceinmap = 1;
-		return (0);
+		return;
 	}
-	return (-1);
+	else
+	ft_quit(s, "bad value in .cub");
 }
 
 
 
 
 
-int		parsing(t_all *s)
+void		parsing(t_all *s)
 {
 	s->parse.line = NULL;
 	s->parse.fd = open(s->parse.map_path, __O_DIRECTORY);
 	if (s->parse.fd != -1 )
-	{
-		printf("map_path can't be a directory\n");
-		return (-1);
-	}
+		ft_quit(s, "map_path can't be a directory\n");
 	s->parse.fd = open(s->parse.map_path, O_RDONLY);
 	if (s->parse.fd == -1 )
-	{
-		printf("bad name .cub\n");
-		return (-1);
-	}
+		ft_quit(s,"bad name .cub\n");
 	while (get_next_line(s->parse.fd, &s->parse.line))
 	{
-		if (treat_line(s) == -1)
-		{
-			printf("\"treat_line\" return = [-1]\n");
-			return (-1);
-		}
+		treat_line(s);
 		free(s->parse.line);
 	}
 	make_map(s);
 	close(s->parse.fd);
-	return 0;
+	return;
 }

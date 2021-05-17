@@ -6,13 +6,18 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 12:05:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/05/10 12:46:47 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/17 15:49:37 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/cub3d.h"
 
-void fuck_up_fonction(void *i)
+int		ismovable(char c)
+{
+	return ((c == '0' || c == 'N' || c == 'W' || c == 'S' || c == 'E'));
+}
+
+void ft_fuck_up_fonction(void *i)
 {
 	return ((void)(i));
 }

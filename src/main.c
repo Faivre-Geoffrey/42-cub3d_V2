@@ -6,32 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 08:07:02 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/05/12 15:31:41 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/17 15:01:01 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	ft_pp(t_all *s)
-{
-	int i = 0;
-	ft_lstclear(&s->list, free);
-	while (i < s->map.size.y +4 )
-	{
-		free(s->map.map[i]);
-		i++;
-	}
-	free(s->map.map);
-	free(s->parse.line);
-	free(s->spr.zbuffer);
-	free(s->spr.spriteDistance);
-	free(s->spr.spriteOrder);
-	mlx_destroy_image(s->mlx.mlx, s->mlx.img);
 
-
-	exit(0);
-	return (0);
-}
 
 void	init(t_all *s)
 {
@@ -40,6 +21,10 @@ void	init(t_all *s)
 	s->parse.width_window_size = 0;
 	s->parse.firstline = 1;
 	s->parse.lastisline = 0;
+
+	/* s->parse.line = NULL; */
+	s->map.map = NULL;
+	s->mlx.img = NULL;
 
 	s->parse.NO_path = NULL;
 	s->parse.EA_path = NULL;
@@ -64,6 +49,10 @@ void	init(t_all *s)
 	s->boy.backward = 0;
 	s->boy.leftward = 0;
 	s->boy.rightward = 0;
+
+	s->spr.spriteDistance = NULL;
+	s->spr.spriteOrder= NULL;
+	s->spr.zbuffer = NULL;
 }
 
 void	mlx_init_full(t_all *s)
@@ -74,7 +63,7 @@ void	mlx_init_full(t_all *s)
 	s->mlx.addr = (int *)mlx_get_data_addr(s->mlx.img, &s->mlx.bits_per_pixel, &s->mlx.line_length, &s->mlx.endian);
 }
 
-int		ft_key(int key, t_all *s)
+/* int		ft_key(int key, t_all *s)
 {
 
 	if (key == ESC)
@@ -93,7 +82,7 @@ int		ft_key(int key, t_all *s)
 		dirright(s);
 	
 	return (1);
-}
+} */
 
 void	init_boy(t_all *s)
 {
@@ -140,9 +129,8 @@ void	printboy(t_all *s)
 
 
 
-int		map_path(t_all *s,char *str)
+void		map_path(t_all *s,char *str)
 {
-
 	int			i;
 
 	i = 0;
@@ -152,23 +140,17 @@ int		map_path(t_all *s,char *str)
 	{
 		i--;
 		if (i == 0)
-			return (-1);
+			ft_quit(s,"Bad map_path name\n");
 	}
 	if (str[i + 1] == 'c' && str[i + 2] == 'u' && str[i + 3] == 'b' && str[i + 4] == '\0')
 	{
 		s->parse.map_path = str;
-		return (1);
+		return;
 	}
-	return (-1);
+	ft_quit(s,"Bad map_path name\n");
 
 }
 
-int		second_arg(char *str)
-{
-	if (ft_strncmp(str, "--save", 7) != 0)
-		return -1;
-	return 0;
-}
 
 int		ft_key_press(int keycode, t_all *s)
 {
@@ -185,8 +167,7 @@ int		ft_key_press(int keycode, t_all *s)
 	else if (keycode == RIGHT)
 		s->boy.dirright = 1;
 	else if (keycode == ESC)
-		ft_pp(s);
-	
+		ft_quit(s, "ESC pressed : \nBYE!!\n");
 	return (1);
 }
 
@@ -204,9 +185,13 @@ int		ft_key_release(int keycode, t_all *s)
 		s->boy.dirleft = 0;
 	else if (keycode == RIGHT)
 		s->boy.dirright = 0;
-	else if (keycode == ESC)
-		ft_pp(s);
 	return (1);
+}
+
+int	red_cross_quit(t_all *s)
+{
+	ft_quit(s, "BYE!!\n");
+	return (0);
 }
 
 int		main(int ac, char *av[])
@@ -215,33 +200,12 @@ int		main(int ac, char *av[])
 
 	init(&s);
 	if (ac < 2 || ac > 3)
-	{
-		printf("bad numbers of args\n");
-		return (-1);
-	}
-	if (ac == 3)
-		if (second_arg(av[2]) == -1)
-		{
-			printf("Second args must be \"--save\"\n");
-			return (-1);
-		}
-	if (map_path(&s, av[1]) == -1)
-	{
-		printf("Bad map_path name\n");
-		return (-1);
-	}
-
-	if (parsing(&s) == -1)
-	{
-		printf("\"parsing\" return = [-1]\n");
-		return (-1);
-	}
-	if (check_parsing(&s) == -1)
-	{
-		printf("\"check_parsing\" return = [-1]\n");
-		return (-1);
-	}
+		ft_quit(&s,"bad numbers of args\n");
+	map_path(&s, av[1]);
+	parsing(&s);
+	check_parsing(&s);
 	init_boy(&s);
+	
 	mlx_init_full(&s);
 	s.cp.mlx = s.mlx;
 	s.cp.parse = s.parse;
@@ -250,7 +214,9 @@ int		main(int ac, char *av[])
 	s.spr.spriteOrder = malloc(sizeof(int) * s.parse.numsprite);
 	s.spr.spriteDistance = malloc(sizeof(double) * s.parse.numsprite);
 	oui(&s);
-	mlx_hook(s.mlx.mlx_win, 33, 1L << 17, ft_pp, &s);
+	if (ac == 3)
+		save(&s,av[2]);
+	mlx_hook(s.mlx.mlx_win, 33, 1L << 17, red_cross_quit, &s);
 	mlx_hook(s.mlx.mlx_win, 2, 1L << 0, ft_key_press, &s);
 	mlx_loop_hook(s.mlx.mlx, gigi, &s);
 	mlx_hook(s.mlx.mlx_win, 3, 1L << 1, ft_key_release, &s);

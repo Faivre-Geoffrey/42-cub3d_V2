@@ -6,12 +6,11 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 09:44:09 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/05/12 14:52:26 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/17 15:56:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-#define texHeight 64
 
 
 
@@ -89,9 +88,7 @@ void	oui(t_all *s)
 
       int spriteScreenX = (int)(s->parse.width_window_size / 2) * (1 + transformX / transformY);
 
-      #define uDiv 0.75
-      #define vDiv 0.75
-      #define vMove 64
+      
       int vMoveScreen = (int)(vMove / transformY);
 
       int spriteHeight = abs((int)(s->parse.height_window_size / (transformY))) / vDiv;
@@ -130,12 +127,4 @@ void	oui(t_all *s)
     }
 	
 	mlx_put_image_to_window(s->mlx.mlx, s->mlx.mlx_win, s->mlx.img, 0, 0);
-
-	/* printf("s->boy.dirleft =	{%i}\n",s->boy.dirleft);
-	printf("s->boy.dirright =	{%i}\n",s->boy.dirright);
-	printf("s->boy.forward =	{%i}\n",s->boy.forward);
-	printf("s->boy.backward =	{%i}\n",s->boy.backward);
-	printf("s->boy.leftward =	{%i}\n",s->boy.leftward);
-	printf("s->boy.rightward =	{%i}\n",s->boy.rightward);
- */
 }

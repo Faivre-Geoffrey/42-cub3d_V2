@@ -26,8 +26,7 @@ _IWHITE=\033[47m
 
 
 
-SRC =	move_dir.c \
-		raycasting.c \
+SRC =	raycasting.c \
 		raycasting_2.c \
 		utils.c \
 		main.c \
@@ -39,10 +38,11 @@ SRC =	move_dir.c \
 		check_parsing.c \
 		print_map.c \
 		move_and_dir.c \
-		move.c 
+		quit.c \
+		save.c
 		
 
-NAME = cub3d
+NAME = cub3D
 
 MLX_DIR = minilibx_linux
 MLX = libmlx.a 

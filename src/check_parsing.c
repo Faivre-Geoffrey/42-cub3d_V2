@@ -6,13 +6,13 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 10:23:34 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/05/12 14:52:19 by user42           ###   ########.fr       */
+/*   Updated: 2021/05/17 13:55:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int		check_map(t_all *s)
+void		check_map(t_all *s)
 {
 	int i;
 	int j;
@@ -27,15 +27,12 @@ int		check_map(t_all *s)
 			{
 				if (s->map.map[i + 1][j] == ' ' || s->map.map[i - 1][j] == ' '
 				|| s->map.map[i][j + 1] == ' ' || s->map.map[i][j - 1] == ' ')
-				{
-					printf("map is not secure\n");
-					return (-1);
-				}
+					ft_quit(s,"Map is not secure, do you want to jump into the void?\n");
 			}
 			if(s->map.map[i][j] != '0'  && s->map.map[i][j] != '1' &&
 			s->map.map[i][j] != '2' && s->map.map[i][j] != ' ' && !is_start_pos(s->map.map[i][j]))
 			{
-				return (-1);
+				ft_quit(s,"Bad character in map\n");
 			}
 			if (s->map.map[i][j] == '2')
 				s->parse.numsprite++;
@@ -43,10 +40,9 @@ int		check_map(t_all *s)
 		}
 		i++;
 	}
-	return (1);
 }
 
-int		check_start_pos(t_all *s)
+void	check_start_pos(t_all *s)
 {
 	int i;
 	int j;
@@ -70,30 +66,19 @@ int		check_start_pos(t_all *s)
 		i++;
 	}
 	if (s->start.count > 1 || s->start.count < 1)
-	{
-		printf("Map must contain one start position please\n");
-		return (-1);
-	}
-	return (1);
+		ft_quit(s,"Map must contain one start position please\n");
 }
 
-int		set_sprite(t_all *s)
+void		set_sprite(t_all *s)
 {
 	int i;
 	int j;
 	int x;
 
 	x = 0;
-
-
 	s->sprite = (t_sprite *)malloc(sizeof(t_sprite) * s->parse.numsprite);
 	if (s->sprite == NULL)
-	{
-		printf("non\n");
-
-
-	}
-
+		ft_quit(s,"malloc failed\n");
 	i = 0;
 	while (i < s->map.size.y + 4)
 	{
@@ -110,55 +95,37 @@ int		set_sprite(t_all *s)
 		}
 		i++;
 	}
-
-	return (1);
 }
 
-int	check_path_texture_2(char *str)
+void	check_path_texture_2(t_all *s, char *str)
 {
 	int fd;
 
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
-	{
-		printf("fd = %i\n", fd);
-		close(fd);
-		return (-1);
-	}
-
+		ft_quit(s,"Bad path texture\n");
 	close(fd);
-	return (0);
 }
 
-int	check_path_texture(t_all *s)
+void	check_path_texture(t_all *s)
 {
 	if (s->parse.NO_path == NULL || s->parse.EA_path == NULL ||
 	s->parse.SO_path == NULL || s->parse.WE_path == NULL ||
 	s->parse.S_path == NULL)
-	{
-		printf("Bad number of texture\n");
-		return (-1);
-	}
-
-
-	if (check_path_texture_2(s->parse.NO_path) == -1 ||
-	check_path_texture_2(s->parse.WE_path) == -1 ||
-	check_path_texture_2(s->parse.SO_path) == -1 ||
-	check_path_texture_2(s->parse.EA_path) == -1 ||
-	check_path_texture_2(s->parse.S_path) == -1)
-	{
-		printf("Bad path texture\n");
-		return (-1);
-	}
-	return (1);
-
+		ft_quit(s,"Bad number of texture\n");
+	check_path_texture_2(s, s->parse.NO_path);
+	check_path_texture_2(s, s->parse.WE_path);
+	check_path_texture_2(s, s->parse.SO_path);
+	check_path_texture_2(s, s->parse.EA_path);
+	check_path_texture_2(s, s->parse.S_path);
 }
 
 
 
-int		check_parsing(t_all *s)
+void		check_parsing(t_all *s)
 {
-	if (check_map(s) == -1 || check_start_pos(s) == -1 || set_sprite(s) == -1 || check_path_texture(s) == -1)
-		return (-1);
-	return (0);
+	check_map(s);
+	check_start_pos(s);
+	set_sprite(s);
+	check_path_texture(s);
 }
