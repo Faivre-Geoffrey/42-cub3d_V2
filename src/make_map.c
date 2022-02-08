@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 12:10:33 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/05/11 13:52:18 by user42           ###   ########.fr       */
+/*   Updated: 2022/02/08 17:15:40 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,13 @@ char	**malloc_map(t_all *s)
 	char **tab_map = NULL;
 	tab_map = malloc(sizeof(char*) * (s->map.size.y + 4 + 1));
 	if (tab_map == NULL)
-	{
-		printf("malloc foiree");
-		return (NULL);
-	}
+		ft_quit(s ,"Error\nmalloc foiree");
 	i = 0;
 	while (i < s->map.size.y + 4)
 	{
 		tab_map[i] = malloc(sizeof(char) * (s->map.size.x + 4 + 1));
 		if (tab_map[i] == NULL)
-		{
-			printf("malloc_2 foiree");
-			return (NULL);
-		}
-		/* tab_map[i][s->map.size.y + 4] = '\0'; */
+			ft_quit(s ,"Error\nmalloc foiree");
 		i++;
 	}
 	tab_map[i] = NULL;
@@ -91,7 +84,6 @@ void	fill_map(t_all *s)
 		while (((char *)s->list->content)[s->axe.x])
 		{
 			s->map.map[s->axe.y + 2][s->axe.x + 2] = ((char *)s->list->content)[s->axe.x];
-			/* printf("%c\n", ((char *)s->list->content)[s->axe.x]); */
 			s->axe.x++;
 		}
 		s->list = s->list->next;

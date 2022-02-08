@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 10:23:34 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/08 16:43:38 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/08 17:11:37 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void		check_map(t_all *s)
 			{
 				if (s->map.map[i + 1][j] == ' ' || s->map.map[i - 1][j] == ' '
 				|| s->map.map[i][j + 1] == ' ' || s->map.map[i][j - 1] == ' ')
-					ft_quit(s,"Map is not secure, do you want to jump into the void?\n");
+					ft_quit(s,"Error\nMap is not secure, do you want to jump into the void?\n");
 			}
 			if(s->map.map[i][j] != '0'  && s->map.map[i][j] != '1' &&
 			s->map.map[i][j] != '2' && s->map.map[i][j] != ' ' && !is_start_pos(s->map.map[i][j]))
 			{
-				ft_quit(s,"Bad character in map\n");
+				ft_quit(s,"Error\nBad character in map\n");
 			}
 			if (s->map.map[i][j] == '2')
 				s->parse.numsprite++;
@@ -66,7 +66,7 @@ void	check_start_pos(t_all *s)
 		i++;
 	}
 	if (s->start.count > 1 || s->start.count < 1)
-		ft_quit(s,"Map must contain one start position please\n");
+		ft_quit(s,"Error\nMap must contain one start position please\n");
 }
 
 void		set_sprite(t_all *s)
@@ -78,7 +78,7 @@ void		set_sprite(t_all *s)
 	x = 0;
 	s->sprite = (t_sprite *)malloc(sizeof(t_sprite) * s->parse.numsprite);
 	if (s->sprite == NULL)
-		ft_quit(s,"malloc failed\n");
+		ft_quit(s,"Error\nmalloc failed\n");
 	i = 0;
 	while (i < s->map.size.y + 4)
 	{
@@ -103,7 +103,7 @@ void	check_path_texture_2(t_all *s, char *str)
 
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
-		ft_quit(s,"Bad path texture\n");
+		ft_quit(s,"Error\nBad path texture\n");
 	close(fd);
 }
 
@@ -111,7 +111,7 @@ void	check_path_texture(t_all *s)
 {
 	if (s->parse.NO_path == NULL || s->parse.EA_path == NULL ||
 	s->parse.SO_path == NULL || s->parse.WE_path == NULL )
-		ft_quit(s,"Bad number of texture\n");
+		ft_quit(s,"Error\nBad number of texture\n");
 	check_path_texture_2(s, s->parse.NO_path);
 	check_path_texture_2(s, s->parse.WE_path);
 	check_path_texture_2(s, s->parse.SO_path);

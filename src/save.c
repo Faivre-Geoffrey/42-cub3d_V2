@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:59:33 by user42            #+#    #+#             */
-/*   Updated: 2021/05/17 13:25:17 by user42           ###   ########.fr       */
+/*   Updated: 2022/02/08 17:13:23 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ void	save(t_all *s, char *str)
 	int	y;
 
 	if (ft_strncmp(str, "--save", 7) != 0)
-		ft_quit(s, "second args must be \"--save\"");
+		ft_quit(s, "Error\nsecond args must be \"--save\"");
 	y = s->parse.width_window_size;
 	if ((fd = open("./image.bmp", O_CREAT | O_RDWR)) == -1)
-		ft_quit(s, "Can't create .bmp\n");
+		ft_quit(s, "Error\nCan't create .bmp\n");
 	ft_header(s, fd);
 	while (y >= 0)
 	{

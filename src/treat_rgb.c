@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   treat_rgb.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 09:46:48 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/05/11 13:07:47 by user42           ###   ########.fr       */
+/*   Updated: 2022/02/08 17:16:07 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ int		treat_RGB(t_all *s)
 		i++;
 
 	if (atoi(&s->parse.line[i]) > 255  || !(ft_isdigit(s->parse.line[i])))
-	{
-		printf("Three number with value betwen 0 and 255 for RGB colors\n");
-		return -1;
-	}
+		ft_quit(s, "Error\nThree number with value betwen 0 and 255 for RGB colors\n");
 	else
 		tab[0] = atoi(&s->parse.line[i]);
 
@@ -49,37 +46,25 @@ int		treat_RGB(t_all *s)
 		return (-1);
 	while (!(ft_isdigit(s->parse.line[i]))&& s->parse.line[i])
 		i++;
-
 	if (atoi(&s->parse.line[i]) > 255  || !ft_isdigit(s->parse.line[i]))
-	{
-		printf("Three number with value betwen 0 and 255 for RGB colors\n");
-		return -1;
-	}
+		ft_quit(s, "Error\nThree number with value betwen 0 and 255 for RGB colors\n");
 	else
 		tab[1] = atoi(&s->parse.line[i]);
-
 	while (ft_isdigit(s->parse.line[i])&& s->parse.line[i])
 		i++;
 	if (!(s->parse.line[i] == ',') && s->parse.line[i])
 		return (-1);
 	while (!(ft_isdigit(s->parse.line[i]))&& s->parse.line[i])
 		i++;
-
 	if (atoi(&s->parse.line[i]) > 255  || !ft_isdigit(s->parse.line[i]))
-	{
-		printf("Three number with value betwen 0 and 255 for RGB colors\n");
-		return -1;
-	}
+		ft_quit(s ,"Error\nThree number with value betwen 0 and 255 for RGB colors\n");
 	else
 		tab[2] = atoi(&s->parse.line[i]);
 	while ((!(ft_isdigit(s->parse.line[i])) && s->parse.line[i]) )
 	{
 		i++;
 		if ((ft_isdigit(s->parse.line[i]) && s->parse.line[i]))
-		{
-			printf("Three number only for RGB colors please\n");
-			return (-1);
-		}
+			ft_quit(s, "Error\nThree number only for RGB colors please\n");
 	}
 	return (rgbtohex(tab));
 }

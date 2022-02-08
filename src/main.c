@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 08:07:02 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/08 16:50:31 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/08 17:12:18 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	mlx_init_full(t_all *s)
 {
 	s->mlx.mlx = mlx_init();
 	s->mlx.mlx_win = mlx_new_window(s->mlx.mlx, 1080, 740, "cub3d");
-	printf("testest\n");
 	s->mlx.img = mlx_new_image(s->mlx.mlx, 1080, 740);
 	s->mlx.addr = (int *)mlx_get_data_addr(s->mlx.img, &s->mlx.bits_per_pixel, &s->mlx.line_length, &s->mlx.endian);
 }
@@ -138,14 +137,14 @@ void		map_path(t_all *s,char *str)
 	{
 		i--;
 		if (i == 0)
-			ft_quit(s,"Bad map_path name\n");
+			ft_quit(s,"Error\nBad map_path name\n");
 	}
 	if (str[i + 1] == 'c' && str[i + 2] == 'u' && str[i + 3] == 'b' && str[i + 4] == '\0')
 	{
 		s->parse.map_path = str;
 		return;
 	}
-	ft_quit(s,"Bad map_path name\n");
+	ft_quit(s,"Error\nBad map_path name\n");
 
 }
 
@@ -197,13 +196,12 @@ int		main(int ac, char *av[])
 
 	init(&s);
 	if (ac < 2 || ac > 3)
-		ft_quit(&s,"bad numbers of args\n");
+		ft_quit(&s,"Error\nbad numbers of args\n");
 	map_path(&s, av[1]);
 	parsing(&s);
 	check_parsing(&s);
 	init_boy(&s);
 	mlx_init_full(&s);
-	printf("testi\n");
 	s.cp.mlx = s.mlx;
 	s.cp.parse = s.parse;
 	set_texture(&s);
