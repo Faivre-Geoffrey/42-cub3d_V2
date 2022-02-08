@@ -38,8 +38,7 @@ SRC =	raycasting.c \
 		check_parsing.c \
 		print_map.c \
 		move_and_dir.c \
-		quit.c \
-		save.c
+		quit.c 
 		
 
 NAME = cub3D

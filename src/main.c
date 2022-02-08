@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 08:07:02 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/08 17:12:18 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/08 18:17:50 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init(t_all *s)
 	s->list = NULL;
 	s->parse.height_window_size = 740;
 	s->parse.width_window_size = 1080;
-	s->parse.firstline = 1;
+	s->parse.in_map = 1;
 	s->parse.lastisline = 0;
 
 	s->parse.line = NULL;
@@ -209,8 +209,6 @@ int		main(int ac, char *av[])
 	s.spr.spriteOrder = malloc(sizeof(int) * s.parse.numsprite);
 	s.spr.spriteDistance = malloc(sizeof(double) * s.parse.numsprite);
 	oui(&s);
-	if (ac == 3)
-		save(&s,av[2]);
 	mlx_hook(s.mlx.mlx_win, 33, 1L << 17, red_cross_quit, &s);
 	mlx_hook(s.mlx.mlx_win, 2, 1L << 0, ft_key_press, &s);
 	mlx_loop_hook(s.mlx.mlx, gigi, &s);

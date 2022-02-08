@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:59:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/08 16:55:34 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/08 19:02:29 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef	struct		s_parse
 	int				diviseur;
 	char			*map_path;
 	int				lastisline;
-	int				firstline;
+	int				in_map;
 	int				spaceinmap;
 	int				treat_window_size;
 	int				treat_NO_path;
@@ -205,7 +205,7 @@ int		treat_EA_path(t_all *s);
 int		treat_S_path(t_all *s);
 
 int		rgbtohex(int *tab);
-int		treat_RGB(t_all *s);
+void		treat_RGB(t_all *s);
 
 int		make_linked_list(t_all *s);
 

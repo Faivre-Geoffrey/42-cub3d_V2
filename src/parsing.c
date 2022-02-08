@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 07:16:17 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/08 17:12:52 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/08 18:56:12 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,81 +51,36 @@ int	is_line_at_map(char *str)
 
 void		treat_line(t_all *s)
 {
-	if (s->parse.line[0] == 'N' && s->parse.line[1] == 'O' && s->parse.treat_NO_path == 0 && s->parse.firstline == 1)
-	{
-		s->parse.lastisline = 0;
-		s->parse.treat_NO_path = 1;
-		if (treat_NO_path(s) == -1)
-			ft_quit(s,"Error\n\"treat_NO_path\" return = [-1]\n");
-		return;
-	}
-	else if (s->parse.line[0] == 'S' && s->parse.line[1] == 'O' && s->parse.treat_SO_path == 0 && s->parse.firstline == 1)
-	{
-		s->parse.lastisline = 0;
-		s->parse.treat_SO_path = 1;
-		if (treat_SO_path(s) == -1)
-			ft_quit(s,"Error\n\"treat_SO_path\" return = [-1]\n");
-		return;
-	}
-	else if (s->parse.line[0] == 'W' && s->parse.line[1] == 'E' && s->parse.treat_WE_path == 0 && s->parse.firstline == 1)
-	{
-		s->parse.lastisline = 0;
-		s->parse.treat_WE_path = 1;
-		if (treat_WE_path(s) == -1)
-			ft_quit(s,"Error\n\"treat_WE_path\" return = [-1]\n");
-		return;
-	}
-	else if (s->parse.line[0] == 'E' && s->parse.line[1] == 'A' && s->parse.treat_EA_path == 0 && s->parse.firstline == 1)
-	{
-		s->parse.lastisline = 0;
-		s->parse.treat_WE_path = 1;
-		if (treat_EA_path(s) == -1)
-			ft_quit(s,"Error\n\"treat_EA_path\" return = [-1]\n");
-		return;
-	}
-	else if (s->parse.line[0] == 'S' && s->parse.treat_S_path == 0 && s->parse.firstline == 1)
-	{
-		s->parse.lastisline = 0;
-		s->parse.treat_S_path = 1;
-		if (treat_S_path(s) == -1)
-			ft_quit(s,"Error\n\"treat_S_path\" return = [-1]\n");
-		return;
-	}
-	else if (s->parse.line[0] == 'F' && s->parse.treat_RGB_F == 0 && s->parse.firstline == 1)
-	{
-		s->parse.lastisline = 0;
-		s->parse.treat_RGB_F = 1;
-		if ((s->parse.rgb_F = treat_RGB(s)) == -1)
-			ft_quit(s,"Error\n\"Treat_RGB\" return = [-1]\n");
-		return;
-	}
-	else if (s->parse.line[0] == 'C' && s->parse.treat_RGB_C == 0 && s->parse.firstline == 1)
-	{
-		s->parse.lastisline = 0;
-		s->parse.treat_RGB_C = 1;
-		if ((s->parse.rgb_C = treat_RGB(s) )== -1)
-			ft_quit(s,"Error\n\"Treat_RGB\" return = [-1]\n");
-		return;
-	}
-	else if (is_line_at_map(s->parse.line) && s->parse.spaceinmap == 0 && (s->parse.lastisline == 1 || (s->parse.lastisline == 0 && s->parse.firstline == 1)))
+	if (ft_strncmp(s->parse.line, "NO ", 3) == 0)
+		treat_NO_path(s);
+	else if (ft_strncmp(s->parse.line, "SO ", 3) == 0)
+		treat_SO_path(s);
+	else if (ft_strncmp(s->parse.line, "WE ", 3) == 0)
+		treat_WE_path(s);
+	else if (ft_strncmp(s->parse.line, "EA ", 3) == 0)
+		treat_EA_path(s);
+	else if (ft_strncmp(s->parse.line, "F ", 2) == 0 || ft_strncmp(s->parse.line, "C ", 2) == 0)
+		treat_RGB(s);
+	else if (is_line_at_map(s->parse.line) && s->parse.spaceinmap == 0 && (s->parse.lastisline == 1 || (s->parse.lastisline == 0 && s->parse.in_map == 1)))
 	{
 		if (s->parse.lastisline == 1 &&  s->parse.spaceinmap == 1)
 			ft_quit(s,"Error\nDon't break the map in .cub\n");
-		s->parse.firstline = 0;
+		s->parse.in_map = 0;
 		s->parse.lastisline = 1;
 		make_linked_list(s);
 		return;
 	}
 
 
-	else if ((int)ft_strlen(s->parse.line) == 0)
+	else if ((int)ft_strlen(s->parse.line) <= 1)
 	{
-		if (s->parse.firstline == 0)
+		if (s->parse.in_map == 0)
 			s->parse.spaceinmap = 1;
 		return;
 	}
 	else
 	{
+		printf("s->parse.line\t=\t[%s]\n", s->parse.line);
 		ft_quit(s, "Error\nbad value in .cub");
 	}
 }
