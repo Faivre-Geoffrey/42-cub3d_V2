@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 09:45:31 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/05/12 10:52:11 by user42           ###   ########.fr       */
+/*   Updated: 2022/02/08 16:50:59 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,6 @@ void	set_texture(t_all *s)
 	s->texture[3].img = mlx_xpm_file_to_image(s->cp.mlx.mlx, s->parse.EA_path,
 	&s->cp.parse.width_window_size, &s->cp.parse.height_window_size);
 	s->texture[3].addr = (int *)mlx_get_data_addr(s->texture[3].img,
-	&s->cp.mlx.bits_per_pixel, &s->cp.mlx.line_length, &s->cp.mlx.endian);
-	s->texture[4].img = mlx_xpm_file_to_image(s->cp.mlx.mlx, s->parse.S_path,
-	&s->cp.parse.width_window_size, &s->cp.parse.height_window_size);
-	s->texture[4].addr = (int *)mlx_get_data_addr(s->texture[4].img,
 	&s->cp.mlx.bits_per_pixel, &s->cp.mlx.line_length, &s->cp.mlx.endian);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 08:07:02 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/08 16:33:37 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/08 16:50:31 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,10 @@
 void	init(t_all *s)
 {
 	s->list = NULL;
-	s->parse.height_window_size = 0;
-	s->parse.width_window_size = 0;
+	s->parse.height_window_size = 740;
+	s->parse.width_window_size = 1080;
 	s->parse.firstline = 1;
 	s->parse.lastisline = 0;
-	s->parse.height_window_size = 740;
-	s->parse.height_window_size = 1080;
 
 	s->parse.line = NULL;
 	s->map.map = NULL;
@@ -34,7 +32,6 @@ void	init(t_all *s)
 	s->parse.WE_path = NULL;
 	s->parse.S_path = NULL;
 
-	s->parse.treat_window_size = 0;
 	s->parse.treat_NO_path = 0;
 	s->parse.treat_SO_path = 0;
 	s->parse.treat_WE_path = 0;
@@ -60,8 +57,9 @@ void	init(t_all *s)
 void	mlx_init_full(t_all *s)
 {
 	s->mlx.mlx = mlx_init();
-	s->mlx.mlx_win = mlx_new_window(s->mlx.mlx, s->parse.width_window_size , s->parse.height_window_size, "Hello world!");
-	s->mlx.img = mlx_new_image(s->mlx.mlx, s->parse.width_window_size, s->parse.height_window_size);
+	s->mlx.mlx_win = mlx_new_window(s->mlx.mlx, 1080, 740, "cub3d");
+	printf("testest\n");
+	s->mlx.img = mlx_new_image(s->mlx.mlx, 1080, 740);
 	s->mlx.addr = (int *)mlx_get_data_addr(s->mlx.img, &s->mlx.bits_per_pixel, &s->mlx.line_length, &s->mlx.endian);
 }
 
@@ -204,8 +202,8 @@ int		main(int ac, char *av[])
 	parsing(&s);
 	check_parsing(&s);
 	init_boy(&s);
-	
 	mlx_init_full(&s);
+	printf("testi\n");
 	s.cp.mlx = s.mlx;
 	s.cp.parse = s.parse;
 	set_texture(&s);
