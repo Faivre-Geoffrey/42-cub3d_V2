@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   move_dir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 09:47:17 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/05/12 11:00:01 by user42           ###   ########.fr       */
+/*   Updated: 2022/02/08 16:54:04 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/cub3d.h"
-#define Vdir 0.2
+
 void	dirright(t_all *s)
 {
 	float oldDirX = s->boy.dir.x;

@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:59:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/08 15:59:04 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/08 16:55:34 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 
 #define texHeight 64
 #define Vdir 0.1
-#define Vspeed 0.1
+#define Vspeed 0.5
 
 # define uDiv 2
 # define vDiv 2

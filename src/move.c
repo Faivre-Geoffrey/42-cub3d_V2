@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 09:26:53 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/05/12 12:53:38 by user42           ###   ########.fr       */
+/*   Updated: 2022/02/08 16:55:19 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #define texHeight 64
-#define Vspeed 0.05
 
 int		ismovable(char c)
 {

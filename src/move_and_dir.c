@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   move_and_dir.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 12:38:37 by user42            #+#    #+#             */
-/*   Updated: 2021/05/12 14:53:47 by user42           ###   ########.fr       */
+/*   Updated: 2022/02/08 16:54:35 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/cub3d.h"
 
-#define Vdir 0.1
 #define texHeight 64
-#define Vspeed 0.1
 
 int gigi5(t_all *s)
 {
