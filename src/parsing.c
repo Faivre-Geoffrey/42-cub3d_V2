@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 07:16:17 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/05/17 13:40:48 by user42           ###   ########.fr       */
+/*   Updated: 2022/02/08 15:58:26 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ void		parsing(t_all *s)
 	s->parse.fd = open(s->parse.map_path, O_RDONLY);
 	if (s->parse.fd == -1 )
 		ft_quit(s,"bad name .cub\n");
+	printf("test\n");
 	while (get_next_line(s->parse.fd, &s->parse.line))
 	{
 		treat_line(s);
