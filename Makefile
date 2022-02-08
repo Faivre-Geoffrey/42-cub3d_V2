@@ -42,7 +42,7 @@ SRC =	raycasting.c \
 		save.c
 		
 
-NAME = Cub3D
+NAME = cub3D
 
 MLX_DIR = minilibx-linux
 MLX = libmlx_Linux.a

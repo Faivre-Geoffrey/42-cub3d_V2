@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 08:07:02 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/05/17 15:01:01 by user42           ###   ########.fr       */
+/*   Updated: 2022/02/08 16:03:47 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init(t_all *s)
 	s->parse.firstline = 1;
 	s->parse.lastisline = 0;
 
-	/* s->parse.line = NULL; */
+	s->parse.line = NULL;
 	s->map.map = NULL;
 	s->mlx.img = NULL;
 

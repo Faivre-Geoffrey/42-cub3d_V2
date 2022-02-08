@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:29:46 by user42            #+#    #+#             */
-/*   Updated: 2021/05/17 15:01:13 by user42           ###   ########.fr       */
+/*   Updated: 2022/02/08 16:02:55 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
  
 void	ft_quit(t_all *s, char* str)
 {
-
-
-
-
-
-
 	
 	if (s->list)
 		ft_lstclear(&s->list, free);
@@ -39,8 +33,6 @@ void	ft_quit(t_all *s, char* str)
 		free(s->spr.zbuffer);
 	if (s->spr.spriteDistance)
 		free(s->spr.spriteDistance);
-	if(s->spr.spriteOrder)
-		free(s->spr.spriteOrder);
 	if (s->mlx.img)
 		mlx_destroy_image(s->mlx.mlx, s->mlx.img);
     printf("%s", str);
