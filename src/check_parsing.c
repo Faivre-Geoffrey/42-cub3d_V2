@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 10:23:34 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/05/17 13:55:12 by user42           ###   ########.fr       */
+/*   Updated: 2022/02/08 16:43:38 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,14 +110,12 @@ void	check_path_texture_2(t_all *s, char *str)
 void	check_path_texture(t_all *s)
 {
 	if (s->parse.NO_path == NULL || s->parse.EA_path == NULL ||
-	s->parse.SO_path == NULL || s->parse.WE_path == NULL ||
-	s->parse.S_path == NULL)
+	s->parse.SO_path == NULL || s->parse.WE_path == NULL )
 		ft_quit(s,"Bad number of texture\n");
 	check_path_texture_2(s, s->parse.NO_path);
 	check_path_texture_2(s, s->parse.WE_path);
 	check_path_texture_2(s, s->parse.SO_path);
 	check_path_texture_2(s, s->parse.EA_path);
-	check_path_texture_2(s, s->parse.S_path);
 }
 
 

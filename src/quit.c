@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:29:46 by user42            #+#    #+#             */
-/*   Updated: 2022/02/08 16:02:55 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/08 16:32:14 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
  
 void	ft_quit(t_all *s, char* str)
 {
-	
 	if (s->list)
 		ft_lstclear(&s->list, free);
 	int i = 0;

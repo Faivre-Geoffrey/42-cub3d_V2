@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 07:16:17 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/08 15:58:26 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/08 16:42:45 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,28 +79,22 @@ int	is_line_at_map(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] != ' ' && str[i] != 'N' && str[i] != 'S' && str[i] != 'E' && str[i] != 'W' && !ft_isdigit(str[i]))
-			return (0);
+		if (str[i] != ' ' && str[i] != 'N' && str[i] != 'S' && str[i] != 'E'
+			&& str[i] != 'W' && str[i] != '0' && str[i] != '1')
+			{
+				printf("str[i]\t=\t[%c]\n", str[i]);
+				return (0);
+			}
 		if (str[i] == '1' || str[i] == '0')
 			x = 1;
 		i++;
 	}
-	if (x == 0)
-		return (0);
-	return (1);
+	return (x);
 }
 
 void		treat_line(t_all *s)
 {
-	if (s->parse.line[0] == 'R' && s->parse.treat_window_size == 0 && s->parse.firstline == 1)
-	{
-		s->parse.lastisline = 0;
-		s->parse.treat_window_size = 1;
-		if (treat_window_size(s) == -1)
-			ft_quit(s,"\"treat_window_size\" return = [-1]\n");
-		return;
-	}
-	else if (s->parse.line[0] == 'N' && s->parse.line[1] == 'O' && s->parse.treat_NO_path == 0 && s->parse.firstline == 1)
+	if (s->parse.line[0] == 'N' && s->parse.line[1] == 'O' && s->parse.treat_NO_path == 0 && s->parse.firstline == 1)
 	{
 		s->parse.lastisline = 0;
 		s->parse.treat_NO_path = 1;
@@ -174,7 +168,14 @@ void		treat_line(t_all *s)
 		return;
 	}
 	else
-	ft_quit(s, "bad value in .cub");
+	{
+		printf("s->parse.line\t=\t[%s]\n", s->parse.line);
+		printf("s->parse.spaceinmap\t=\t[%d]\n", s->parse.spaceinmap);
+		printf("s->parse.lastisline\t=\t[%d]\n", s->parse.lastisline);
+		printf("s->parse.firstline\t=\t[%d]\n", s->parse.firstline);
+
+		ft_quit(s, "bad value in .cub");
+	}
 }
 
 

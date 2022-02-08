@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 08:07:02 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/08 16:03:47 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/08 16:33:37 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	init(t_all *s)
 	s->parse.width_window_size = 0;
 	s->parse.firstline = 1;
 	s->parse.lastisline = 0;
+	s->parse.height_window_size = 740;
+	s->parse.height_window_size = 1080;
 
 	s->parse.line = NULL;
 	s->map.map = NULL;
@@ -127,8 +129,6 @@ void	printboy(t_all *s)
 	square_put(s, 10, 0x0042F5A1);
 }
 
-
-
 void		map_path(t_all *s,char *str)
 {
 	int			i;
@@ -150,7 +150,6 @@ void		map_path(t_all *s,char *str)
 	ft_quit(s,"Bad map_path name\n");
 
 }
-
 
 int		ft_key_press(int keycode, t_all *s)
 {
