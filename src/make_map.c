@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 12:10:33 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 16:40:23 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 16:59:17 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 
 char	**malloc_map(t_all *s)
 {
-	int i;
+	int		i;
+	char	**tab_map;
 
-	char **tab_map = NULL;
-	tab_map = malloc(sizeof(char*) * (s->map.size.y + 4 + 1));
+	tab_map = NULL;
+	tab_map = malloc(sizeof(char *) * (s->map.size.y + 4 + 1));
 	if (tab_map == NULL)
-		ft_quit(s ,"Error\nmalloc foiree");
+		ft_quit(s, "Error\nmalloc foiree");
 	i = 0;
 	while (i < s->map.size.y + 4)
 	{
 		tab_map[i] = malloc(sizeof(char) * (s->map.size.x + 4 + 1));
 		if (tab_map[i] == NULL)
-			ft_quit(s ,"Error\nmalloc foiree");
+			ft_quit(s, "Error\nmalloc foiree");
 		i++;
 	}
 	tab_map[i] = NULL;
@@ -34,12 +35,10 @@ char	**malloc_map(t_all *s)
 
 void	space_map(t_all *s)
 {
-
-	int y;
-	int x;
+	int	y;
+	int	x;
 
 	y = 0;
-
 	while (y < s->map.size.y + 4)
 	{
 		x = 0;
@@ -54,9 +53,8 @@ void	space_map(t_all *s)
 
 void	frame_map(t_all *s)
 {
-	int y;
-	int x;
-
+	int	y;
+	int	x;
 
 	y = 0;
 	while (y < s->map.size.y + 4)
@@ -64,7 +62,8 @@ void	frame_map(t_all *s)
 		x = 0;
 		while (x < s->map.size.x + 4)
 		{
-			if (x == 0 || x == s->map.size.x + 4 - 1 || y == 0 || y == s->map.size.y + 4 - 1)
+			if (x == 0 || x == s->map.size.x + 4 - 1 || y == 0
+				|| y == s->map.size.y + 4 - 1)
 				s->map.map[y][x] = '*';
 			x++;
 		}
@@ -72,10 +71,10 @@ void	frame_map(t_all *s)
 	}
 }
 
-
 void	fill_map(t_all *s)
 {
-	t_list *t;
+	t_list	*t;
+
 	t = s->list;
 	s->axe.y = 0;
 	while (s->axe.y < s->map.size.y)
@@ -83,7 +82,8 @@ void	fill_map(t_all *s)
 		s->axe.x = 0;
 		while (((char *)s->list->content)[s->axe.x])
 		{
-			s->map.map[s->axe.y + 2][s->axe.x + 2] = ((char *)s->list->content)[s->axe.x];
+			s->map.map[s->axe.y + 2][s->axe.x + 2]
+				= ((char *)s->list->content)[s->axe.x];
 			s->axe.x++;
 		}
 		s->list = s->list->next;
@@ -92,7 +92,7 @@ void	fill_map(t_all *s)
 	s->list = t;
 }
 
-int		make_map(t_all *s)
+int	make_map(t_all *s)
 {
 	s->map.size.x = ft_lstsize_longer(s->list);
 	s->map.size.y = ft_lstsize(s->list);
