@@ -6,18 +6,18 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 12:05:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 15:36:17 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 16:40:03 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/cub3d.h"
+#include "../includes/cub3d.h"
 
-int		ismovable(char c)
+int	ismovable(char c)
 {
 	return ((c == '0' || c == 'N' || c == 'W' || c == 'S' || c == 'E'));
 }
 
-void ft_fuck_up_fonction(void *i)
+void	ft_fuck_up_fonction(void *i)
 {
 	return ((void)(i));
 }
@@ -33,8 +33,8 @@ void	print_list(t_all *s)
 
 void	print_map(t_all *s)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 
 	y = 0;
 	while (y < s->map.size.y + 4)
@@ -42,7 +42,7 @@ void	print_map(t_all *s)
 		x = 0;
 		while (x < s->map.size.x + 4)
 		{
-			printf("%c",s->map.map[y][x]);
+			printf("%c", s->map.map[y][x]);
 			x++;
 		}
 		printf("\n");
@@ -50,123 +50,7 @@ void	print_map(t_all *s)
 	}
 }
 
-int		is_start_pos(char c)
+int	is_start_pos(char c)
 {
-	return(c == 'N' ||c == 'E' || c == 'S' || c == 'W');
+	return (c == 'N' || c == 'E' || c == 'S' || c == 'W');
 }
-
-void		 pixel_put(t_all *s, int x, int y, int color)
-{
-	s->mlx.addr[y * s->mlx.line_length / 4 + x]= color;
-}
-
-void	square_put(t_all *s, int size, int color)
-{
-	int x = s->axe.x;
-	int y = s->axe.y;
-	int x_count = 0;
-	int y_count = 0;
-	int y_save = y;
-
-	while (x_count < size)
-	{
-		y_count = 0;
-		y = y_save;
-		while (y_count < size)
-		{
-			pixel_put(s, x, y, color);
-			y++;
-			y_count++;
-		}
-		x++;
-		x_count++;
-
-	}
-}
-
-void	printceiling(t_all *s)
-{
-	int		x = 0;
-	int		y = 0;
-	while (x < (H_WINDOW / 2))
-	{
-		y = 0;
-		while (y < W_WINDOW)
-		{
-			pixel_put(s, y, x, s->parse.rgb_C);
-			y++;
-		}
-		x++;
-
-	}
-
-}
-void	printfloor(t_all *s)
-{
-	int		x = H_WINDOW / 2;
-	int		y = 0;
-	while (x < H_WINDOW)
-	{
-		y = 0;
-		while (y < W_WINDOW)
-		{
-			pixel_put(s, y, x, s->parse.rgb_F);
-			y++;
-		}
-		x++;
-
-	}
-
-}
-
-void	drawline(t_all *s)
-{
-	if (s->axe.y == 0)
-	{
-		while (s->axe.y < s->rc.drawStart)
-		{
-			pixel_put(s, s->axe.x, s->axe.y, s->parse.rgb_C);
-			s->axe.y++;
-		}
-	}
-	else if (s->axe.y == s->rc.drawEnd + 1)
-	{
-		while(s->axe.y < H_WINDOW)
-		{
-			pixel_put(s, s->axe.x, s->axe.y, s->parse.rgb_F);
-			s->axe.y++;
-		}
-	}
-}
-
-void	printback(t_all *s)
-{
-	printceiling(s);
-	printfloor(s);
-
-}
-
-int		namecheck(char *arg, char *ext)
-{
-	int size;
-	int	i;
-
-	i = 0;
-	size = 0;
-	while (arg[i] != '\0')
-		i++;
-	size = ft_strlen(ext);
-	while(arg[i] != '.' && i < 0 && size < 0)
-	{
-		if (arg[i] != ext[size])
-			return (-1);
-
-		if (arg[i] == '.' && size != 0)
-			return (-1);
-
-		size--;
-		i--;
-	}
-	return (1);
-}
-

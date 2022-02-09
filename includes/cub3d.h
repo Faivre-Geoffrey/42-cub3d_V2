@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:59:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 15:51:27 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 16:30:07 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ typedef	struct		s_start
 typedef struct		s_data {
 	void			*img;
 	int				*addr;
-	int				bits_per_pixel;
+	int				b_per_pixel;
 	int				line_length;
 	int				endian;
 	void			*mlx;
@@ -185,6 +185,11 @@ void	init(t_all *s);
 int		red_cross_quit(t_all *s);
 int		ft_key_release(int keycode, t_all *s);
 int		ft_key_press(int keycode, t_all *s);
+
+
+//UTILS
+void	printceiling(t_all *s);
+void	printfloor(t_all *s);
 
 
 void	ft_quit(t_all *s, char* str);

@@ -30,6 +30,8 @@ SRC =	init.c \
 		raycasting.c \
 		raycasting_2.c \
 		utils.c \
+		utils_2.c \
+		utils_3.c \
 		mlx_utils.c \
 		main.c \
 		parsing.c \
@@ -38,7 +40,6 @@ SRC =	init.c \
 		make_linked_list.c \
 		make_map.c \
 		check_parsing.c \
-		print_map.c \
 		move_and_dir.c \
 		quit.c 
 		

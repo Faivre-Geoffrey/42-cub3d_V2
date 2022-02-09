@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:39:05 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 15:45:20 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 16:01:57 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	mlx_init_full(t_all *s)
 	s->mlx.mlx_win = mlx_new_window(s->mlx.mlx, 1080, 740, "cub3d");
 	s->mlx.img = mlx_new_image(s->mlx.mlx, 1080, 740);
 	s->mlx.addr = (int *)mlx_get_data_addr(s->mlx.img,
-		&s->mlx.bits_per_pixel, &s->mlx.line_length, &s->mlx.endian);
+		&s->mlx.b_per_pixel, &s->mlx.line_length, &s->mlx.endian);
 }
 
 void	init_boy(t_all *s)

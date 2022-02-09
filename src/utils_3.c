@@ -1,26 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   make_linked_list.c                                 :+:      :+:    :+:   */
+/*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/09 10:15:46 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 15:56:04 by gefaivre         ###   ########.fr       */
+/*   Created: 2022/02/09 16:32:48 by gefaivre          #+#    #+#             */
+/*   Updated: 2022/02/09 16:35:29 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	make_linked_map(t_all *s)
+void	printback(t_all *s)
 {
-	t_list	*node;
+	printceiling(s);
+	printfloor(s);
+}
 
-	if (s->parse.lastisline == 1 && s->parse.spaceinmap == 1)
-		ft_quit(s, "Error\nDon't break the map in .cub\n");
-	s->parse.in_map = 0;
-	s->parse.lastisline = 1;
-	node = ft_lstnew(ft_strdup(s->parse.line));
-	ft_lstadd_back(&s->list, node);
-	return (0);
+int	namecheck(char *arg, char *ext)
+{
+	int	size;
+	int	i;
+
+	i = 0;
+	size = 0;
+	while (arg[i] != '\0')
+		i++;
+	size = ft_strlen(ext);
+	while (arg[i] != '.' && i < 0 && size < 0)
+	{
+		if (arg[i] != ext[size])
+			return (-1);
+		if (arg[i] == '.' && size != 0)
+			return (-1);
+		size--;
+		i--;
+	}
+	return (1);
 }

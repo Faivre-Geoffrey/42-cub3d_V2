@@ -6,11 +6,32 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 09:44:09 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 15:36:17 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 16:24:50 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	rc_hit(t_all *s)
+{
+	while (s->rc.hit == 0)
+	{
+		if (s->rc.sideDistX < s->rc.sideDistY)
+		{
+			s->rc.sideDistX += s->rc.deltaDistX;
+			s->rc.mapX += s->rc.stepX;
+			s->rc.side = 0;
+		}
+		else
+		{
+			s->rc.sideDistY += s->rc.deltaDistY;
+			s->rc.mapY += s->rc.stepY;
+			s->rc.side = 1;
+		}
+		if (s->map.map[s->rc.mapY][s->rc.mapX] == '1')
+			s->rc.hit = 1;
+	}
+}
 
 void	raycasting_2(t_all *s)
 {

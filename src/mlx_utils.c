@@ -6,13 +6,13 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:46:26 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 15:46:55 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 16:25:27 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int		ft_key_press(int keycode, t_all *s)
+int	ft_key_press(int keycode, t_all *s)
 {
 	if (keycode == W)
 		s->boy.forward = 1;
@@ -31,7 +31,7 @@ int		ft_key_press(int keycode, t_all *s)
 	return (1);
 }
 
-int		ft_key_release(int keycode, t_all *s)
+int	ft_key_release(int keycode, t_all *s)
 {
 	if (keycode == W)
 		s->boy.forward = 0;
