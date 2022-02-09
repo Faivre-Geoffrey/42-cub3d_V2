@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:59:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/08 19:02:29 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 11:47:34 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,7 +205,7 @@ int		treat_EA_path(t_all *s);
 int		treat_S_path(t_all *s);
 
 int		rgbtohex(int *tab);
-void		treat_RGB(t_all *s);
+void		parse_rgb(t_all *s);
 
 int		make_linked_list(t_all *s);
 
