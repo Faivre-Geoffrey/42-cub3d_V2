@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 08:28:08 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/05/12 09:43:29 by user42           ###   ########.fr       */
+/*   Updated: 2022/02/09 15:36:17 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,7 @@ void	printmap(t_all *s)
 {
 	s->axe.x = 0;
 	s->axe.x_count = 0;
-	/* s->map.size.x -= 4;
-	s->map.size.y -= 4; */
-	s->parse.diviseur = /* ft_intmin(s->parse.width_window_size, s->parse.height_window_size) / ft_intmax(s->map.size.x, s->map.size.y); */
-						s->parse.width_window_size / s->map.size.x;
-
-	/* printf("diviseur = %i\n", diviseur);
-	printf("s_parsing->m_height = %i\n", s_parsing->m_height);
-	printf("s_parsing->m_width = %i\n", s_parsing->m_width);
-	printf("s_parsing->x_render_size = %i\n", s_parsing->x_render_size);
-	printf("s_parsing->y_render_size = %i\n", s_parsing->y_render_size);
-	printf("s_parsing->m_width *  diviseur= %i\n", s_parsing->m_width *  diviseur); */
-
+	s->parse.diviseur = W_WINDOW / s->map.size.x;
 	while (s->axe.x_count < s->map.size.x)
 	{
 		s->axe.y = 0;
@@ -48,5 +37,4 @@ void	printmap(t_all *s)
 		s->axe.x = s->axe.x + s->parse.diviseur;
 		s->axe.x_count++;
 	}
-	/* printf("NO SEG FAULT"); */
 }

@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:59:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 14:29:15 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:51:27 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@
 #define TEXHEIGHT 64
 #define Vdir 0.02
 #define Vspeed 0.05
+
+#define H_WINDOW 740
+#define W_WINDOW 1080
 
 
 typedef struct		s_rgb {
@@ -172,12 +175,24 @@ typedef	struct		s_all
 	t_cp			cp;
 }					t_all;
 
+
+//INIT
+void	mlx_init_full(t_all *s);
+void	init_boy(t_all *s);
+void	init(t_all *s);
+
+//MLX_UTILS
+int		red_cross_quit(t_all *s);
+int		ft_key_release(int keycode, t_all *s);
+int		ft_key_press(int keycode, t_all *s);
+
+
 void	ft_quit(t_all *s, char* str);
 void	save(t_all *s, char *str);
-
+int	my_atoi(const char *str);
 
 int		set_move(t_all *s);
-
+void		map_path(t_all *s,char *str);
 void		parsing(t_all *s);
 
 int		treat_no_path(t_all *s);

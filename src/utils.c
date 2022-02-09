@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 12:05:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/05/17 15:49:37 by user42           ###   ########.fr       */
+/*   Updated: 2022/02/09 15:36:17 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,10 @@ void	printceiling(t_all *s)
 {
 	int		x = 0;
 	int		y = 0;
-	while (x < (s->parse.height_window_size / 2))
+	while (x < (H_WINDOW / 2))
 	{
 		y = 0;
-		while (y < s->parse.width_window_size)
+		while (y < W_WINDOW)
 		{
 			pixel_put(s, y, x, s->parse.rgb_C);
 			y++;
@@ -103,12 +103,12 @@ void	printceiling(t_all *s)
 }
 void	printfloor(t_all *s)
 {
-	int		x = s->parse.height_window_size / 2;
+	int		x = H_WINDOW / 2;
 	int		y = 0;
-	while (x < s->parse.height_window_size)
+	while (x < H_WINDOW)
 	{
 		y = 0;
-		while (y < s->parse.width_window_size)
+		while (y < W_WINDOW)
 		{
 			pixel_put(s, y, x, s->parse.rgb_F);
 			y++;
@@ -131,7 +131,7 @@ void	drawline(t_all *s)
 	}
 	else if (s->axe.y == s->rc.drawEnd + 1)
 	{
-		while(s->axe.y < s->parse.height_window_size)
+		while(s->axe.y < H_WINDOW)
 		{
 			pixel_put(s, s->axe.x, s->axe.y, s->parse.rgb_F);
 			s->axe.y++;

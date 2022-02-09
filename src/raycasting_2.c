@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 09:45:31 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 14:04:38 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:36:17 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	drawline_tex(t_all *s)
 void	set_rc_var(t_all *s)
 {
 	s->rc.cameraX = 2 * (float)s->axe.x /
-	(float)s->parse.width_window_size - 1;
+	(float)W_WINDOW - 1;
 	s->rc.rayDirX = s->boy.dir.x + s->boy.plane.x * s->rc.cameraX;
 	s->rc.rayDirY = s->boy.dir.y + s->boy.plane.y * s->rc.cameraX;
 	s->rc.mapX = (int)s->boy.pos.x;

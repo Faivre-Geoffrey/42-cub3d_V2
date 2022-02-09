@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 09:46:48 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 13:20:14 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:50:19 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	parse_one_number(t_all *s, int *i, int nb)
 
 	increment_space(s, i);
 	if (s->parse.line[*i] && ft_isdigit(s->parse.line[*i])
-		&& atoi(&s->parse.line[*i]) > 0 && atoi(&s->parse.line[*i]) < 256)
-		ret = atoi(&s->parse.line[*i]);
+		&& my_atoi(&s->parse.line[*i]) > 0 && my_atoi(&s->parse.line[*i]) < 256)
+		ret = my_atoi(&s->parse.line[*i]);
 	else
 		ft_quit(s, "Error\nOnly digit betwen 0 and 255 for RGB colors\n");
 	while (s->parse.line[*i] && ft_isdigit(s->parse.line[*i]))

@@ -26,9 +26,11 @@ _IWHITE=\033[47m
 
 
 
-SRC =	raycasting.c \
+SRC =	init.c \
+		raycasting.c \
 		raycasting_2.c \
 		utils.c \
+		mlx_utils.c \
 		main.c \
 		parsing.c \
 		treat_path.c \

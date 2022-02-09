@@ -6,13 +6,36 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 07:16:17 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 14:28:05 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:51:18 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	atoi(const char *str)
+void		map_path(t_all *s,char *str)
+{
+	int			i;
+
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	while (str[i] != '.')
+	{
+		i--;
+		if (i == 0)
+			ft_quit(s,"Error\nBad map_path name\n");
+	}
+	if (str[i + 1] == 'c' && str[i + 2] == 'u' && str[i + 3] == 'b' && str[i + 4] == '\0')
+	{
+		s->parse.map_path = str;
+		return;
+	}
+	ft_quit(s,"Error\nBad map_path name\n");
+
+}
+
+
+int	my_atoi(const char *str)
 {
 	int	i;
 	int	neg;
