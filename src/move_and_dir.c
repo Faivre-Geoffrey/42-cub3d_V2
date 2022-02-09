@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 12:38:37 by user42            #+#    #+#             */
-/*   Updated: 2022/02/08 16:54:35 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:01:34 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #define texHeight 64
 
-int gigi5(t_all *s)
+int set_move5(t_all *s)
 {
 	if (s->boy.rightward == 1)
 	{
@@ -25,11 +25,11 @@ int gigi5(t_all *s)
 			[(int)(s->boy.pos.x)]))
 			s->boy.pos.y = s->boy.pos.y + (s->boy.dir.x * Vspeed);
 	}
-	oui(s);
+	raycasting(s);
 	return (1);
 }
 
-int gigi4(t_all *s)
+int set_move4(t_all *s)
 {
 	if (s->boy.leftward == 1)
 	{
@@ -40,12 +40,12 @@ int gigi4(t_all *s)
 			[(int)(s->boy.pos.x)]))
 			s->boy.pos.y = s->boy.pos.y - (s->boy.dir.x * Vspeed);
 	}
-	gigi5(s);
+	set_move5(s);
 	return (1);
 }
 
 
-int	gigi3(t_all *s)
+int	set_move3(t_all *s)
 {
 	if (s->boy.backward == 1)
 	{
@@ -56,11 +56,11 @@ int	gigi3(t_all *s)
 			[(int)(s->boy.pos.x)]))
 			s->boy.pos.y = s->boy.pos.y + -(s->boy.dir.y * Vspeed);
 	}
-	gigi4(s);
+	set_move4(s);
 	return (1);
 }
 
-int	gigi2(t_all *s)
+int	set_move2(t_all *s)
 {
 	if (s->boy.forward == 1)
 	{
@@ -71,11 +71,11 @@ int	gigi2(t_all *s)
 			[(int)(s->boy.pos.x)]))
 			s->boy.pos.y = s->boy.pos.y + s->boy.dir.y * Vspeed;
 	}
-	gigi3(s);
+	set_move3(s);
 	return (1);
 }
 
-int gigi1(t_all *s)
+int set_move1(t_all *s)
 {
 	
 	if (s->boy.dirleft == 1)
@@ -87,11 +87,11 @@ int gigi1(t_all *s)
 		s->boy.plane.x = s->boy.plane.x * cos(-Vdir) - s->boy.plane.y * sin(-Vdir);
 		s->boy.plane.y = oldPlaneX * sin(-Vdir) + s->boy.plane.y * cos(-Vdir);
 	}
-	gigi2(s);
+	set_move2(s);
 	return (1);
 }
 
-int	gigi(t_all *s)
+int	set_move(t_all *s)
 {
     if (s->boy.dirright == 1)
     {
@@ -102,7 +102,7 @@ int	gigi(t_all *s)
 	    s->boy.plane.x = s->boy.plane.x * cos(Vdir) - s->boy.plane.y * sin(Vdir);
 	    s->boy.plane.y = oldPlaneX * sin(Vdir) + s->boy.plane.y * cos(Vdir);
     }
-	gigi1(s);
+	set_move1(s);
 	return (1);
 }
 

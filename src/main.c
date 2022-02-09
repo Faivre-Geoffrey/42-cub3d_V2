@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 08:07:02 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/08 18:17:50 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:01:34 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	init(t_all *s)
 	s->parse.treat_RGB_C = 0;
 	s->parse.spaceinmap = 0;
 	s->parse.numsprite = 0;
-	s->sprite = NULL;
 	s->boy.dirleft = 0;
 	s->boy.dirright = 0;
 	s->boy.forward = 0;
@@ -49,9 +48,6 @@ void	init(t_all *s)
 	s->boy.leftward = 0;
 	s->boy.rightward = 0;
 
-	s->spr.spriteDistance = NULL;
-	s->spr.spriteOrder= NULL;
-	s->spr.zbuffer = NULL;
 }
 
 void	mlx_init_full(t_all *s)
@@ -205,13 +201,10 @@ int		main(int ac, char *av[])
 	s.cp.mlx = s.mlx;
 	s.cp.parse = s.parse;
 	set_texture(&s);
-	s.spr.zbuffer = malloc(sizeof(double) * s.parse.width_window_size);
-	s.spr.spriteOrder = malloc(sizeof(int) * s.parse.numsprite);
-	s.spr.spriteDistance = malloc(sizeof(double) * s.parse.numsprite);
-	oui(&s);
+	raycasting(&s);
 	mlx_hook(s.mlx.mlx_win, 33, 1L << 17, red_cross_quit, &s);
 	mlx_hook(s.mlx.mlx_win, 2, 1L << 0, ft_key_press, &s);
-	mlx_loop_hook(s.mlx.mlx, gigi, &s);
+	mlx_loop_hook(s.mlx.mlx, set_move, &s);
 	mlx_hook(s.mlx.mlx_win, 3, 1L << 1, ft_key_release, &s);
 	mlx_loop(s.mlx.mlx); 
 	return (0);

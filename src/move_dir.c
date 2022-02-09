@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 09:47:17 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/08 16:54:04 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:00:25 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	dirright(t_all *s)
 	float oldPlaneX = s->boy.plane.x;
 	s->boy.plane.x = s->boy.plane.x * cos(Vdir) - s->boy.plane.y * sin(Vdir);
 	s->boy.plane.y = oldPlaneX * sin(Vdir) + s->boy.plane.y * cos(Vdir);
-	oui(s);
+	raycasting(s);
 }
 
 void	dirleft(t_all *s)
@@ -31,5 +31,5 @@ void	dirleft(t_all *s)
 	float oldPlaneX = s->boy.plane.x;
 	s->boy.plane.x = s->boy.plane.x * cos(-Vdir) - s->boy.plane.y * sin(-Vdir);
 	s->boy.plane.y = oldPlaneX * sin(-Vdir) + s->boy.plane.y * cos(-Vdir);
-	oui(s);
+	raycasting(s);
 }

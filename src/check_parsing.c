@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 10:23:34 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/08 17:11:37 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 13:36:18 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,37 +65,10 @@ void	check_start_pos(t_all *s)
 		}
 		i++;
 	}
-	if (s->start.count > 1 || s->start.count < 1)
-		ft_quit(s,"Error\nMap must contain one start position please\n");
+	if (s->start.count != 1)
+		ft_quit(s,"Error\nMap must contain one start position please (or add a wall)\n");
 }
 
-void		set_sprite(t_all *s)
-{
-	int i;
-	int j;
-	int x;
-
-	x = 0;
-	s->sprite = (t_sprite *)malloc(sizeof(t_sprite) * s->parse.numsprite);
-	if (s->sprite == NULL)
-		ft_quit(s,"Error\nmalloc failed\n");
-	i = 0;
-	while (i < s->map.size.y + 4)
-	{
-		j = 0;
-		while(j < s->map.size.x + 4)
-		{
-			if (s->map.map[i][j] == '2')
-			{
-				s->sprite[x].x = j;
-				s->sprite[x].y = i;
-				x++;
-			}
-			j++;
-		}
-		i++;
-	}
-}
 
 void	check_path_texture_2(t_all *s, char *str)
 {
@@ -124,6 +97,5 @@ void		check_parsing(t_all *s)
 {
 	check_map(s);
 	check_start_pos(s);
-	set_sprite(s);
 	check_path_texture(s);
 }

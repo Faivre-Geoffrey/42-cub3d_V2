@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 07:16:17 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 11:48:06 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 13:39:26 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ void		treat_line(t_all *s)
 		treat_WE_path(s);
 	else if (ft_strncmp(s->parse.line, "EA ", 3) == 0)
 		treat_EA_path(s);
-	else if (ft_strncmp(s->parse.line, "F ", 2) == 0 || ft_strncmp(s->parse.line, "C ", 2) == 0)
+	else if (ft_strncmp(s->parse.line, "F ", 2) == 0 
+		|| ft_strncmp(s->parse.line, "C ", 2) == 0)
 		parse_rgb(s);
-	else if (is_line_at_map(s->parse.line) && s->parse.spaceinmap == 0 && (s->parse.lastisline == 1 || (s->parse.lastisline == 0 && s->parse.in_map == 1)))
+	else if (is_line_at_map(s->parse.line))
 	{
 		if (s->parse.lastisline == 1 &&  s->parse.spaceinmap == 1)
 			ft_quit(s,"Error\nDon't break the map in .cub\n");
@@ -79,10 +80,7 @@ void		treat_line(t_all *s)
 		return;
 	}
 	else
-	{
-		printf("s->parse.line\t=\t[%s]\n", s->parse.line);
-		ft_quit(s, "Error\nbad value in .cub");
-	}
+		ft_quit(s, "Error\nBad symbole in .cub");
 }
 
 

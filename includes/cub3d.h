@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:59:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 11:47:34 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:01:34 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 # define RIGHT 65363
 
 #define texHeight 64
-#define Vdir 0.1
-#define Vspeed 0.5
+#define Vdir 0.02
+#define Vspeed 0.02
 
 # define uDiv 2
 # define vDiv 2
@@ -155,19 +155,6 @@ typedef struct		s_rc{
 	float			texPos;
 }					t_rc;
 
-typedef struct	s_sprite
-{
-	float	x;
-	float	y;
-}				t_sprite;
-
-typedef struct	s_spr
-{
-	double			*zbuffer;
-	int 			*spriteOrder;
-	double 			*spriteDistance;
-}				t_spr;
-
 typedef struct	s_cp
 {
 	t_data		mlx;
@@ -185,8 +172,6 @@ typedef	struct		s_all
 	t_start			start;
 	t_boy			boy;
 	t_rc			rc;
-	t_spr			spr;
-	t_sprite		*sprite;
 	t_cp			cp;
 }					t_all;
 
@@ -194,7 +179,7 @@ void	ft_quit(t_all *s, char* str);
 void	save(t_all *s, char *str);
 
 
-int		gigi(t_all *s);
+int		set_move(t_all *s);
 
 void		parsing(t_all *s);
 
@@ -223,7 +208,7 @@ void	dirright(t_all *s);
 void	printboy(t_all *s);
 
 
-void	oui(t_all *s);
+void	raycasting(t_all *s);
 void	drawline_tex(t_all *s);
 void	set_texture(t_all *s);
 void	rc_hit(t_all *s);

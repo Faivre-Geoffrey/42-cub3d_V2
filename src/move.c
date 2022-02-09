@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 09:26:53 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/08 16:55:19 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:00:25 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	forward(t_all *s)
 	if(ismovable(s->map.map[(int)(s->boy.pos.y + s->boy.dir.y * Vspeed)]
 		[(int)(s->boy.pos.x)]))
 		s->boy.pos.y = s->boy.pos.y + s->boy.dir.y * Vspeed;
-	oui(s);
+	raycasting(s);
 }
 
 void	backward(t_all *s)
@@ -37,7 +37,7 @@ void	backward(t_all *s)
 	if(ismovable(s->map.map[(int)(s->boy.pos.y + -(s->boy.dir.y * Vspeed))]
 		[(int)(s->boy.pos.x)]))
 		s->boy.pos.y = s->boy.pos.y + -(s->boy.dir.y * Vspeed);
-	oui(s);
+	raycasting(s);
 }
 
 void	leftward(t_all *s)
@@ -48,7 +48,7 @@ void	leftward(t_all *s)
 	if(ismovable(s->map.map[(int)(s->boy.pos.y - (s->boy.dir.x * Vspeed))]
 		[(int)(s->boy.pos.x)]))
 		s->boy.pos.y = s->boy.pos.y - (s->boy.dir.x * Vspeed);
-	oui(s);
+	raycasting(s);
 }
 void	rightward(t_all *s)
 {
@@ -58,7 +58,7 @@ void	rightward(t_all *s)
 	if(ismovable(s->map.map[(int)(s->boy.pos.y + (s->boy.dir.x * Vspeed))]
 		[(int)(s->boy.pos.x)]))
 		s->boy.pos.y = s->boy.pos.y + (s->boy.dir.x * Vspeed);
-	oui(s);
+	raycasting(s);
 }
 
 
