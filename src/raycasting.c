@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 09:44:09 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 14:00:03 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:04:38 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	raycasting_2(t_all *s)
 	if ((s->rc.side == 0 && s->rc.rayDirX > 0)
 		|| (s->rc.side == 1 && s->rc.rayDirY < 0))
 		s->rc.texX = 64 - s->rc.texX - 1;
-	s->rc.step = 1.0 * texHeight / s->rc.lineHeight;
+	s->rc.step = 1.0 * TEXHEIGHT / s->rc.lineHeight;
 	s->rc.texPos = (s->rc.drawStart - s->parse.height_window_size
 			/ 2 + s->rc.lineHeight / 2) * s->rc.step;
 	drawline_tex(s);

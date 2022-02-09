@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:59:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 14:01:34 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:04:38 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,10 @@
 # define LEFT 65361
 # define RIGHT 65363
 
-#define texHeight 64
+#define TEXHEIGHT 64
 #define Vdir 0.02
 #define Vspeed 0.02
 
-# define uDiv 2
-# define vDiv 2
-# define vMove 64
 
 typedef struct		s_rgb {
 	unsigned char	b;

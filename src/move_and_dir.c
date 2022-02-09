@@ -6,13 +6,13 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 12:38:37 by user42            #+#    #+#             */
-/*   Updated: 2022/02/09 14:01:34 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:04:38 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/cub3d.h"
 
-#define texHeight 64
+#define TEXHEIGHT 64
 
 int set_move5(t_all *s)
 {

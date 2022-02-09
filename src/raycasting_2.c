@@ -6,12 +6,12 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 09:45:31 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/08 16:50:59 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:04:38 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-#define texHeight 64
+#define TEXHEIGHT 64
 
 void	set_texture(t_all *s)
 {
@@ -39,7 +39,7 @@ void	drawline_tex(t_all *s)
 	drawline(s);
 	while( s->axe.y <= s->rc.drawEnd )
 	{
-		s->rc.texY = (int)s->rc.texPos & (texHeight - 1);
+		s->rc.texY = (int)s->rc.texPos & (TEXHEIGHT - 1);
 		s->rc.texPos += s->rc.step;
 		if(s->rc.side == 1 && s->rc.rayDirY < 0 )
 			s->mlx.addr[s->axe.y * s->mlx.line_length / 4 + s->axe.x ] =
