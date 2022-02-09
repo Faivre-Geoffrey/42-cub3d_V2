@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 08:07:02 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 14:01:34 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:13:28 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	init(t_all *s)
 	s->parse.WE_path = NULL;
 	s->parse.S_path = NULL;
 
-	s->parse.treat_NO_path = 0;
-	s->parse.treat_SO_path = 0;
-	s->parse.treat_WE_path = 0;
-	s->parse.treat_EA_path = 0;
+	s->parse.treat_no_path = 0;
+	s->parse.treat_so_path = 0;
+	s->parse.treat_we_path = 0;
+	s->parse.treat_ea_path = 0;
 	s->parse.treat_S_path = 0;
 	s->parse.treat_RGB_F = 0;
 	s->parse.treat_RGB_C = 0;

@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:59:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 14:04:38 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:29:15 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 
 #define TEXHEIGHT 64
 #define Vdir 0.02
-#define Vspeed 0.02
+#define Vspeed 0.05
 
 
 typedef struct		s_rgb {
@@ -78,10 +78,10 @@ typedef	struct		s_parse
 	int				in_map;
 	int				spaceinmap;
 	int				treat_window_size;
-	int				treat_NO_path;
-	int				treat_SO_path;
-	int				treat_WE_path;
-	int				treat_EA_path;
+	int				treat_no_path;
+	int				treat_so_path;
+	int				treat_we_path;
+	int				treat_ea_path;
 	int				treat_S_path;
 	int				treat_RGB_F;
 	int				treat_RGB_C;
@@ -180,16 +180,16 @@ int		set_move(t_all *s);
 
 void		parsing(t_all *s);
 
-int		treat_NO_path(t_all *s);
-int		treat_SO_path(t_all *s);
-int		treat_WE_path(t_all *s);
-int		treat_EA_path(t_all *s);
+int		treat_no_path(t_all *s);
+int		treat_so_path(t_all *s);
+int		treat_we_path(t_all *s);
+int		treat_ea_path(t_all *s);
 int		treat_S_path(t_all *s);
 
 int		rgbtohex(int *tab);
 void		parse_rgb(t_all *s);
 
-int		make_linked_list(t_all *s);
+int		make_linked_map(t_all *s);
 
 int		make_map(t_all *s);
 
