@@ -27,6 +27,7 @@ _IWHITE=\033[47m
 
 
 SRC =	init.c \
+		init_boy.c \
 		raycasting.c \
 		raycasting_2.c \
 		utils.c \
@@ -41,6 +42,7 @@ SRC =	init.c \
 		make_map.c \
 		check_parsing.c \
 		move_and_dir.c \
+		dir.c \
 		quit.c 
 		
 
