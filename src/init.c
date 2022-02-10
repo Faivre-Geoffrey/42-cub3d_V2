@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:39:05 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/10 14:25:12 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/10 15:16:56 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,25 @@ void	init_boy_value(t_all *s)
 	s->boy.rightward = 0;
 }
 
+void set_null_mx_pointer(t_all *s)
+{
+	s->texture[0].img = NULL;
+	s->texture[1].img = NULL;
+	s->texture[2].img = NULL;
+	s->texture[3].img = NULL;
+	s->mlx.addr = NULL;
+	s->mlx.img = NULL;
+	s->mlx.mlx = NULL;
+	s->mlx.mlx_win = NULL;
+
+}
+
 void	init(t_all *s)
 {
 	s->list = NULL;
 	s->parse.line = NULL;
 	s->map.map = NULL;
-	s->mlx.img = NULL;
+	
 	s->parse.NO_path = NULL;
 	s->parse.EA_path = NULL;
 	s->parse.SO_path = NULL;
@@ -51,4 +64,6 @@ void	init(t_all *s)
 	s->parse.treat_RGB_C = 0;
 	s->parse.spaceinmap = 0;
 	init_boy_value(s);
+	set_null_mx_pointer(s);
+	
 }
