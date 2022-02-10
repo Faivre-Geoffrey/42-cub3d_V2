@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 11:31:03 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/05/08 15:32:04 by user42           ###   ########.fr       */
+/*   Updated: 2022/02/10 19:57:35 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*get_new_save(char *save)
+char	*get_new_save(char *save)
 {
 	char	*rtn;
 	int		i;
@@ -29,7 +29,8 @@ char		*get_new_save(char *save)
 		free(save);
 		return (0);
 	}
-	if (!(rtn = malloc(sizeof(char) * ((ft_strlen(save) - i) + 1))))
+	rtn = malloc(sizeof(char) * ((ft_strlen(save) - i) + 1));
+	if (!rtn)
 		return (0);
 	i++;
 	while (save[i])
@@ -39,7 +40,7 @@ char		*get_new_save(char *save)
 	return (rtn);
 }
 
-char		*get_line(char *str)
+char	*get_line(char *str)
 {
 	int		i;
 	char	*rtn;
@@ -49,7 +50,8 @@ char		*get_line(char *str)
 		return (0);
 	while (str[i] && str[i] != '\n')
 		i++;
-	if (!(rtn = malloc(sizeof(char) * (i + 1))))
+	rtn = malloc(sizeof(char) * (i + 1));
+	if (!rtn)
 		return (0);
 	i = 0;
 	while (str[i] && str[i] != '\n')
@@ -61,7 +63,13 @@ char		*get_line(char *str)
 	return (rtn);
 }
 
-int			get_next_line(int fd, char **line)
+int	free_the_buff(char *buff)
+{
+	free(buff);
+	return (-1);
+}
+
+int	get_next_line(int fd, char **line)
 {
 	static char		*save;
 	int				read_value;
@@ -69,16 +77,15 @@ int			get_next_line(int fd, char **line)
 
 	if (!line || fd < 0 || BUFFER_SIZE <= 0)
 		return (-1);
-	if (!(buff = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
+	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buff)
 		return (-1);
 	read_value = 1;
 	while (!has_return(save) && read_value != 0)
 	{
-		if ((read_value = read(fd, buff, BUFFER_SIZE)) == -1)
-		{
-			free(buff);
-			return (-1);
-		}
+		read_value = read(fd, buff, BUFFER_SIZE);
+		if (read_value == -1)
+			return (free_the_buff(buff));
 		buff[read_value] = 0;
 		save = join(save, buff);
 	}
