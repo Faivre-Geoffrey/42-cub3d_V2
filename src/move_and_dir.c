@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 12:38:37 by user42            #+#    #+#             */
-/*   Updated: 2022/02/09 14:47:55 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/10 14:26:52 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,46 +72,3 @@ int	set_move2(t_all *s)
 	return (1);
 }
 
-int	set_move1(t_all *s)
-{
-	float	olddirx;
-	float	oldplanex;
-
-	if (s->boy.dirleft == 1)
-	{
-		olddirx = s->boy.dir.x;
-		s->boy.dir.x = s->boy.dir.x * cos(-Vdir)
-			- s->boy.dir.y * sin(-Vdir);
-		s->boy.dir.y = olddirx * sin(-Vdir)
-			+ s->boy.dir.y * cos(-Vdir);
-		oldplanex = s->boy.plane.x;
-		s->boy.plane.x = s->boy.plane.x * cos(-Vdir)
-			- s->boy.plane.y * sin(-Vdir);
-		s->boy.plane.y = oldplanex * sin(-Vdir)
-			+ s->boy.plane.y * cos(-Vdir);
-	}
-	set_move2(s);
-	return (1);
-}
-
-int	set_move(t_all *s)
-{
-	float	olddirx;
-	float	oldplanex;
-
-	if (s->boy.dirright == 1)
-	{
-		olddirx = s->boy.dir.x;
-		s->boy.dir.x = s->boy.dir.x * cos(Vdir)
-			- s->boy.dir.y * sin(Vdir);
-		s->boy.dir.y = olddirx * sin(Vdir)
-			+ s->boy.dir.y * cos(Vdir);
-		oldplanex = s->boy.plane.x;
-		s->boy.plane.x = s->boy.plane.x * cos(Vdir)
-			- s->boy.plane.y * sin(Vdir);
-		s->boy.plane.y = oldplanex * sin(Vdir)
-			+ s->boy.plane.y * cos(Vdir);
-	}
-	set_move1(s);
-	return (1);
-}

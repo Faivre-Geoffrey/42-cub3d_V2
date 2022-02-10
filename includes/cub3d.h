@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:59:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 16:30:07 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/10 14:27:15 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,7 @@ int		ft_key_press(int keycode, t_all *s);
 void	printceiling(t_all *s);
 void	printfloor(t_all *s);
 
-
+int	 	set_move2(t_all *s);
 void	ft_quit(t_all *s, char* str);
 void	save(t_all *s, char *str);
 int	my_atoi(const char *str);
