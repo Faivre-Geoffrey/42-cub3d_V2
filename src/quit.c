@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:29:46 by user42            #+#    #+#             */
-/*   Updated: 2022/02/10 15:18:33 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/10 19:34:47 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	ft_quit(t_all *s, char *str)
 	i = 0;
 	if (s->list)
 		ft_lstclear(&s->list, free);
-	if(s->parse.WE_path)
-		free(s->parse.WE_path);
-	if(s->parse.EA_path)
-		free(s->parse.EA_path);
-	if(s->parse.SO_path)
-		free(s->parse.SO_path);
-	if(s->parse.NO_path)
-		free(s->parse.NO_path);
+	if(s->parse.we_path)
+		free(s->parse.we_path);
+	if(s->parse.ea_path)
+		free(s->parse.ea_path);
+	if(s->parse.so_path)
+		free(s->parse.so_path);
+	if(s->parse.no_path)
+		free(s->parse.no_path);
 	if (s->map.map)
 	{
 		while (s->map.map[i] && i < s->map.size.y + 4)

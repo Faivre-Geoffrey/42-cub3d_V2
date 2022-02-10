@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 09:46:48 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 15:50:19 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/10 19:33:59 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,27 +69,27 @@ void	make_hex(t_all *s, char x)
 	tab[1] = parse_one_number(s, &i, 2);
 	tab[2] = parse_one_number(s, &i, 3);
 	if (x == 'F')
-		s->parse.rgb_F = rgbtohex(tab);
+		s->parse.rgb_f = rgbtohex(tab);
 	else if (x == 'C')
-		s->parse.rgb_C = rgbtohex(tab);
+		s->parse.rgb_c = rgbtohex(tab);
 }
 
 void	parse_rgb(t_all *s)
 {
 	if (ft_strncmp(s->parse.line, "F ", 2) == 0)
 	{	
-		if (s->parse.treat_RGB_F == 1 || s->parse.in_map == 0)
+		if (s->parse.treat_rgb_f == 1 || s->parse.in_map == 0)
 			ft_quit(s, "Error\n parsing return an error with F description");
 		s->parse.lastisline = 0;
-		s->parse.treat_RGB_F = 1;
+		s->parse.treat_rgb_f = 1;
 		make_hex(s, 'F');
 	}
 	else if (ft_strncmp(s->parse.line, "C ", 2) == 0)
 	{
-		if (s->parse.treat_RGB_C == 1 || s->parse.in_map == 0)
+		if (s->parse.treat_rgb_c == 1 || s->parse.in_map == 0)
 			ft_quit(s, "Error\n parsing return an error with C description");
 		s->parse.lastisline = 0;
-		s->parse.treat_RGB_C = 1;
+		s->parse.treat_rgb_c = 1;
 		make_hex(s, 'C');
 	}
 }

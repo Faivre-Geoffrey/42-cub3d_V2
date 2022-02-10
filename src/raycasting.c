@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 09:44:09 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/10 14:32:29 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/10 19:46:18 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,41 +16,41 @@ void	rc_hit(t_all *s)
 {
 	while (s->rc.hit == 0)
 	{
-		if (s->rc.sideDistX < s->rc.sideDistY)
+		if (s->rc.sidedistx < s->rc.sidedisty)
 		{
-			s->rc.sideDistX += s->rc.deltaDistX;
-			s->rc.mapX += s->rc.stepX;
+			s->rc.sidedistx += s->rc.deltadistx;
+			s->rc.mapx += s->rc.stepx;
 			s->rc.side = 0;
 		}
 		else
 		{
-			s->rc.sideDistY += s->rc.deltaDistY;
-			s->rc.mapY += s->rc.stepY;
+			s->rc.sidedisty += s->rc.deltadisty;
+			s->rc.mapy += s->rc.stepy;
 			s->rc.side = 1;
 		}
-		if (s->map.map[s->rc.mapY][s->rc.mapX] == '1')
+		if (s->map.map[s->rc.mapy][s->rc.mapx] == '1')
 			s->rc.hit = 1;
 	}
 }
 
 void	raycasting_2(t_all *s)
 {
-	s->rc.drawEnd = s->rc.lineHeight / 2 + H_WINDOW / 2;
-	if (s->rc.drawEnd >= H_WINDOW)
-		s->rc.drawEnd = H_WINDOW - 1;
-	s->rc.texNum = s->map.map[s->rc.mapY][s->rc.mapX] - 1;
+	s->rc.drawend = s->rc.lineheight / 2 + H_WINDOW / 2;
+	if (s->rc.drawend >= H_WINDOW)
+		s->rc.drawend = H_WINDOW - 1;
+	s->rc.texnum = s->map.map[s->rc.mapy][s->rc.mapx] - 1;
 	if (s->rc.side == 0)
-		s->rc.wallX = s->boy.pos.y + s->rc.perpWallDist * s->rc.rayDirY;
+		s->rc.wallx = s->boy.pos.y + s->rc.perpwalldist * s->rc.raydiry;
 	else
-		s->rc.wallX = s->boy.pos.x + s->rc.perpWallDist * s->rc.rayDirX;
-	s->rc.wallX -= floor((s->rc.wallX));
-	s->rc.texX = (int)(s->rc.wallX * 64);
-	if ((s->rc.side == 0 && s->rc.rayDirX > 0)
-		|| (s->rc.side == 1 && s->rc.rayDirY < 0))
-		s->rc.texX = 64 - s->rc.texX - 1;
-	s->rc.step = 1.0 * TEXHEIGHT / s->rc.lineHeight;
-	s->rc.texPos = (s->rc.drawStart - H_WINDOW
-			/ 2 + s->rc.lineHeight / 2) * s->rc.step;
+		s->rc.wallx = s->boy.pos.x + s->rc.perpwalldist * s->rc.raydirx;
+	s->rc.wallx -= floor((s->rc.wallx));
+	s->rc.texx = (int)(s->rc.wallx * 64);
+	if ((s->rc.side == 0 && s->rc.raydirx > 0)
+		|| (s->rc.side == 1 && s->rc.raydiry < 0))
+		s->rc.texx = 64 - s->rc.texx - 1;
+	s->rc.step = 1.0 * TEXHEIGHT / s->rc.lineheight;
+	s->rc.texpos = (s->rc.drawstart - H_WINDOW
+			/ 2 + s->rc.lineheight / 2) * s->rc.step;
 	drawline_tex(s);
 	s->axe.x++;
 }
@@ -64,20 +64,20 @@ void	raycasting(t_all *s)
 		rc_step_and_dist(s);
 		rc_hit(s);
 		if (s->rc.side == 0)
-			s->rc.perpWallDist = (s->rc.mapX - s->boy.pos.x
-					+ (1 - s->rc.stepX) / 2) / s->rc.rayDirX;
+			s->rc.perpwalldist = (s->rc.mapx - s->boy.pos.x
+					+ (1 - s->rc.stepx) / 2) / s->rc.raydirx;
 		else
-			s->rc.perpWallDist = (s->rc.mapY - s->boy.pos.y
-					+ (1 - s->rc.stepY) / 2) / s->rc.rayDirY;
-		s->rc.lineHeight = (int)(H_WINDOW
-				/ s->rc.perpWallDist);
-		s->rc.lineHeight = (float)s->rc.lineHeight / (1.25 *(
+			s->rc.perpwalldist = (s->rc.mapy - s->boy.pos.y
+					+ (1 - s->rc.stepy) / 2) / s->rc.raydiry;
+		s->rc.lineheight = (int)(H_WINDOW
+				/ s->rc.perpwalldist);
+		s->rc.lineheight = (float)s->rc.lineheight / (1.25 *(
 					(float)H_WINDOW
 					/ (float)W_WINDOW));
-		s->rc.drawStart = -s->rc.lineHeight
+		s->rc.drawstart = -s->rc.lineheight
 			/ 2 + H_WINDOW / 2;
-		if (s->rc.drawStart < 0)
-			s->rc.drawStart = 0;
+		if (s->rc.drawstart < 0)
+			s->rc.drawstart = 0;
 		raycasting_2(s);
 	}
 	mlx_put_image_to_window(s->mlx.mlx, s->mlx.mlx_win, s->mlx.img, 0, 0);

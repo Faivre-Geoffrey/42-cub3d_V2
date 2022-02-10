@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 09:47:35 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 14:14:30 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/10 19:34:47 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	treat_no_path(t_all *s)
 	i = 2;
 	while (s->parse.line[i] == ' ')
 		i++;
-	s->parse.NO_path = ft_strdup(&s->parse.line[i]);
+	s->parse.no_path = ft_strdup(&s->parse.line[i]);
 	return (0);
 }
 
@@ -38,7 +38,7 @@ int	treat_so_path(t_all *s)
 	i = 2;
 	while (s->parse.line[i] == ' ')
 		i++;
-	s->parse.SO_path = ft_strdup(&s->parse.line[i]);
+	s->parse.so_path = ft_strdup(&s->parse.line[i]);
 	return (0);
 }
 
@@ -53,7 +53,7 @@ int	treat_we_path(t_all *s)
 	i = 2;
 	while (s->parse.line[i] == ' ')
 		i++;
-	s->parse.WE_path = ft_strdup(&s->parse.line[i]);
+	s->parse.we_path = ft_strdup(&s->parse.line[i]);
 	return (0);
 }
 
@@ -68,6 +68,6 @@ int	treat_ea_path(t_all *s)
 	i = 2;
 	while (s->parse.line[i] == ' ')
 		i++;
-	s->parse.EA_path = ft_strdup(&s->parse.line[i]);
+	s->parse.ea_path = ft_strdup(&s->parse.line[i]);
 	return (0);
 }

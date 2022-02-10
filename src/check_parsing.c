@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 10:23:34 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 14:40:48 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/10 19:39:17 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	check_start_pos(t_all *s)
 			if (is_start_pos(s->map.map[i][j]))
 			{
 				s->start.count++;
-				s->start.NSEW = s->map.map[i][j];
+				s->start.nsew = s->map.map[i][j];
 				s->start.pos.y = i;
 				s->start.pos.x = j;
 			}
@@ -75,13 +75,13 @@ void	check_path_texture_2(t_all *s, char *str)
 
 void	check_path_texture(t_all *s)
 {
-	if (s->parse.NO_path == NULL || s->parse.EA_path == NULL
-		|| s->parse.SO_path == NULL || s->parse.WE_path == NULL )
+	if (s->parse.no_path == NULL || s->parse.ea_path == NULL
+		|| s->parse.so_path == NULL || s->parse.we_path == NULL )
 		ft_quit(s, "Error\nBad number of texture\n");
-	check_path_texture_2(s, s->parse.NO_path);
-	check_path_texture_2(s, s->parse.WE_path);
-	check_path_texture_2(s, s->parse.SO_path);
-	check_path_texture_2(s, s->parse.EA_path);
+	check_path_texture_2(s, s->parse.no_path);
+	check_path_texture_2(s, s->parse.we_path);
+	check_path_texture_2(s, s->parse.so_path);
+	check_path_texture_2(s, s->parse.ea_path);
 }
 
 void	check_parsing(t_all *s)

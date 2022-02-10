@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 08:07:02 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 15:52:16 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/10 19:24:52 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int ac, char *av[])
 
 	init(&s);
 	if (ac < 2 || ac > 3)
-		ft_quit(&s, "Error\nbad numbers of args\n");
+		ft_quit(&s, "Error\nBad numbers of args\n");
 	map_path(&s, av[1]);
 	parsing(&s);
 	check_parsing(&s);

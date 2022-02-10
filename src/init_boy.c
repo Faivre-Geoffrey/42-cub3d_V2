@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/10 14:18:21 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/10 14:24:27 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/10 19:39:17 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ void	init_boy(t_all *s)
 	s->parse.diviseur = W_WINDOW / s->map.size.x;
 	s->boy.pos.x = s->start.pos.x + 0.5;
 	s->boy.pos.y = s->start.pos.y + 0.5;
-	if (s->start.NSEW == 'N')
+	if (s->start.nsew == 'N')
 		init_boy_n(s);
-	else if (s->start.NSEW == 'S')
+	else if (s->start.nsew == 'S')
 		init_boy_s(s);
-	else if (s->start.NSEW == 'E')
+	else if (s->start.nsew == 'E')
 		init_boy_e(s);
-	else if (s->start.NSEW == 'W')
+	else if (s->start.nsew == 'W')
 		init_boy_w(s);
 }

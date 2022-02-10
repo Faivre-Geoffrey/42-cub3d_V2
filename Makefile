@@ -78,6 +78,8 @@ all:
 # -L donner le nom du dossier / -l donner le nom le la lib
 # loader path = ecrit le chemin de la mlx dans le binaire pour pouvoir la retrouver au moment ou on lance le binaire
 $(NAME): $(OBJ)
+		$(MAKE) -C libft
+		$(MAKE) -C minilibx-linux
 		${CC} $(CFLAGS) -o $(NAME) $(OBJ) -L $(MLX_DIR) -lmlx -lm -lbsd -lX11 -lXext libft/libft.a
 		@echo $(NAME) : Created !
 
@@ -90,10 +92,12 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | .gitignore
 		@echo $(NAME) > .gitignore
 
 clean:
+	@$(MAKE) -C libft clean
 	@rm -rf $(OBJ_DIR)
 	@echo "obj deleted"
 
 fclean:	clean
+	@rm -rf ./libft/libft.a
 	@rm -rf $(NAME)
 	@echo "[$(NAME)]: deleted"
 

@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:39:05 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/10 15:16:56 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/10 19:34:47 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,18 @@ void	init(t_all *s)
 	s->parse.line = NULL;
 	s->map.map = NULL;
 	
-	s->parse.NO_path = NULL;
-	s->parse.EA_path = NULL;
-	s->parse.SO_path = NULL;
-	s->parse.WE_path = NULL;
+	s->parse.no_path = NULL;
+	s->parse.ea_path = NULL;
+	s->parse.so_path = NULL;
+	s->parse.we_path = NULL;
 	s->parse.lastisline = 0;
 	s->parse.in_map = 1;
 	s->parse.treat_no_path = 0;
 	s->parse.treat_so_path = 0;
 	s->parse.treat_we_path = 0;
 	s->parse.treat_ea_path = 0;
-	s->parse.treat_RGB_F = 0;
-	s->parse.treat_RGB_C = 0;
+	s->parse.treat_rgb_f = 0;
+	s->parse.treat_rgb_c = 0;
 	s->parse.spaceinmap = 0;
 	init_boy_value(s);
 	set_null_mx_pointer(s);
