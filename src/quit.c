@@ -6,11 +6,24 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:29:46 by user42            #+#    #+#             */
-/*   Updated: 2022/02/21 17:48:47 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/21 18:01:37 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+
+void	free_gnl(t_all *s)
+{
+	if (s->parse.line)
+		free(s->parse.line);
+	while (get_next_line(s->parse.fd, &s->parse.line))
+	{
+		free(s->parse.line);
+	}
+	if (s->parse.fd)
+		close(s->parse.fd);
+}
 
 void	free_path_and_map(t_all *s)
 {
@@ -40,6 +53,7 @@ void	free_path_and_map(t_all *s)
 
 void	ft_quit(t_all *s, char *str)
 {
+	free_gnl(s);
 	free_path_and_map(s);
 	if (s->parse.line)
 		free(s->parse.line);
