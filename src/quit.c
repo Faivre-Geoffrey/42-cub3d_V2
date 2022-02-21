@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:29:46 by user42            #+#    #+#             */
-/*   Updated: 2022/02/21 18:07:28 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/21 18:51:06 by jraffin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
 
 void	free_gnl(t_all *s)
 {
@@ -46,7 +45,7 @@ void	free_path_and_map(t_all *s)
 		{
 			free(s->map.map[i]);
 			i++;
-		}	
+		}
 		free(s->map.map);
 	}
 }
