@@ -6,15 +6,15 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 12:22:25 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/03/09 12:47:37 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/21 17:42:11 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_lstsize_longer(t_list *lst)
+int	ft_lstsize_longer(t_list *lst)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (lst)

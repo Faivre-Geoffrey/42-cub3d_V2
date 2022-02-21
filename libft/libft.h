@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 08:49:30 by geoffrey          #+#    #+#             */
-/*   Updated: 2021/05/08 16:48:24 by user42           ###   ########.fr       */
+/*   Updated: 2022/02/21 17:32:58 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-typedef	struct	s_list
+typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
@@ -24,7 +24,7 @@ typedef	struct	s_list
 /*
 **			PARTIE 1
 */
-void			*ft_memset (void *s, int c, size_t n);
+void			*ft_memset(void *s, int c, size_t n);
 void			ft_bzero(void *s, size_t n);
 void			*ft_memcpy(void *dest, const void *src, size_t size);
 void			*ft_memccpy(void *dest, const void *src, int c, size_t size);
@@ -32,11 +32,11 @@ void			*ft_memmove(void *dest, const void *src, size_t n);
 void			*ft_memchr(const void *src, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 size_t			ft_strlen(const char *str);
-int				ft_isalpha (int c);
-int				ft_isdigit (int c);
-int				ft_isalnum (int c);
-int				ft_isascii (int c);
-int				ft_isprint (int c);
+int				ft_isalpha(int c);
+int				ft_isdigit(int c);
+int				ft_isalnum(int c);
+int				ft_isascii(int c);
+int				ft_isprint(int c);
 int				ft_toupper(int c);
 int				ft_tolower(int c);
 char			*ft_strchr(const char *str, int c);
@@ -65,33 +65,33 @@ void			ft_putnbr_fd(int n, int fd);
 /*
 **			LST
 */
-t_list				*ft_lstnew(void *content);
-t_list				*ft_lstlast(t_list *lst);
-t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
+t_list			*ft_lstnew(void *content);
+t_list			*ft_lstlast(t_list *lst);
+t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
-void				ft_lstadd_front(t_list **alst, t_list *new);
-void				ft_lstadd_back(t_list **alst, t_list *new);
-void				ft_lstdelone(t_list *lst, void (*del)(void*));
-void				ft_lstclear(t_list **lst, void (*del)(void*));
-void				ft_lstiter(t_list *lst, void (*f)(void *));
-int					ft_lstsize(t_list *lst);
-int					ft_lstsize_longer(t_list *lst);
+void			ft_lstadd_front(t_list **alst, t_list *new);
+void			ft_lstadd_back(t_list **alst, t_list *new);
+void			ft_lstdelone(t_list *lst, void (*del)(void*));
+void			ft_lstclear(t_list **lst, void (*del)(void*));
+void			ft_lstiter(t_list *lst, void (*f)(void *));
+int				ft_lstsize(t_list *lst);
+int				ft_lstsize_longer(t_list *lst);
 
-int					ft_intmax(int a, int b);
-int					ft_intmin(int a, int b);
+int				ft_intmax(int a, int b);
+int				ft_intmin(int a, int b);
 
 /*
 **			get_next_line
 */
 
-#define BUFFER_SIZE 30
+# define BUFFER_SIZE 30
 
-size_t		ft_strlen_const(const char *s);
-void		*ft_memmove_const(void *dst, const void *src, size_t len);
-char		*join(char const *s1, char const *s2);
-int			has_return(char *str);
-char		*get_new_save(char *save);
-char		*get_line(char *str);
-int			get_next_line(int fd, char **line);
+size_t			ft_strlen_const(const char *s);
+void			*ft_memmove_const(void *dst, const void *src, size_t len);
+char			*join(char const *s1, char const *s2);
+int				has_return(char *str);
+char			*get_new_save(char *save);
+char			*get_line(char *str);
+int				get_next_line(int fd, char **line);
 
 #endif

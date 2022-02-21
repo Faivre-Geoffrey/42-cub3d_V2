@@ -6,26 +6,26 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:29:46 by user42            #+#    #+#             */
-/*   Updated: 2022/02/10 19:34:47 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/21 17:48:47 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void	ft_quit(t_all *s, char *str)
+void	free_path_and_map(t_all *s)
 {
 	int	i;
 
 	i = 0;
 	if (s->list)
 		ft_lstclear(&s->list, free);
-	if(s->parse.we_path)
+	if (s->parse.we_path)
 		free(s->parse.we_path);
-	if(s->parse.ea_path)
+	if (s->parse.ea_path)
 		free(s->parse.ea_path);
-	if(s->parse.so_path)
+	if (s->parse.so_path)
 		free(s->parse.so_path);
-	if(s->parse.no_path)
+	if (s->parse.no_path)
 		free(s->parse.no_path);
 	if (s->map.map)
 	{
@@ -35,7 +35,12 @@ void	ft_quit(t_all *s, char *str)
 			i++;
 		}	
 		free(s->map.map);
-	}	
+	}
+}
+
+void	ft_quit(t_all *s, char *str)
+{
+	free_path_and_map(s);
 	if (s->parse.line)
 		free(s->parse.line);
 	if (s->mlx.img)

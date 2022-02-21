@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 09:43:51 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/03/08 09:44:13 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/21 17:35:32 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_list	*ft_lstnew(void *content)
 {
-	t_list *rtn;
+	t_list	*rtn;
 
 	rtn = (t_list *)malloc(sizeof(t_list));
 	if (!rtn)

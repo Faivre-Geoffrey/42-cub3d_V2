@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 09:49:55 by gefaivre          #+#    #+#             */
-/*   Updated: 2021/03/08 09:50:06 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/21 17:35:23 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_lstadd_back(t_list **alst, t_list *new)
 {
-	t_list *t;
+	t_list	*t;
 
 	if (*alst)
 	{
