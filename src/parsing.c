@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 07:16:17 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/10 19:34:47 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/21 18:01:57 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,5 @@ void	parsing(t_all *s)
 		free(s->parse.line);
 	}
 	make_map(s);
-	close(s->parse.fd);
 	return ;
 }
