@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 07:16:17 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/21 18:01:57 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:33:58 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	treat_line(t_all *s)
 			s->parse.spaceinmap = 1;
 	}
 	else
-		ft_quit(s, "Error\nBad symbole in .cub");
+		ft_quit(s, "Error\nBad symbole in .cub\n");
 }
 
 void	parsing(t_all *s)

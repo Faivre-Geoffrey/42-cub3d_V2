@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:46:26 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 16:25:27 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:33:48 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_key_press(int keycode, t_all *s)
 	else if (keycode == RIGHT)
 		s->boy.dirright = 1;
 	else if (keycode == ESC)
-		ft_quit(s, "ESC pressed : \nBYE!!\n");
+		ft_quit(s, "");
 	return (1);
 }
 
@@ -50,6 +50,6 @@ int	ft_key_release(int keycode, t_all *s)
 
 int	red_cross_quit(t_all *s)
 {
-	ft_quit(s, "BYE!!\n");
+	ft_quit(s, "");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 12:10:33 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 16:59:17 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/23 17:33:26 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ char	**malloc_map(t_all *s)
 	tab_map = NULL;
 	tab_map = malloc(sizeof(char *) * (s->map.size.y + 4 + 1));
 	if (tab_map == NULL)
-		ft_quit(s, "Error\nmalloc foiree");
+		ft_quit(s, "Error\nMalloc");
 	i = 0;
 	while (i < s->map.size.y + 4)
 	{
 		tab_map[i] = malloc(sizeof(char) * (s->map.size.x + 4 + 1));
 		if (tab_map[i] == NULL)
-			ft_quit(s, "Error\nmalloc foiree");
+			ft_quit(s, "Error\nMalloc");
 		i++;
 	}
 	tab_map[i] = NULL;
