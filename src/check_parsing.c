@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 10:23:34 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/10 19:39:17 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/02/24 17:45:37 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,12 @@ void	check_path_texture_2(t_all *s, char *str)
 {
 	int	fd;
 
+	fd = open(str, __O_DIRECTORY);
+	if (fd != -1)
+	{
+		close(fd);
+		ft_quit(s, "Error\nTexture path can't be a directory\n");
+	}
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 		ft_quit(s, "Error\nBad path texture\n");
