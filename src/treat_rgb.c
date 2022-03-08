@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 09:46:48 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/23 17:34:32 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/03/08 10:42:01 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	parse_rgb(t_all *s)
 	if (ft_strncmp(s->parse.line, "F ", 2) == 0)
 	{	
 		if (s->parse.treat_rgb_f == 1 || s->parse.in_map == 0)
-			ft_quit(s, "Error\n parsing return an error with F description\n");
+			ft_quit(s, "Error\nParsing return an error with F description\n");
 		s->parse.lastisline = 0;
 		s->parse.treat_rgb_f = 1;
 		make_hex(s, 'F');
@@ -87,7 +87,7 @@ void	parse_rgb(t_all *s)
 	else if (ft_strncmp(s->parse.line, "C ", 2) == 0)
 	{
 		if (s->parse.treat_rgb_c == 1 || s->parse.in_map == 0)
-			ft_quit(s, "Error\n parsing return an error with C description\n");
+			ft_quit(s, "Error\nParsing return an error with C description\n");
 		s->parse.lastisline = 0;
 		s->parse.treat_rgb_c = 1;
 		make_hex(s, 'C');

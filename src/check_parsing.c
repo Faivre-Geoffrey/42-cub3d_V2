@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 10:23:34 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/24 17:45:37 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/03/08 10:40:36 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,10 @@ void	check_path_texture(t_all *s)
 	check_path_texture_2(s, s->parse.we_path);
 	check_path_texture_2(s, s->parse.so_path);
 	check_path_texture_2(s, s->parse.ea_path);
+	if (s->parse.treat_rgb_c == 0)
+		ft_quit(s, "Error\nNo Ceiling rgb\n");
+	if (s->parse.treat_rgb_f == 0)
+		ft_quit(s, "Error\nNo floor rgb\n");
 }
 
 void	check_parsing(t_all *s)
