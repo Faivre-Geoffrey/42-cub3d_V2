@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 10:59:54 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/10 19:48:35 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/03/08 14:39:09 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define RIGHT 65363
 
 # define TEXHEIGHT 64
-# define VDIR 0.02
+# define VDIR 0.03
 # define VSPEED 0.05
 
 # define H_WINDOW 740
@@ -91,6 +91,8 @@ typedef struct s_parse
 	int				treat_rgb_f;
 	int				treat_rgb_c;
 	int				numsprite;
+	int				nbr_line;
+	int				c_nbr_line;
 }					t_parse;
 
 typedef struct s_map

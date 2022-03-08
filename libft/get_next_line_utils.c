@@ -6,75 +6,103 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 11:43:19 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/10 20:01:00 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/03/08 14:29:49 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen_const(const char *s)
+char	*ft_strchr(char *s, int c)
 {
 	int	i;
 
 	i = 0;
 	if (!s)
 		return (0);
+	if (c == '\0')
+		return ((char *)&s[ft_strlen(s)]);
 	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
-void	*ft_memmove_const(void *dst, const void *src, size_t len)
-{
-	char	*dst_c;
-	char	*src_c;
-
-	dst_c = (char *)dst;
-	src_c = (char *)src;
-	if (dst == src)
-		return (dst);
-	if (src_c < dst_c)
 	{
-		while (len--)
-			*(dst_c + len) = *(src_c + len);
-		return (dst);
-	}
-	while (len--)
-		*dst_c++ = *src_c++;
-	return (dst);
-}
-
-char	*join(char const *s1, char const *s2)
-{
-	size_t	stot_len;
-	char	*rtn_str;
-
-	if (!s1 && !s2)
-		return (0);
-	stot_len = ft_strlen_const((char *)s1) + ft_strlen_const((char *)s2) + 1;
-	rtn_str = malloc(sizeof(char) * stot_len);
-	if (!rtn_str)
-		return (0);
-	ft_memmove_const(rtn_str, s1, ft_strlen_const((char *)s1));
-	ft_memmove_const(rtn_str + ft_strlen_const((char *)s1),
-		s2, ft_strlen_const((char *)s2));
-	rtn_str[stot_len - 1] = '\0';
-	free((char *)s1);
-	return (rtn_str);
-}
-
-int	has_return(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-	{
-		if (str[i] == '\n')
-			return (1);
+		if (s[i] == (char) c)
+			return ((char *)&s[i]);
 		i++;
 	}
 	return (0);
+}
+
+char	*ft_strjoin(char *left_str, char *buff)
+{
+	size_t	i;
+	size_t	j;
+	char	*str;
+
+	if (!left_str)
+	{
+		left_str = (char *)malloc(1 * sizeof(char));
+		left_str[0] = '\0';
+	}
+	if (!left_str || !buff)
+		return (NULL);
+	str = malloc(sizeof(char) * ((ft_strlen(left_str) + ft_strlen(buff)) + 1));
+	if (str == NULL)
+		return (NULL);
+	i = -1;
+	j = 0;
+	if (left_str)
+		while (left_str[++i] != '\0')
+			str[i] = left_str[i];
+	while (buff[j] != '\0')
+		str[i++] = buff[j++];
+	str[ft_strlen(left_str) + ft_strlen(buff)] = '\0';
+	free(left_str);
+	return (str);
+}
+
+char	*ft_get_line(char *left_str)
+{
+	int		i;
+	char	*str;
+
+	i = 0;
+	if (!left_str[i])
+		return (NULL);
+	while (left_str[i] && left_str[i] != '\n')
+		i++;
+	str = (char *)malloc(sizeof(char) * (i + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (left_str[i] && left_str[i] != '\n')
+	{
+		str[i] = left_str[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+char	*ft_new_left_str(char *left_str)
+{
+	int		i;
+	int		j;
+	char	*str;
+
+	i = 0;
+	while (left_str[i] && left_str[i] != '\n')
+		i++;
+	if (!left_str[i])
+	{
+		free(left_str);
+		return (NULL);
+	}
+	str = (char *)malloc(sizeof(char) * (ft_strlen(left_str) - i + 1));
+	if (!str)
+		return (NULL);
+	i++;
+	j = 0;
+	while (left_str[i])
+		str[j++] = left_str[i++];
+	str[j] = '\0';
+	free(left_str);
+	return (str);
 }

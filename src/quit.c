@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jraffin <jraffin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:29:46 by user42            #+#    #+#             */
-/*   Updated: 2022/02/21 18:51:06 by jraffin          ###   ########.fr       */
+/*   Updated: 2022/03/08 14:21:52 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,21 @@
 void	free_gnl(t_all *s)
 {
 	if (s->parse.line)
-		free(s->parse.line);
-	while (s->parse.fd != -1 && get_next_line(s->parse.fd, &s->parse.line))
 	{
 		free(s->parse.line);
+		s->parse.line = NULL;
+	}
+	while (s->parse.c_nbr_line < s->parse.nbr_line)
+	{
+		s->parse.line = get_next_line(s->parse.fd);
+		free(s->parse.line);
+		s->parse.line = NULL;
+		s->parse.c_nbr_line++;
+	}
+	if (s->parse.line)
+	{
+		free(s->parse.line);
+		s->parse.line = NULL;
 	}
 	if (s->parse.fd != -1)
 		close(s->parse.fd);
@@ -54,8 +65,6 @@ void	ft_quit(t_all *s, char *str)
 {
 	free_gnl(s);
 	free_path_and_map(s);
-	if (s->parse.line)
-		free(s->parse.line);
 	if (s->mlx.img)
 		mlx_destroy_image(s->mlx.mlx, s->mlx.img);
 	if (s->texture[0].img)

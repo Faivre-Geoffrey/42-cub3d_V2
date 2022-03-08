@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 07:16:17 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/03/08 10:27:45 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/03/08 14:26:55 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,6 @@ void	map_path(t_all *s, char *str)
 		return ;
 	}
 	ft_quit(s, "Error\nBad map_path name\n");
-}
-
-int	my_atoi(const char *str)
-{
-	int	i;
-	int	neg;
-	int	res;
-
-	i = 0;
-	neg = 1;
-	if (str[i] == '-')
-		i++;
-	res = 0;
-	while (str[i] >= '0' && str[i] <= '9' && i < 9)
-		res = (res * 10) + (str[i++] - '0');
-	return (res * neg);
 }
 
 int	is_line_at_map(char *str)
@@ -95,6 +79,24 @@ void	treat_line(t_all *s)
 		ft_quit(s, "Error\nBad symbole in .cub\n");
 }
 
+void	get_nbr_line(t_all *s)
+{
+	int		i;
+	char	*str;
+
+	i = 1;
+	str = NULL;
+	while (i)
+	{
+		str = get_next_line(s->parse.fd);
+		if (str == NULL)
+			i = 0;
+		free(str);
+		str = NULL;
+		s->parse.nbr_line++;
+	}
+}
+
 void	parsing(t_all *s)
 {
 	s->parse.line = NULL;
@@ -104,10 +106,16 @@ void	parsing(t_all *s)
 	s->parse.fd = open(s->parse.map_path, O_RDONLY);
 	if (s->parse.fd == -1)
 		ft_quit(s, "Error\nbad name .cub\n");
-	while (get_next_line(s->parse.fd, &s->parse.line))
+	get_nbr_line(s);
+	close(s->parse.fd);
+	s->parse.fd = open(s->parse.map_path, O_RDONLY);
+	while (s->parse.c_nbr_line < s->parse.nbr_line - 1)
 	{
+		s->parse.line = get_next_line(s->parse.fd);
 		treat_line(s);
 		free(s->parse.line);
+		s->parse.line = NULL;
+		s->parse.c_nbr_line++;
 	}
 	make_map(s);
 	return ;

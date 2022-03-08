@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 15:39:05 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/03/08 10:38:44 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/03/08 13:33:46 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	init(t_all *s)
 	s->parse.treat_rgb_c = 0;
 	s->parse.spaceinmap = 0;
 	s->parse.fd = -1;
+	s->parse.nbr_line = 0;
+	s->parse.c_nbr_line = 0;
 	init_boy_value(s);
 	set_null_mx_pointer(s);
 }

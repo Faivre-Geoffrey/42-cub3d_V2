@@ -1,31 +1,3 @@
-_END=\033[0m
-_BOLD=\033[1m
-_UNDER=\033[4m
-_REV=\033[7m
-
-# Colors
-_GREY=\033[30m
-_RED=\033[31m
-_GREEN=\033[32m
-_YELLOW=\033[33m
-_BLUE=\033[34m
-_PURPLE=\033[35m
-_CYAN=\033[36m
-_WHITE=\033[37m
-
-# Inverted, i.e. colored backgrounds
-_IGREY=\033[40m
-_IRED=\033[41m
-_IGREEN=\033[42m
-_IYELLOW=\033[43m
-_IBLUE=\033[44m
-_IPURPLE=\033[45m
-_ICYAN=\033[46m
-_IWHITE=\033[47m
-
-
-
-
 SRC =	init.c \
 		init_boy.c \
 		raycasting.c \
@@ -77,7 +49,7 @@ all:
 # permet de pouvoir comparer la derniere modification de la dep par rapport a la regle
 # -L donner le nom du dossier / -l donner le nom le la lib
 # loader path = ecrit le chemin de la mlx dans le binaire pour pouvoir la retrouver au moment ou on lance le binaire
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) includes/cub3d.h 
 		$(MAKE) -C libft
 		$(MAKE) -C minilibx-linux
 		${CC} $(CFLAGS) -o $(NAME) $(OBJ) -L $(MLX_DIR) -lmlx -lm -lbsd -lX11 -lXext libft/libft.a

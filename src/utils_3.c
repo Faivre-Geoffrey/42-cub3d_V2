@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 16:32:48 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/09 16:35:29 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/03/08 14:30:20 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,20 @@ int	namecheck(char *arg, char *ext)
 		i--;
 	}
 	return (1);
+}
+
+int	my_atoi(const char *str)
+{
+	int	i;
+	int	neg;
+	int	res;
+
+	i = 0;
+	neg = 1;
+	if (str[i] == '-')
+		i++;
+	res = 0;
+	while (str[i] >= '0' && str[i] <= '9' && i < 9)
+		res = (res * 10) + (str[i++] - '0');
+	return (res * neg);
 }
