@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 09:45:31 by gefaivre          #+#    #+#             */
-/*   Updated: 2022/02/10 19:46:18 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/03/08 10:46:50 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,26 @@ void	set_texture(t_all *s)
 {
 	s->texture[0].img = mlx_xpm_file_to_image(s->cp.mlx.mlx, s->parse.no_path,
 			&s->cp.parse.width_window_size, &s->cp.parse.height_window_size);
+	if (s->texture[0].img == NULL)
+		ft_quit(s, "Error\nBad texture file\n");
 	s->texture[0].addr = (int *)mlx_get_data_addr(s->texture[0].img,
 			&s->cp.mlx.b_per_pixel, &s->cp.mlx.line_length, &s->cp.mlx.endian);
 	s->texture[1].img = mlx_xpm_file_to_image(s->cp.mlx.mlx, s->parse.so_path,
 			&s->cp.parse.width_window_size, &s->cp.parse.height_window_size);
+	if (s->texture[1].img == NULL)
+		ft_quit(s, "Error\nBad texture file\n");
 	s->texture[1].addr = (int *)mlx_get_data_addr(s->texture[1].img,
 			&s->cp.mlx.b_per_pixel, &s->cp.mlx.line_length, &s->cp.mlx.endian);
 	s->texture[2].img = mlx_xpm_file_to_image(s->cp.mlx.mlx, s->parse.we_path,
 			&s->cp.parse.width_window_size, &s->cp.parse.height_window_size);
+	if (s->texture[2].img == NULL)
+		ft_quit(s, "Error\nBad texture file\n");
 	s->texture[2].addr = (int *)mlx_get_data_addr(s->texture[2].img,
 			&s->cp.mlx.b_per_pixel, &s->cp.mlx.line_length, &s->cp.mlx.endian);
 	s->texture[3].img = mlx_xpm_file_to_image(s->cp.mlx.mlx, s->parse.ea_path,
 			&s->cp.parse.width_window_size, &s->cp.parse.height_window_size);
+	if (s->texture[3].img == NULL)
+		ft_quit(s, "Error\nBad texture file\n");
 	s->texture[3].addr = (int *)mlx_get_data_addr(s->texture[3].img,
 			&s->cp.mlx.b_per_pixel, &s->cp.mlx.line_length, &s->cp.mlx.endian);
 }
