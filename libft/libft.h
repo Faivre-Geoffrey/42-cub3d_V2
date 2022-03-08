@@ -6,7 +6,7 @@
 /*   By: gefaivre <gefaivre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 08:49:30 by geoffrey          #+#    #+#             */
-/*   Updated: 2022/02/21 17:55:42 by gefaivre         ###   ########.fr       */
+/*   Updated: 2022/03/08 10:11:27 by gefaivre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int				ft_intmin(int a, int b);
 **			get_next_line
 */
 
-# define BUFFER_SIZE 30
+# define BUFFER_SIZE 1
 
 size_t			ft_strlen_const(const char *s);
 void			*ft_memmove_const(void *dst, const void *src, size_t len);
