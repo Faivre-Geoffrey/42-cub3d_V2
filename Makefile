@@ -28,14 +28,13 @@ CC = clang
 # .a = lib static, les fonctions utilisees sont directement ecrite dans le binaire
 # .dylib = lib dynamique, les fonctions doivent etre chargees au momnent ou on lance le binaire
 
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
 OBJ_DIR = obj
 SRC_DIR = src
 INC_DIR = inc
 
 OBJ = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
-DPD = $(addprefix $(OBJ_DIR)/,$(SRC:.c=.d))
 
 .c.o:
 	${CC} ${CFLAGS} -c$< -o ${<:.c=.o}
@@ -76,6 +75,3 @@ fclean:	clean
 re: fclean all
 
 .PHONY: all, clean, fclean, re
-
-# Utilise les .d (et ignore s'ils n'existe pas)
--include $(DPD)
